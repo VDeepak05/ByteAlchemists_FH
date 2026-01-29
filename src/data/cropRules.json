@@ -1,0 +1,378 @@
+[
+    {
+        "name": "Rice (Paddy)",
+        "seasons": [
+            "kharif",
+            "rabi"
+        ],
+        "waterRequirement": "high",
+        "investment": "moderate",
+        "keralaSuitability": "high",
+        "profitability": "moderate",
+        "yieldPotential": "high",
+        "sustainability": "moderate",
+        "marketDemand": "high",
+        "expectedYield": "40-50 quintals/hectare",
+        "investmentRange": "₹25,000-35,000/hectare",
+        "suitableSoils": [
+            "clay",
+            "loam"
+        ],
+        "tips": [
+            "Ensure proper water management",
+            "Use SRI method for better yield",
+            "Monitor for pest diseases regularly"
+        ]
+    },
+    {
+        "name": "Coconut",
+        "seasons": [
+            "kharif",
+            "rabi",
+            "zaid"
+        ],
+        "waterRequirement": "moderate",
+        "investment": "high",
+        "keralaSuitability": "high",
+        "profitability": "high",
+        "yieldPotential": "high",
+        "sustainability": "high",
+        "marketDemand": "high",
+        "expectedYield": "80-100 nuts/tree/year",
+        "investmentRange": "₹40,000-60,000/hectare",
+        "suitableSoils": [
+            "sandy loam",
+            "clay",
+            "laterite"
+        ],
+        "tips": [
+            "Plant high-yielding varieties",
+            "Regular irrigation during summer",
+            "Intercrop with pepper or cocoa"
+        ]
+    },
+    {
+        "name": "Rubber",
+        "seasons": [
+            "kharif",
+            "rabi"
+        ],
+        "waterRequirement": "high",
+        "investment": "high",
+        "keralaSuitability": "high",
+        "profitability": "high",
+        "yieldPotential": "high",
+        "sustainability": "moderate",
+        "marketDemand": "high",
+        "expectedYield": "1500-2000 kg/hectare/year",
+        "investmentRange": "₹50,000-80,000/hectare",
+        "suitableSoils": [
+            "laterite",
+            "clay loam"
+        ],
+        "tips": [
+            "Requires 7-8 years to start yielding",
+            "High rainfall areas are ideal",
+            "Good long-term investment"
+        ]
+    },
+    {
+        "name": "Black Pepper",
+        "seasons": [
+            "kharif"
+        ],
+        "waterRequirement": "moderate",
+        "investment": "moderate",
+        "keralaSuitability": "high",
+        "profitability": "high",
+        "yieldPotential": "moderate",
+        "sustainability": "high",
+        "marketDemand": "high",
+        "expectedYield": "2-3 kg/vine/year (dry)",
+        "investmentRange": "₹30,000-45,000/hectare",
+        "suitableSoils": [
+            "laterite",
+            "loam"
+        ],
+        "tips": [
+            "Grow on support trees or poles",
+            "Ensure good drainage",
+            "High market value for organic pepper"
+        ]
+    },
+    {
+        "name": "Cardamom",
+        "seasons": [
+            "kharif",
+            "rabi"
+        ],
+        "waterRequirement": "high",
+        "investment": "high",
+        "keralaSuitability": "high",
+        "profitability": "high",
+        "yieldPotential": "moderate",
+        "sustainability": "high",
+        "marketDemand": "high",
+        "expectedYield": "100-150 kg/hectare",
+        "investmentRange": "₹60,000-90,000/hectare",
+        "suitableSoils": [
+            "forest loam",
+            "clay loam"
+        ],
+        "tips": [
+            "Shade-loving crop",
+            "Ideal for hilly regions",
+            "Premium prices for organic cardamom"
+        ]
+    },
+    {
+        "name": "Banana",
+        "seasons": [
+            "kharif",
+            "rabi",
+            "zaid"
+        ],
+        "waterRequirement": "high",
+        "investment": "moderate",
+        "keralaSuitability": "high",
+        "profitability": "high",
+        "yieldPotential": "high",
+        "sustainability": "moderate",
+        "marketDemand": "high",
+        "expectedYield": "40-50 tonnes/hectare",
+        "investmentRange": "₹35,000-50,000/hectare",
+        "suitableSoils": [
+            "loam",
+            "clay loam"
+        ],
+        "tips": [
+            "Quick returns (12-15 months)",
+            "High water requirement",
+            "Good for small landholdings"
+        ]
+    },
+    {
+        "name": "Pineapple",
+        "seasons": [
+            "kharif",
+            "rabi"
+        ],
+        "waterRequirement": "low",
+        "investment": "moderate",
+        "keralaSuitability": "high",
+        "profitability": "moderate",
+        "yieldPotential": "moderate",
+        "sustainability": "high",
+        "marketDemand": "moderate",
+        "expectedYield": "30-40 tonnes/hectare",
+        "investmentRange": "₹25,000-40,000/hectare",
+        "suitableSoils": [
+            "laterite",
+            "sandy loam"
+        ],
+        "tips": [
+            "Drought-resistant crop",
+            "Suitable for wasteland",
+            "Processing industry demand"
+        ]
+    },
+    {
+        "name": "Ginger",
+        "seasons": [
+            "kharif"
+        ],
+        "waterRequirement": "moderate",
+        "investment": "high",
+        "keralaSuitability": "high",
+        "profitability": "high",
+        "yieldPotential": "high",
+        "sustainability": "moderate",
+        "marketDemand": "high",
+        "expectedYield": "15-20 tonnes/hectare",
+        "investmentRange": "₹80,000-120,000/hectare",
+        "suitableSoils": [
+            "loam",
+            "clay loam"
+        ],
+        "tips": [
+            "High investment but excellent returns",
+            "Store well for better prices",
+            "Organic ginger fetches premium"
+        ]
+    },
+    {
+        "name": "Turmeric",
+        "seasons": [
+            "kharif"
+        ],
+        "waterRequirement": "moderate",
+        "investment": "moderate",
+        "keralaSuitability": "high",
+        "profitability": "high",
+        "yieldPotential": "high",
+        "sustainability": "high",
+        "marketDemand": "high",
+        "expectedYield": "20-25 tonnes/hectare",
+        "investmentRange": "₹50,000-70,000/hectare",
+        "suitableSoils": [
+            "loam",
+            "clay loam"
+        ],
+        "tips": [
+            "9-10 months crop duration",
+            "Good for intercropping",
+            "High demand for quality turmeric"
+        ]
+    },
+    {
+        "name": "Tapioca (Cassava)",
+        "seasons": [
+            "kharif",
+            "rabi"
+        ],
+        "waterRequirement": "low",
+        "investment": "low",
+        "keralaSuitability": "high",
+        "profitability": "moderate",
+        "yieldPotential": "high",
+        "sustainability": "high",
+        "marketDemand": "high",
+        "expectedYield": "25-35 tonnes/hectare",
+        "investmentRange": "₹15,000-25,000/hectare",
+        "suitableSoils": [
+            "laterite",
+            "sandy loam"
+        ],
+        "tips": [
+            "Low maintenance crop",
+            "Drought tolerant",
+            "Staple food in Kerala"
+        ]
+    },
+    {
+        "name": "Cashew",
+        "seasons": [
+            "kharif",
+            "rabi"
+        ],
+        "waterRequirement": "low",
+        "investment": "moderate",
+        "keralaSuitability": "high",
+        "profitability": "high",
+        "yieldPotential": "moderate",
+        "sustainability": "high",
+        "marketDemand": "high",
+        "expectedYield": "800-1200 kg/hectare",
+        "investmentRange": "₹30,000-45,000/hectare",
+        "suitableSoils": [
+            "laterite",
+            "sandy"
+        ],
+        "tips": [
+            "Suitable for coastal areas",
+            "Processing adds value",
+            "Long-term crop (3-4 years to yield)"
+        ]
+    },
+    {
+        "name": "Arecanut",
+        "seasons": [
+            "kharif",
+            "rabi"
+        ],
+        "waterRequirement": "high",
+        "investment": "high",
+        "keralaSuitability": "high",
+        "profitability": "high",
+        "yieldPotential": "high",
+        "sustainability": "moderate",
+        "marketDemand": "high",
+        "expectedYield": "2000-2500 nuts/tree/year",
+        "investmentRange": "₹50,000-70,000/hectare",
+        "suitableSoils": [
+            "laterite",
+            "loam"
+        ],
+        "tips": [
+            "Intercrop with pepper or cocoa",
+            "High water requirement",
+            "Good returns after 6-7 years"
+        ]
+    },
+    {
+        "name": "Coffee",
+        "seasons": [
+            "kharif",
+            "rabi"
+        ],
+        "waterRequirement": "moderate",
+        "investment": "high",
+        "keralaSuitability": "high",
+        "profitability": "high",
+        "yieldPotential": "moderate",
+        "sustainability": "high",
+        "marketDemand": "high",
+        "expectedYield": "800-1200 kg/hectare",
+        "investmentRange": "₹60,000-90,000/hectare",
+        "suitableSoils": [
+            "laterite",
+            "forest loam"
+        ],
+        "tips": [
+            "Ideal for hilly regions",
+            "Shade-grown coffee is premium",
+            "Takes 3-4 years to start yielding"
+        ]
+    },
+    {
+        "name": "Tea",
+        "seasons": [
+            "kharif",
+            "rabi"
+        ],
+        "waterRequirement": "high",
+        "investment": "high",
+        "keralaSuitability": "high",
+        "profitability": "moderate",
+        "yieldPotential": "moderate",
+        "sustainability": "moderate",
+        "marketDemand": "moderate",
+        "expectedYield": "1500-2000 kg/hectare",
+        "investmentRange": "₹80,000-120,000/hectare",
+        "suitableSoils": [
+            "forest loam",
+            "acidic soil"
+        ],
+        "tips": [
+            "High elevation areas (800m+)",
+            "Processing infrastructure needed",
+            "Continuous harvesting crop"
+        ]
+    },
+    {
+        "name": "Vegetables (Mixed)",
+        "seasons": [
+            "kharif",
+            "rabi",
+            "zaid"
+        ],
+        "waterRequirement": "moderate",
+        "investment": "moderate",
+        "keralaSuitability": "high",
+        "profitability": "high",
+        "yieldPotential": "high",
+        "sustainability": "high",
+        "marketDemand": "high",
+        "expectedYield": "20-30 tonnes/hectare",
+        "investmentRange": "₹40,000-60,000/hectare",
+        "suitableSoils": [
+            "loam",
+            "clay loam"
+        ],
+        "tips": [
+            "Quick returns (2-4 months)",
+            "Grow mixed vegetables for market",
+            "High demand in urban areas"
+        ]
+    }
+]

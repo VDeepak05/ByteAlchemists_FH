@@ -1,0 +1,202 @@
+[
+    {
+        "id": "crop-001",
+        "crop": "Rice (Jaya)",
+        "category": "Cereals",
+        "price": 2850,
+        "unit": "₹/quintal",
+        "change": 5.2,
+        "market": "Kochi APMC",
+        "lastUpdated": "2026-01-29T10:30:00Z"
+    },
+    {
+        "id": "crop-002",
+        "crop": "Coconut",
+        "category": "Plantation Crops",
+        "price": 28,
+        "unit": "₹/nut",
+        "change": 3.7,
+        "market": "Calicut Market",
+        "lastUpdated": "2026-01-29T10:30:00Z"
+    },
+    {
+        "id": "crop-003",
+        "crop": "Rubber",
+        "category": "Plantation Crops",
+        "price": 165,
+        "unit": "₹/kg",
+        "change": -2.1,
+        "market": "Kottayam Market",
+        "lastUpdated": "2026-01-29T10:30:00Z"
+    },
+    {
+        "id": "crop-004",
+        "crop": "Pepper",
+        "category": "Spices",
+        "price": 520,
+        "unit": "₹/kg",
+        "change": 8.5,
+        "market": "Kochi APMC",
+        "lastUpdated": "2026-01-29T10:30:00Z"
+    },
+    {
+        "id": "crop-005",
+        "crop": "Cardamom",
+        "category": "Spices",
+        "price": 1850,
+        "unit": "₹/kg",
+        "change": 12.3,
+        "market": "Idukki Market",
+        "lastUpdated": "2026-01-29T10:30:00Z"
+    },
+    {
+        "id": "crop-006",
+        "crop": "Banana",
+        "category": "Fruits",
+        "price": 25,
+        "unit": "₹/dozen",
+        "change": -1.5,
+        "market": "Trivandrum Market",
+        "lastUpdated": "2026-01-29T10:30:00Z"
+    },
+    {
+        "id": "crop-007",
+        "crop": "Pineapple",
+        "category": "Fruits",
+        "price": 35,
+        "unit": "₹/kg",
+        "change": 4.2,
+        "market": "Trivandrum Market",
+        "lastUpdated": "2026-01-29T10:30:00Z"
+    },
+    {
+        "id": "crop-008",
+        "crop": "Ginger",
+        "category": "Spices",
+        "price": 180,
+        "unit": "₹/kg",
+        "change": 6.8,
+        "market": "Kochi APMC",
+        "lastUpdated": "2026-01-29T10:30:00Z"
+    },
+    {
+        "id": "crop-009",
+        "crop": "Turmeric",
+        "category": "Spices",
+        "price": 145,
+        "unit": "₹/kg",
+        "change": -3.2,
+        "market": "Calicut Market",
+        "lastUpdated": "2026-01-29T10:30:00Z"
+    },
+    {
+        "id": "crop-010",
+        "crop": "Tapioca",
+        "category": "Tubers",
+        "price": 22,
+        "unit": "₹/kg",
+        "change": 2.8,
+        "market": "Kollam Market",
+        "lastUpdated": "2026-01-29T10:30:00Z"
+    },
+    {
+        "id": "crop-011",
+        "crop": "Cashew",
+        "category": "Nuts",
+        "price": 850,
+        "unit": "₹/kg",
+        "change": 5.5,
+        "market": "Kollam Market",
+        "lastUpdated": "2026-01-29T10:30:00Z"
+    },
+    {
+        "id": "crop-012",
+        "crop": "Arecanut",
+        "category": "Plantation Crops",
+        "price": 420,
+        "unit": "₹/kg",
+        "change": -1.8,
+        "market": "Kasargod Market",
+        "lastUpdated": "2026-01-29T10:30:00Z"
+    },
+    {
+        "id": "crop-013",
+        "crop": "Coffee",
+        "category": "Plantation Crops",
+        "price": 285,
+        "unit": "₹/kg",
+        "change": 3.1,
+        "market": "Wayanad Market",
+        "lastUpdated": "2026-01-29T10:30:00Z"
+    },
+    {
+        "id": "crop-014",
+        "crop": "Tea",
+        "category": "Plantation Crops",
+        "price": 195,
+        "unit": "₹/kg",
+        "change": 1.9,
+        "market": "Munnar Market",
+        "lastUpdated": "2026-01-29T10:30:00Z"
+    },
+    {
+        "id": "crop-015",
+        "crop": "Tomato",
+        "category": "Vegetables",
+        "price": 38,
+        "unit": "₹/kg",
+        "change": -5.4,
+        "market": "Kochi APMC",
+        "lastUpdated": "2026-01-29T10:30:00Z"
+    },
+    {
+        "id": "crop-016",
+        "crop": "Onion",
+        "category": "Vegetables",
+        "price": 45,
+        "unit": "₹/kg",
+        "change": 7.2,
+        "market": "Trivandrum Market",
+        "lastUpdated": "2026-01-29T10:30:00Z"
+    },
+    {
+        "id": "crop-017",
+        "crop": "Potato",
+        "category": "Vegetables",
+        "price": 28,
+        "unit": "₹/kg",
+        "change": -2.3,
+        "market": "Kochi APMC",
+        "lastUpdated": "2026-01-29T10:30:00Z"
+    },
+    {
+        "id": "crop-018",
+        "crop": "Brinjal",
+        "category": "Vegetables",
+        "price": 32,
+        "unit": "₹/kg",
+        "change": 4.6,
+        "market": "Calicut Market",
+        "lastUpdated": "2026-01-29T10:30:00Z"
+    },
+    {
+        "id": "crop-019",
+        "crop": "Beans",
+        "category": "Vegetables",
+        "price": 55,
+        "unit": "₹/kg",
+        "change": 2.4,
+        "market": "Trivandrum Market",
+        "lastUpdated": "2026-01-29T10:30:00Z"
+    },
+    {
+        "id": "crop-020",
+        "crop": "Mango",
+        "category": "Fruits",
+        "price": 85,
+        "unit": "₹/kg",
+        "change": -3.8,
+        "market": "Malappuram Market",
+        "lastUpdated": "2026-01-29T10:30:00Z"
+    }
+]

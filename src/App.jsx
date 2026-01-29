@@ -11,6 +11,8 @@ import CropCalendar from './pages/CropCalendar';
 import Settings from './pages/Settings';
 import Login from './pages/Login';
 import Register from './pages/Register';
+// Added this import assuming the file exists, as it is used in the Reneto routes
+import CropRecommendation from './pages/CropRecommendation'; 
 
 function AppRoutes() {
   const { isAuthenticated } = useAuth();
@@ -22,7 +24,11 @@ function AppRoutes() {
 
       <Route path="/" element={isAuthenticated ? <Layout /> : <Navigate to="/login" />}>
         <Route index element={<Dashboard />} />
-        <Route path="recommendations" element={<AIAdvisor />} />
+        
+        {/* Resolved Conflict: Using Reneto's granular routing */}
+        <Route path="advisor" element={<AIAdvisor />} />
+        <Route path="recommendations" element={<CropRecommendation />} />
+        
         <Route path="market" element={<MarketPrices />} />
         <Route path="schemes" element={<GovSchemes />} />
         <Route path="calendar" element={<CropCalendar />} />
