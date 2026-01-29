@@ -8,24 +8,20 @@ const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [rememberMe, setRememberMe] = useState(false);
     const [loginData, setLoginData] = useState({
-        phone: '',
+        username: '',
         password: ''
     });
     const [error, setError] = useState('');
-    const [loading, setLoading] = useState(false);
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
         setError('');
-        setLoading(true);
 
-        try {
-            await login(loginData.phone, loginData.password);
+        const success = login(loginData.username, loginData.password);
+        if (success) {
             navigate('/');
-        } catch (err) {
-            setError('Invalid phone number or password');
-        } finally {
-            setLoading(false);
+        } else {
+            setError('Please enter valid credentials');
         }
     };
 
@@ -121,18 +117,18 @@ const Login = () => {
                         <form className="space-y-6" onSubmit={handleSubmit}>
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                                    Phone Number
+                                    Phone Number or Email
                                 </label>
                                 <div className="relative">
                                     <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">
-                                        call
+                                        person
                                     </span>
                                     <input
                                         className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-200 dark:border-zinc-700 dark:bg-zinc-800 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none"
-                                        placeholder="e.g. 9876543210"
-                                        type="tel"
-                                        name="phone"
-                                        value={loginData.phone}
+                                        placeholder="e.g. +91 98765 43210"
+                                        type="text"
+                                        name="username"
+                                        value={loginData.username}
                                         onChange={handleInputChange}
                                         required
                                     />
