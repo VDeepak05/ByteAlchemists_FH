@@ -4,15 +4,15 @@ import { useAuth } from '../context/AuthContext';
 
 const Settings = () => {
     const { theme, toggleTheme } = useTheme();
-    const { currentUser, logout, updateProfile } = useAuth();
+    const { logout } = useAuth();
 
     const [activeTab, setActiveTab] = useState('profile');
     const [profileData, setProfileData] = useState({
-        name: currentUser?.name || '',
-        phone: currentUser?.phone || '',
-        email: currentUser?.email || '',
-        district: currentUser?.location || '', // Mapping location to district for now as fallback
-        village: currentUser?.village || ''
+        name: 'Raju Kumar',
+        phone: '+91 98765 43210',
+        email: 'raju.kumar@example.com',
+        district: 'Ernakulam',
+        village: 'Aluva'
     });
 
     const [farmData, setFarmData] = useState({
@@ -58,20 +58,9 @@ const Settings = () => {
         });
     };
 
-    const handleSave = async () => {
-        try {
-            await updateProfile({
-                name: profileData.name,
-                phone: profileData.phone,
-                email: profileData.email,
-                location: profileData.district, // Syncing back
-                village: profileData.village
-            });
-            alert('Settings saved successfully!');
-        } catch (error) {
-            console.error("Failed to update profile", error);
-            alert('Failed to save settings.');
-        }
+    const handleSave = () => {
+        // TODO: Save to backend
+        alert('Settings saved successfully!');
     };
 
     return (
@@ -95,8 +84,8 @@ const Settings = () => {
                                 key={tab.id}
                                 onClick={() => setActiveTab(tab.id)}
                                 className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors text-left ${activeTab === tab.id
-                                    ? 'bg-primary/10 text-primary font-semibold'
-                                    : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-zinc-800'
+                                        ? 'bg-primary/10 text-primary font-semibold'
+                                        : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-zinc-800'
                                     }`}
                             >
                                 <span className="material-symbols-outlined text-lg">{tab.icon}</span>
@@ -159,21 +148,12 @@ const Settings = () => {
                                             onChange={(e) => handleProfileChange('district', e.target.value)}
                                             className="w-full px-4 py-3 rounded-lg border border-gray-200 dark:border-zinc-700 dark:bg-zinc-800 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none"
                                         >
-                                            <option value="">Select District</option>
-                                            <option value="Thiruvananthapuram">Thiruvananthapuram</option>
-                                            <option value="Kollam">Kollam</option>
-                                            <option value="Pathanamthitta">Pathanamthitta</option>
-                                            <option value="Alappuzha">Alappuzha</option>
-                                            <option value="Kottayam">Kottayam</option>
-                                            <option value="Idukki">Idukki</option>
-                                            <option value="Ernakulam">Ernakulam</option>
-                                            <option value="Thrissur">Thrissur</option>
-                                            <option value="Palakkad">Palakkad</option>
-                                            <option value="Malappuram">Malappuram</option>
-                                            <option value="Kozhikode">Kozhikode</option>
-                                            <option value="Wayanad">Wayanad</option>
-                                            <option value="Kannur">Kannur</option>
-                                            <option value="Kasaragod">Kasaragod</option>
+                                            <option>Ernakulam</option>
+                                            <option>Thiruvananthapuram</option>
+                                            <option>Kozhikode</option>
+                                            <option>Thrissur</option>
+                                            <option>Kollam</option>
+                                            <option>Malappuram</option>
                                         </select>
                                     </div>
                                     <div className="md:col-span-2">

@@ -12,16 +12,15 @@ import Settings from './pages/Settings';
 import Login from './pages/Login';
 import Register from './pages/Register';
 
-
 function AppRoutes() {
-  const { currentUser } = useAuth();
+  const { isAuthenticated } = useAuth();
 
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
 
-      <Route path="/" element={currentUser ? <Layout /> : <Navigate to="/login" />}>
+      <Route path="/" element={isAuthenticated ? <Layout /> : <Navigate to="/login" />}>
         <Route index element={<Dashboard />} />
         <Route path="recommendations" element={<AIAdvisor />} />
         <Route path="market" element={<MarketPrices />} />
