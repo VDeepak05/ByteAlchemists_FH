@@ -1,5 +1,7 @@
-const API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY;
-const BASE_URL = 'https://api.openweathermap.org/data/2.5';
+
+// Open-Meteo does not require an API key for non-commercial use.
+const GEOCODING_URL = 'https://geocoding-api.open-meteo.com/v1/search';
+const WEATHER_URL = 'https://api.open-meteo.com/v1/forecast';
 
 const MOCK_WEATHER = {
     current: {
@@ -18,45 +20,63 @@ const MOCK_WEATHER = {
     }))
 };
 
+// WMO Weather interpretation codes (https://open-meteo.com/en/docs)
+function getConditionFromWMOCode(code) {
+    if (code <= 1) return 'Sun';
+    if (code <= 3) return 'Cloudy';
+    if (code <= 48) return 'Cloudy'; // Fog etc
+    if (code <= 67) return 'Rain';   // Drizzle, Rain
+    if (code <= 77) return 'Rain';   // Snow (treated as precip/rain for basic icon logic)
+    if (code <= 82) return 'Rain';   // Showers
+    if (code <= 86) return 'Rain';   // Snow showers
+    return 'Rain';                   // Thunderstorm etc
+}
+
 export async function getWeatherForecast(location = 'Palakkad,IN') {
-    if (!API_KEY) {
-        console.warn("No API Key found, using mock data");
-        return MOCK_WEATHER;
-    }
-
     try {
-        const response = await fetch(`${BASE_URL}/forecast?q=${location}&appid=${API_KEY}&units=metric`);
-        if (!response.ok) throw new Error('Weather fetch failed');
+        // 1. Geocode the location
+        // Handle "City,Country" format by taking just the city part for search reliability
+        const cityName = location.split(',')[0].trim();
 
-        const data = await response.json();
+        const geoResponse = await fetch(`${GEOCODING_URL}?name=${encodeURIComponent(cityName)}&count=1&language=en&format=json`);
 
-        // Process API data to match our component needs
-        // OpenWeather 5-day/3-hour forecast needs aggregation
-        // For MVP/Demo, using mock is safer if API key is missing, 
-        // but here implies we try real then fallback.
-        // Simplifying for now to just return mock if complex parsing is needed,
-        // but let's do a basic parse if successful.
+        if (!geoResponse.ok) throw new Error('Geocoding fetch failed');
+        const geoData = await geoResponse.json();
 
+        if (!geoData.results || geoData.results.length === 0) {
+            console.warn(`Location ${location} not found, using mock data`);
+            return MOCK_WEATHER;
+        }
+
+        const { latitude, longitude } = geoData.results[0];
+
+        // 2. Fetch Weather Data
+        // Request parameters:
+        // current: temp, humidity, weathercode, windspeed
+        // daily: weathercode, temp_max, temp_min, precip_prob_max
+        const weatherResponse = await fetch(
+            `${WEATHER_URL}?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=auto`
+        );
+
+        if (!weatherResponse.ok) throw new Error('Weather fetch failed');
+        const data = await weatherResponse.json();
+
+        // 3. Transform Data
         const current = {
-            temp: Math.round(data.list[0].main.temp),
-            humidity: data.list[0].main.humidity,
-            condition: data.list[0].weather[0].main,
-            windSpeed: data.list[0].wind.speed,
-            rainfall: data.list[0].rain ? data.list[0].rain['3h'] : 0
+            temp: Math.round(data.current.temperature_2m),
+            humidity: data.current.relative_humidity_2m,
+            condition: getConditionFromWMOCode(data.current.weather_code),
+            windSpeed: data.current.wind_speed_10m,
+            rainfall: 0 // Current rainfall not directly in basic params, can rely on cond/prob
         };
 
-        // Simple daily aggregation (taking noon values ~ index 4, 12, 20...)
-        const forecast = [];
-        for (let i = 0; i < data.list.length; i += 8) {
-            const day = data.list[i];
-            forecast.push({
-                date: day.dt_txt.split(' ')[0],
-                maxTemp: Math.round(day.main.temp_max),
-                minTemp: Math.round(day.main.temp_min),
-                rainProbability: day.pop * 100,
-                condition: day.weather[0].main
-            });
-        }
+        const forecast = data.daily.time.map((date, index) => ({
+            date: date,
+            maxTemp: Math.round(data.daily.temperature_2m_max[index]),
+            minTemp: Math.round(data.daily.temperature_2m_min[index]),
+            rainProbability: data.daily.precipitation_probability_max[index] || 0,
+            condition: getConditionFromWMOCode(data.daily.weather_code[index])
+        }));
 
         return { current, forecast };
 
