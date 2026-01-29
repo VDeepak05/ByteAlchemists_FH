@@ -12,6 +12,7 @@ import Settings from './pages/Settings';
 import Login from './pages/Login';
 import Register from './pages/Register';
 
+
 function AppRoutes() {
   const { isAuthenticated } = useAuth();
 
