@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>KrishiSahaya - AI Crop Recommendation</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#16a249",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#112117",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .progress-ring__circle {
+            transition: stroke-dashoffset 0.35s;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-[#0e1b13] dark:text-white font-display min-h-screen">
+<div class="layout-container flex flex-col min-h-screen">
+<!-- Top Navigation Bar -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-primary/10 bg-white dark:bg-[#1a2e21] px-10 py-3 sticky top-0 z-50">
+<div class="flex items-center gap-4 text-primary">
+<div class="size-6">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M24 4H6V17.3333V30.6667H24V44H42V30.6667V17.3333H24V4Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<h2 class="text-[#0e1b13] dark:text-white text-xl font-bold leading-tight tracking-tight">KrishiSahaya</h2>
+</div>
+<div class="flex flex-1 justify-end gap-8 items-center">
+<nav class="hidden md:flex items-center gap-9">
+<a class="text-[#0e1b13] dark:text-white text-sm font-medium hover:text-primary transition-colors" href="#">Dashboard</a>
+<a class="text-primary text-sm font-bold border-b-2 border-primary pb-1" href="#">Advisory</a>
+<a class="text-[#0e1b13] dark:text-white text-sm font-medium hover:text-primary transition-colors" href="#">Marketplace</a>
+<a class="text-[#0e1b13] dark:text-white text-sm font-medium hover:text-primary transition-colors" href="#">Weather</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold hover:bg-green-700 transition-all">
+<span>Profile</span>
+</button>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-primary/20" data-alt="User profile avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDSXJQJ-01qjfZrfQ1emMZLNNyAPrRtHN01qjRQFPjVxhgZdQf0feHED-zLGM7YLuJrwRq8ZXQ6WhyK0pNllcqqDxIwTUEHJIKY6FOCyDPjorbofgSCtw0N2KpEjwllFs2sH21JEV8Dx74jiozyYr5VFAUubn9JYjcUj0gMuqYbTj0yxCAJL_eEUj-nBGwW7I6MOIvyPllSCp3_kJxPUK0LEGWROfRzGac56E7uMAKghz03OBl-WULZ6pZmK0T0kXtAeBv17k2JhnI");'>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-1 flex flex-col lg:flex-row max-w-7xl mx-auto w-full p-6 gap-6">
+<!-- Left Panel: Form Section -->
+<aside class="w-full lg:w-1/3 flex flex-col gap-6">
+<!-- Page Heading -->
+<div class="flex flex-col gap-2">
+<h1 class="text-[#0e1b13] dark:text-white text-3xl font-black leading-tight">AI Crop Recommendation</h1>
+<p class="text-[#50956a] text-sm font-normal">Based on Kerala's agro-climatic zones and your resource profile.</p>
+</div>
+<!-- Form Card -->
+<div class="bg-white dark:bg-[#1a2e21] rounded-xl p-6 shadow-sm border border-primary/10">
+<div class="flex flex-col gap-1 mb-6">
+<h2 class="text-lg font-bold text-[#0e1b13] dark:text-white">Advisor Panel</h2>
+<p class="text-xs text-[#50956a]">Define your land parameters</p>
+</div>
+<form class="space-y-4">
+<div class="flex flex-col gap-2">
+<label class="text-[#0e1b13] dark:text-white text-sm font-semibold">Select Season</label>
+<select class="w-full rounded-lg border border-[#d1e6d8] bg-background-light dark:bg-[#112117] dark:border-white/10 p-3 text-sm focus:ring-primary focus:border-primary">
+<option value="kharif">Monsoon (Kharif)</option>
+<option value="rabi">Winter (Rabi)</option>
+<option value="summer">Summer (Zaid)</option>
+</select>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-[#0e1b13] dark:text-white text-sm font-semibold">Budget Range (per acre)</label>
+<select class="w-full rounded-lg border border-[#d1e6d8] bg-background-light dark:bg-[#112117] dark:border-white/10 p-3 text-sm focus:ring-primary focus:border-primary">
+<option value="low">Low (&lt; ₹50k)</option>
+<option selected="" value="mid">Medium (₹50k - ₹1.5L)</option>
+<option value="high">High (&gt; ₹1.5L)</option>
+</select>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-[#0e1b13] dark:text-white text-sm font-semibold">Water Availability</label>
+<select class="w-full rounded-lg border border-[#d1e6d8] bg-background-light dark:bg-[#112117] dark:border-white/10 p-3 text-sm focus:ring-primary focus:border-primary">
+<option value="rainfed">Rain-fed</option>
+<option value="irrigated">Canal/Well Irrigated</option>
+<option value="low">Scarce / Drought-prone</option>
+</select>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-[#0e1b13] dark:text-white text-sm font-semibold">Primary Goal</label>
+<select class="w-full rounded-lg border border-[#d1e6d8] bg-background-light dark:bg-[#112117] dark:border-white/10 p-3 text-sm focus:ring-primary focus:border-primary">
+<option value="profit">Maximum Profit Margin</option>
+<option value="risk">Low Risk / Resilience</option>
+<option value="export">Export Potential</option>
+</select>
+</div>
+<button class="w-full bg-primary text-white py-4 rounded-lg font-bold flex items-center justify-center gap-2 hover:bg-green-700 transition-all mt-4" type="submit">
+<span class="material-symbols-outlined">auto_awesome</span>
+                            Generate Recommendations
+                        </button>
+</form>
+</div>
+<!-- Secondary Nav Items -->
+<div class="flex flex-col gap-2">
+<div class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary/10 text-primary">
+<span class="material-symbols-outlined">analytics</span>
+<p class="text-sm font-bold">Current Recommendation</p>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 text-[#50956a] hover:bg-white dark:hover:bg-white/5 rounded-lg cursor-pointer transition-colors">
+<span class="material-symbols-outlined">bookmark</span>
+<p class="text-sm font-medium">Saved Results</p>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 text-[#50956a] hover:bg-white dark:hover:bg-white/5 rounded-lg cursor-pointer transition-colors">
+<span class="material-symbols-outlined">history</span>
+<p class="text-sm font-medium">Historical Trends</p>
+</div>
+</div>
+</aside>
+<!-- Right Panel: Results Section -->
+<section class="flex-1 flex flex-col gap-6">
+<div class="flex items-center justify-between">
+<h3 class="text-xl font-bold text-[#0e1b13] dark:text-white">Top 3 Recommended Crops</h3>
+<div class="flex gap-2">
+<span class="flex items-center gap-1 text-xs bg-primary/20 text-primary px-2 py-1 rounded font-bold">
+<span class="material-symbols-outlined text-sm">location_on</span> Wayanad, Kerala
+                        </span>
+<span class="flex items-center gap-1 text-xs bg-amber-100 text-amber-700 px-2 py-1 rounded font-bold">
+<span class="material-symbols-outlined text-sm">wb_sunny</span> High Humidity
+                        </span>
+</div>
+</div>
+<!-- Results Grid -->
+<div class="grid grid-cols-1 xl:grid-cols-3 gap-6">
+<!-- Card 1: Nendran Banana -->
+<div class="bg-white dark:bg-[#1a2e21] rounded-xl overflow-hidden border-2 border-primary shadow-lg flex flex-col">
+<div class="relative h-40 w-full overflow-hidden">
+<div class="absolute top-3 left-3 z-10 bg-primary text-white text-[10px] font-black px-2 py-1 rounded uppercase tracking-widest">Best Match</div>
+<img class="w-full h-full object-cover" data-alt="Nendran Banana Plantation" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHlWGJ2HbBL1J7r0kO_DJg7CT6ks4ydDC790W36jQXL72iqTC_xA1XCp5_Ee7IQOKmwjFBMfX08M5V8BT7AzRVbegtp2m8Iw2yjeHhK2xA6QHwB8DElKuVm31zNACziqHSgCHrLagK_imODbt_bwlQ_87Cxq9MfMng-P86ecoKU0duRmpJAh2W_RxfFW6h6L_Fjz1ISS_WK8zGXsxA5blfOtoD5DZ42E0Y4nYe5remRWqw7i5VK6qDEOh3WzkP4mC6uGwVpvYE5rI"/>
+</div>
+<div class="p-5 flex flex-col flex-1">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h4 class="text-lg font-black text-[#0e1b13] dark:text-white">Nendran Banana</h4>
+<p class="text-xs text-[#50956a]">Plantain Variety</p>
+</div>
+<!-- Progress Circle -->
+<div class="relative flex items-center justify-center">
+<svg class="w-12 h-12">
+<circle class="text-gray-200 dark:text-white/10" cx="24" cy="24" fill="transparent" r="20" stroke="currentColor" stroke-width="4"></circle>
+<circle class="text-primary progress-ring__circle" cx="24" cy="24" fill="transparent" r="20" stroke="currentColor" stroke-dasharray="125.6" stroke-dashoffset="12.5" stroke-linecap="round" stroke-width="4"></circle>
+</svg>
+<span class="absolute text-[10px] font-black text-primary">92%</span>
+</div>
+</div>
+<div class="space-y-3 mb-6">
+<div class="flex justify-between text-sm">
+<span class="text-[#50956a]">Investment</span>
+<span class="font-bold text-[#0e1b13] dark:text-white">₹85,000 / ac</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="text-[#50956a]">Profit Margin</span>
+<span class="font-bold text-primary">+45%</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="text-[#50956a]">Growth Cycle</span>
+<span class="font-bold text-[#0e1b13] dark:text-white">10-12 Months</span>
+</div>
+</div>
+<button class="mt-auto w-full py-2 bg-primary/10 text-primary font-bold rounded-lg border border-primary/20 hover:bg-primary hover:text-white transition-all">
+                                View Full Guide
+                            </button>
+</div>
+</div>
+<!-- Card 2: Turmeric -->
+<div class="bg-white dark:bg-[#1a2e21] rounded-xl overflow-hidden border border-primary/10 shadow-sm flex flex-col">
+<div class="relative h-40 w-full overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Turmeric Roots" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9MZs9EfY7R_vp_rbMRoB8VASJDbn_-_C05P6QLAo5rohsnnbva60n_VSLHTqyyL9zkPt2fVsCbnpOhJOIQUjkp-9PSw1fLVPLyG-yo2PWEn0QfDs4QwcMNhYZAM_2DBhERZ-tq-10p_SUUAGKMV434VPEwhcupkVLwSZsKdSAU0BChcNuAgyQ6ahrTUn7nNObaRZcheYYRqZgzXxwsA0T0VXBLhyZpyJfegMzShTwD1yCWZI5luw8foIXncyRMsD8aSypbTcu5l4"/>
+</div>
+<div class="p-5 flex flex-col flex-1">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h4 class="text-lg font-black text-[#0e1b13] dark:text-white">Turmeric</h4>
+<p class="text-xs text-[#50956a]">Alleppey Supreme</p>
+</div>
+<div class="relative flex items-center justify-center">
+<svg class="w-12 h-12">
+<circle class="text-gray-200 dark:text-white/10" cx="24" cy="24" fill="transparent" r="20" stroke="currentColor" stroke-width="4"></circle>
+<circle class="text-primary progress-ring__circle" cx="24" cy="24" fill="transparent" r="20" stroke="currentColor" stroke-dasharray="125.6" stroke-dashoffset="25.1" stroke-linecap="round" stroke-width="4"></circle>
+</svg>
+<span class="absolute text-[10px] font-black text-primary">84%</span>
+</div>
+</div>
+<div class="space-y-3 mb-6">
+<div class="flex justify-between text-sm">
+<span class="text-[#50956a]">Investment</span>
+<span class="font-bold text-[#0e1b13] dark:text-white">₹60,000 / ac</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="text-[#50956a]">Profit Margin</span>
+<span class="font-bold text-primary">+38%</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="text-[#50956a]">Growth Cycle</span>
+<span class="font-bold text-[#0e1b13] dark:text-white">8-9 Months</span>
+</div>
+</div>
+<button class="mt-auto w-full py-2 bg-primary/10 text-primary font-bold rounded-lg border border-primary/20 hover:bg-primary hover:text-white transition-all">
+                                View Full Guide
+                            </button>
+</div>
+</div>
+<!-- Card 3: Ginger -->
+<div class="bg-white dark:bg-[#1a2e21] rounded-xl overflow-hidden border border-primary/10 shadow-sm flex flex-col">
+<div class="relative h-40 w-full overflow-hidden opacity-90">
+<img class="w-full h-full object-cover" data-alt="Fresh Ginger Rhizomes" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzA8Ut7CwVnZm8vY9e1dCJExMMxIT6Vutnh7TWTXnjhwsbdp00EOwbqgUa-fEWfUTvTncxVHWbE3kTyucuAeq_T8awgdo5NthVTMPSR7eQiCM5SKQyVNgD0jryFRRyV3kiakZAnDdFSljTSxM2Dl4bOUV2ykrPMyk8X04X8XLE_BmH6GdzInzscxh_tq9BUMlG3iT762R9vytxuW7UevFrTKsyRRR-EoCOHasX_KaiIviBUcsEQlr3z8fyVE8YPOask1HnlE9Bm24"/>
+</div>
+<div class="p-5 flex flex-col flex-1">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h4 class="text-lg font-black text-[#0e1b13] dark:text-white">Ginger</h4>
+<p class="text-xs text-[#50956a]">Wayanad Variety</p>
+</div>
+<div class="relative flex items-center justify-center">
+<svg class="w-12 h-12">
+<circle class="text-gray-200 dark:text-white/10" cx="24" cy="24" fill="transparent" r="20" stroke="currentColor" stroke-width="4"></circle>
+<circle class="text-amber-500 progress-ring__circle" cx="24" cy="24" fill="transparent" r="20" stroke="currentColor" stroke-dasharray="125.6" stroke-dashoffset="40.2" stroke-linecap="round" stroke-width="4"></circle>
+</svg>
+<span class="absolute text-[10px] font-black text-amber-500">72%</span>
+</div>
+</div>
+<div class="space-y-3 mb-6">
+<div class="flex justify-between text-sm">
+<span class="text-[#50956a]">Investment</span>
+<span class="font-bold text-[#0e1b13] dark:text-white">₹1,10,000 / ac</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="text-[#50956a]">Profit Margin</span>
+<span class="font-bold text-amber-600">+28%</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="text-[#50956a]">Growth Cycle</span>
+<span class="font-bold text-[#0e1b13] dark:text-white">8-10 Months</span>
+</div>
+</div>
+<button class="mt-auto w-full py-2 bg-primary/10 text-primary font-bold rounded-lg border border-primary/20 hover:bg-primary hover:text-white transition-all">
+                                View Full Guide
+                            </button>
+</div>
+</div>
+</div>
+<!-- Footer Disclaimer/Info -->
+<div class="mt-4 p-4 rounded-lg bg-background-light dark:bg-white/5 border border-primary/5">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary">info</span>
+<div>
+<p class="text-xs text-[#50956a] leading-relaxed">
+                                Recommendations are generated using historical rainfall data (2010-2023), current soil pH levels for the Malabar region, and market price volatility indices. Financial estimates are approximate and based on local cooperative rates.
+                            </p>
+</div>
+</div>
+</div>
+</section>
+</main>
+</div>
+</body></html>

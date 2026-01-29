@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Market Price Intelligence | KrishiSahaya</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#16a249",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#112117",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-[#0e1b13] dark:text-white min-h-screen flex flex-col">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-50 bg-background-light dark:bg-background-dark border-b border-[#e8f3ec] dark:border-[#1e3226] px-6 lg:px-20 py-3">
+<div class="max-w-[1440px] mx-auto flex items-center justify-between">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3">
+<div class="size-8 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined">agriculture</span>
+</div>
+<h2 class="text-[#0e1b13] dark:text-white text-xl font-bold tracking-tight">KrishiSahaya</h2>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-[#50956a] dark:text-gray-400 hover:text-primary transition-colors text-sm font-semibold" href="#">Dashboard</a>
+<a class="text-primary text-sm font-bold border-b-2 border-primary pb-1" href="#">Advisory</a>
+<a class="text-[#50956a] dark:text-gray-400 hover:text-primary transition-colors text-sm font-semibold" href="#">Market Price</a>
+<a class="text-[#50956a] dark:text-gray-400 hover:text-primary transition-colors text-sm font-semibold" href="#">Weather</a>
+<a class="text-[#50956a] dark:text-gray-400 hover:text-primary transition-colors text-sm font-semibold" href="#">Community</a>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden sm:flex relative items-center">
+<span class="material-symbols-outlined absolute left-3 text-[#50956a]">search</span>
+<input class="pl-10 pr-4 py-2 bg-[#e8f3ec] dark:bg-[#1a2e22] border-none rounded-lg focus:ring-2 focus:ring-primary text-sm w-64 placeholder-[#50956a]" placeholder="Search crops..." type="text"/>
+</div>
+<div class="size-10 rounded-full bg-cover bg-center border-2 border-primary" data-alt="User profile picture of a male farmer" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA5BCQyJ6mMi3cF8Gw6Hcxex8Is1Qugw81EUYjj9d0fZzM4vnMADNiA69-PYX65LpEpQHILbQnIIBzN6yccaAbOUVmRIY0j3SOqg-7ftgpSMCBvY60q5tZwnmpU7xzkt_5Hl-pnQ3BGRHIooYnAtIDjp-oK2IyZdu83CX60bwnvG4ISzGOYpsS5w2V2GeW0GhDlCEBUEfnUsEM7l1bsnbl8fag6IMuEo_N8qTQZ1ostYWEbu4gGj9kVgynZUgXjNgjdPn3zHwnLW38")'></div>
+</div>
+</div>
+</header>
+<div class="flex flex-1 max-w-[1440px] mx-auto w-full px-6 lg:px-20 py-8 gap-8">
+<!-- Sidebar Navigation -->
+<aside class="w-64 flex-shrink-0 hidden lg:flex flex-col gap-8">
+<div class="bg-white dark:bg-[#1a2e22] rounded-xl p-4 shadow-sm border border-[#e8f3ec] dark:border-[#1e3226]">
+<div class="mb-4">
+<h3 class="text-xs font-bold text-[#50956a] uppercase tracking-wider">Market Intel</h3>
+<p class="text-lg font-bold">Kerala Markets</p>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-[#e8f3ec] dark:hover:bg-[#253d2e] transition-colors group" href="#">
+<span class="material-symbols-outlined text-[#50956a] group-hover:text-primary">dashboard</span>
+<span class="text-sm font-medium">Overview</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary border border-primary/20" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="text-sm font-bold">Live Prices</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-[#e8f3ec] dark:hover:bg-[#253d2e] transition-colors group" href="#">
+<span class="material-symbols-outlined text-[#50956a] group-hover:text-primary">trending_up</span>
+<span class="text-sm font-medium">Trends</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-[#e8f3ec] dark:hover:bg-[#253d2e] transition-colors group" href="#">
+<span class="material-symbols-outlined text-[#50956a] group-hover:text-primary">notifications_active</span>
+<span class="text-sm font-medium">Price Alerts</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-[#e8f3ec] dark:hover:bg-[#253d2e] transition-colors group" href="#">
+<span class="material-symbols-outlined text-[#50956a] group-hover:text-primary">map</span>
+<span class="text-sm font-medium">Market Map</span>
+</a>
+</nav>
+<button class="w-full mt-6 bg-primary text-white py-2.5 rounded-lg font-bold text-sm hover:bg-primary/90 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">add</span> Add Watchlist
+                </button>
+</div>
+<!-- Coming Soon Alert Card -->
+<div class="relative overflow-hidden bg-gradient-to-br from-[#16a249] to-[#0d6b30] rounded-xl p-6 text-white shadow-lg">
+<div class="relative z-10">
+<span class="inline-block px-2 py-1 bg-white/20 rounded text-[10px] font-bold uppercase tracking-widest mb-3">Coming Soon</span>
+<h4 class="text-lg font-bold leading-tight mb-2">Automated Price Alerts</h4>
+<p class="text-xs text-white/80 leading-relaxed mb-4">Get instant WhatsApp notifications when your crops hit your target selling price.</p>
+<button class="w-full bg-white text-primary py-2 rounded-lg font-bold text-xs hover:bg-gray-100 transition-colors">Notify Me</button>
+</div>
+<span class="material-symbols-outlined absolute -right-4 -bottom-4 text-9xl text-white/10 rotate-12">notifications</span>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col gap-6">
+<!-- Breadcrumbs -->
+<nav class="flex items-center gap-2 text-sm">
+<a class="text-[#50956a] hover:text-primary" href="#">Home</a>
+<span class="material-symbols-outlined text-sm text-[#50956a]">chevron_right</span>
+<span class="text-[#0e1b13] dark:text-white font-medium">Market Price Intelligence</span>
+</nav>
+<!-- Page Heading -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div class="flex flex-col gap-1">
+<h1 class="text-3xl lg:text-4xl font-black tracking-tight text-[#0e1b13] dark:text-white">Market Price Intelligence</h1>
+<p class="text-[#50956a] dark:text-gray-400">Real-time wholesale prices across major Kerala agricultural markets. <span class="text-xs ml-2 italic opacity-75">Last updated: 10 mins ago</span></p>
+</div>
+<div class="flex gap-2">
+<button class="flex items-center gap-2 px-4 py-2 bg-[#e8f3ec] dark:bg-[#1a2e22] text-[#0e1b13] dark:text-white rounded-lg font-bold text-sm hover:bg-[#d1e6d8] transition-colors">
+<span class="material-symbols-outlined text-sm">download</span> Export CSV
+                    </button>
+<button class="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg font-bold text-sm hover:bg-primary/90 transition-colors">
+<span class="material-symbols-outlined text-sm">refresh</span> Refresh
+                    </button>
+</div>
+</div>
+<!-- Stats/Filter Bar -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="bg-white dark:bg-[#1a2e22] p-4 rounded-xl border border-[#e8f3ec] dark:border-[#1e3226] flex items-center justify-between shadow-sm">
+<div>
+<p class="text-xs text-[#50956a] font-bold uppercase tracking-wider">Top Gainer</p>
+<p class="text-lg font-bold">Black Pepper</p>
+</div>
+<div class="text-primary flex items-center gap-1 font-bold">
+<span class="material-symbols-outlined">trending_up</span> +5.2%
+                    </div>
+</div>
+<div class="bg-white dark:bg-[#1a2e22] p-4 rounded-xl border border-[#e8f3ec] dark:border-[#1e3226] flex items-center justify-between shadow-sm">
+<div>
+<p class="text-xs text-[#50956a] font-bold uppercase tracking-wider">Total Crops Tracked</p>
+<p class="text-lg font-bold">42 Commodities</p>
+</div>
+<span class="material-symbols-outlined text-[#50956a]">inventory_2</span>
+</div>
+<div class="bg-white dark:bg-[#1a2e22] p-4 rounded-xl border border-[#e8f3ec] dark:border-[#1e3226] flex items-center justify-between shadow-sm">
+<div>
+<p class="text-xs text-[#50956a] font-bold uppercase tracking-wider">Market Sentiment</p>
+<p class="text-lg font-bold">Bullish (Strong)</p>
+</div>
+<span class="material-symbols-outlined text-primary">auto_graph</span>
+</div>
+</div>
+<!-- Market Data Table -->
+<div class="bg-white dark:bg-[#1a2e22] rounded-xl border border-[#e8f3ec] dark:border-[#1e3226] shadow-sm overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-[#f8fbf9] dark:bg-[#13251a]">
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-[#50956a]">Crop Name</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-[#50956a]">Current Price (₹/kg)</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-[#50956a]">7-Day Trend</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-[#50956a]">Best Time to Sell</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-[#50956a]">Market Location</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-[#50956a] text-right">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-[#e8f3ec] dark:divide-[#1e3226]">
+<!-- Row 1 -->
+<tr class="hover:bg-[#f8fbf9] dark:hover:bg-[#16291e] transition-colors">
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-lg bg-gray-100 dark:bg-[#253d2e] flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">eco</span>
+</div>
+<span class="font-bold text-[#0e1b13] dark:text-white">Black Pepper</span>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="text-lg font-black text-primary">₹640.00</span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center gap-1 text-primary font-bold bg-primary/10 px-2 py-1 rounded w-fit">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+<span class="text-sm">2.5%</span>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-[#e8f3ec] text-[#0e1b13] border border-primary/20">
+<span class="size-1.5 rounded-full bg-[#50956a] mr-2"></span> Hold
+                                    </span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-[#50956a]">Kochi APMC</td>
+<td class="px-6 py-4 whitespace-nowrap text-right">
+<button class="text-primary text-sm font-bold hover:underline">View History</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-[#f8fbf9] dark:hover:bg-[#16291e] transition-colors">
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-lg bg-gray-100 dark:bg-[#253d2e] flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">grain</span>
+</div>
+<span class="font-bold text-[#0e1b13] dark:text-white">Cardamom</span>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="text-lg font-black text-primary">₹1,250.00</span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center gap-1 text-red-500 font-bold bg-red-50 dark:bg-red-900/20 px-2 py-1 rounded w-fit">
+<span class="material-symbols-outlined text-sm">trending_down</span>
+<span class="text-sm">1.2%</span>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-primary text-white">
+<span class="size-1.5 rounded-full bg-white mr-2"></span> Sell Now
+                                    </span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-[#50956a]">Idukki Market</td>
+<td class="px-6 py-4 whitespace-nowrap text-right">
+<button class="text-primary text-sm font-bold hover:underline">View History</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-[#f8fbf9] dark:hover:bg-[#16291e] transition-colors">
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-lg bg-gray-100 dark:bg-[#253d2e] flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">layers</span>
+</div>
+<span class="font-bold text-[#0e1b13] dark:text-white">Rubber (RSS 4)</span>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="text-lg font-black text-primary">₹185.50</span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center gap-1 text-gray-500 font-bold bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded w-fit">
+<span class="material-symbols-outlined text-sm">remove</span>
+<span class="text-sm">0.0%</span>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-[#e8f3ec] text-[#0e1b13] border border-primary/20">
+<span class="size-1.5 rounded-full bg-[#50956a] mr-2"></span> Wait
+                                    </span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-[#50956a]">Kottayam</td>
+<td class="px-6 py-4 whitespace-nowrap text-right">
+<button class="text-primary text-sm font-bold hover:underline">View History</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-[#f8fbf9] dark:hover:bg-[#16291e] transition-colors">
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-lg bg-gray-100 dark:bg-[#253d2e] flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">circle_notifications</span>
+</div>
+<span class="font-bold text-[#0e1b13] dark:text-white">Coconut (Dry)</span>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="text-lg font-black text-primary">₹35.20</span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center gap-1 text-primary font-bold bg-primary/10 px-2 py-1 rounded w-fit">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+<span class="text-sm">5.1%</span>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-primary text-white">
+<span class="size-1.5 rounded-full bg-white mr-2"></span> Sell Now
+                                    </span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-[#50956a]">Kozhikode</td>
+<td class="px-6 py-4 whitespace-nowrap text-right">
+<button class="text-primary text-sm font-bold hover:underline">View History</button>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-[#f8fbf9] dark:hover:bg-[#16291e] transition-colors">
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-lg bg-gray-100 dark:bg-[#253d2e] flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">restaurant</span>
+</div>
+<span class="font-bold text-[#0e1b13] dark:text-white">Tapioca</span>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="text-lg font-black text-primary">₹28.00</span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center gap-1 text-red-500 font-bold bg-red-50 dark:bg-red-900/20 px-2 py-1 rounded w-fit">
+<span class="material-symbols-outlined text-sm">trending_down</span>
+<span class="text-sm">0.8%</span>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-[#e8f3ec] text-[#0e1b13] border border-primary/20">
+<span class="size-1.5 rounded-full bg-[#50956a] mr-2"></span> Hold
+                                    </span>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-[#50956a]">Trivandrum APMC</td>
+<td class="px-6 py-4 whitespace-nowrap text-right">
+<button class="text-primary text-sm font-bold hover:underline">View History</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-4 bg-[#f8fbf9] dark:bg-[#13251a] border-t border-[#e8f3ec] dark:border-[#1e3226] flex items-center justify-between">
+<p class="text-xs text-[#50956a]">Showing 1-5 of 42 crops</p>
+<div class="flex gap-2">
+<button class="size-8 rounded border border-[#d1e6d8] dark:border-[#1e3226] flex items-center justify-center text-[#50956a] hover:bg-white dark:hover:bg-[#253d2e]">
+<span class="material-symbols-outlined text-sm">chevron_left</span>
+</button>
+<button class="size-8 rounded bg-primary text-white flex items-center justify-center text-xs font-bold">1</button>
+<button class="size-8 rounded border border-[#d1e6d8] dark:border-[#1e3226] flex items-center justify-center text-[#50956a] hover:bg-white dark:hover:bg-[#253d2e] text-xs font-bold">2</button>
+<button class="size-8 rounded border border-[#d1e6d8] dark:border-[#1e3226] flex items-center justify-center text-[#50956a] hover:bg-white dark:hover:bg-[#253d2e] text-xs font-bold">3</button>
+<button class="size-8 rounded border border-[#d1e6d8] dark:border-[#1e3226] flex items-center justify-center text-[#50956a] hover:bg-white dark:hover:bg-[#253d2e]">
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Additional Help Section -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<div class="bg-white dark:bg-[#1a2e22] p-6 rounded-xl border border-[#e8f3ec] dark:border-[#1e3226] shadow-sm">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-primary">lightbulb</span>
+<h4 class="font-bold">Pro-Tip for Sell Timing</h4>
+</div>
+<p class="text-sm text-[#50956a] leading-relaxed">Prices in the <span class="font-bold text-[#0e1b13] dark:text-white">Kochi market</span> typically peak between Tuesday and Thursday. Consider harvesting on weekends for early-week market distribution.</p>
+</div>
+<div class="bg-white dark:bg-[#1a2e22] p-6 rounded-xl border border-[#e8f3ec] dark:border-[#1e3226] shadow-sm">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-primary">cloud_sync</span>
+<h4 class="font-bold">Sync with Weather</h4>
+</div>
+<p class="text-sm text-[#50956a] leading-relaxed">Upcoming monsoon in North Kerala may affect spice supply next week. Current trends suggest a <span class="font-bold text-[#0e1b13] dark:text-white">10-15% price spike</span> for Cardamom. Plan accordingly.</p>
+</div>
+</div>
+</main>
+</div>
+<!-- Simple Footer -->
+<footer class="mt-auto border-t border-[#e8f3ec] dark:border-[#1e3226] bg-white dark:bg-[#112117] px-6 lg:px-20 py-6">
+<div class="max-w-[1440px] mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">agriculture</span>
+<span class="text-sm font-bold opacity-75">KrishiSahaya © 2024</span>
+</div>
+<div class="flex gap-6">
+<a class="text-xs font-medium text-[#50956a] hover:text-primary" href="#">Privacy Policy</a>
+<a class="text-xs font-medium text-[#50956a] hover:text-primary" href="#">Terms of Service</a>
+<a class="text-xs font-medium text-[#50956a] hover:text-primary" href="#">Contact Support</a>
+</div>
+</div>
+</footer>
+</body></html>

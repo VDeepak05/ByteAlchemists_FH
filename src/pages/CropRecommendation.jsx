@@ -1,206 +1,256 @@
 import React, { useState } from 'react';
-import { Sprout, DollarSign, Droplets, Target, AlertTriangle } from 'lucide-react';
 import { getRecommendations } from '../services/cropEngine';
-import { getWeatherForecast } from '../services/weatherAPI';
 
 const CropRecommendation = () => {
-    const [loading, setLoading] = useState(false);
-    const [recommendations, setRecommendations] = useState(null);
-
     const [formData, setFormData] = useState({
-        season: 'Kharif',
-        budget: 50000,
-        waterAvailability: 'Moderate',
-        goal: 'Maximum Profit',
-        farmSize: 1, // Default from profile usually
-        soilType: 'Red Soil' // Default from profile usually
+        season: 'kharif',
+        budget: 'mid',
+        water: 'rainfed',
+        goal: 'profit'
     });
+    const [recommendations, setRecommendations] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData(prev => ({ ...prev, [name]: value }));
+        setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
-
-        // Simulate API/Processing delay
         try {
-            // Fetch weather context (mock or real)
-            const weather = await getWeatherForecast(); // Assume this returns object with totalRainfall30Days or we calculate it
-            // For now, let's inject a dummy rainfall metric if not present, based on forecast
-            const weatherContext = {
-                totalRainfall30Days: weather.current?.rainfall ? weather.current.rainfall * 30 * 8 : 300 // rough estimate
-            };
-
-            const results = getRecommendations(formData, weatherContext);
-            setRecommendations(results);
-        } catch (err) {
-            console.error(err);
-        } finally {
-            setLoading(false);
+            const results = await getRecommendations(formData);
+            setRecommendations(results.slice(0, 3));
+        } catch (error) {
+            console.error('Error getting recommendations:', error);
         }
+        setLoading(false);
+    };
+
+    // Default recommendations to show
+    const defaultCrops = [
+        {
+            name: 'Nendran Banana',
+            variety: 'Plantain Variety',
+            score: 92,
+            investment: '₹85,000 / ac',
+            profit: '+45%',
+            cycle: '10-12 Months',
+            image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBHlWGJ2HbBL1J7r0kO_DJg7CT6ks4ydDC790W36jQXL72iqTC_xA1XCp5_Ee7IQOKmwjFBMfX08M5V8BT7AzRVbegtp2m8Iw2yjeHhK2xA6QHwB8DElKuVm31zNACziqHSgCHrLagK_imODbt_bwlQ_87Cxq9MfMng-P86ecoKU0duRmpJAh2W_RxfFW6h6L_Fjz1ISS_WK8zGXsxA5blfOtoD5DZ42E0Y4nYe5remRWqw7i5VK6qDEOh3WzkP4mC6uGwVpvYE5rI',
+            best: true
+        },
+        {
+            name: 'Turmeric',
+            variety: 'Alleppey Supreme',
+            score: 84,
+            investment: '₹60,000 / ac',
+            profit: '+38%',
+            cycle: '8-9 Months',
+            image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuD9MZs9EfY7R_vp_rbMRoB8VASJDbn_-_C05P6QLAo5rohsnnbva60n_VSLHTqyyL9zkPt2fVsCbnpOhJOIQUjkp-9PSw1fLVPLyG-yo2PWEn0QfDs4QwcMNhYZAM_2DBhERZ-tq-10p_SUUAGKMV434VPEwhcupkVLwSZsKdSAU0BChcNuAgyQ6ahrTUn7nNObaRZcheYYRqZgzXxwsA0T0VXBLhyZpyJfegMzShTwD1yCWZI5luw8foIXncyRMsD8aSypbTcu5l4',
+            best: false
+        },
+        {
+            name: 'Ginger',
+            variety: 'Wayanad Variety',
+            score: 72,
+            investment: '₹1,10,000 / ac',
+            profit: '+28%',
+            cycle: '8-10 Months',
+            image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDzA8Ut7CwVnZm8vY9e1dCJExMMxIT6Vutnh7TWTXnjhwsbdp00EOwbqgUa-fEWfUTvTncxVHWbE3kTyucuAeq_T8awgdo5NthVTMPSR7eQiCM5SKQyVNgD0jryFRRyV3kiakZAnDdFSljTSxM2Dl4bOUV2ykrPMyk8X04X8XLE_BmH6GdzInzscxh_tq9BUMlG3iT762R9vytxuW7UevFrTKsyRRR-EoCOHasX_KaiIviBUcsEQlr3z8fyVE8YPOask1HnlE9Bm24',
+            best: false
+        }
+    ];
+
+    const displayCrops = recommendations.length > 0 ? recommendations : defaultCrops;
+
+    const ProgressCircle = ({ score }) => {
+        const circumference = 2 * Math.PI * 20;
+        const offset = circumference - (score / 100) * circumference;
+        return (
+            <div className="relative flex items-center justify-center">
+                <svg className="w-12 h-12">
+                    <circle className="text-gray-200 dark:text-white/10" cx="24" cy="24" fill="transparent" r="20" stroke="currentColor" strokeWidth="4" />
+                    <circle
+                        className={`${score >= 80 ? 'text-primary' : 'text-amber-500'}`}
+                        cx="24" cy="24" fill="transparent" r="20"
+                        stroke="currentColor"
+                        strokeDasharray={circumference}
+                        strokeDashoffset={offset}
+                        strokeLinecap="round"
+                        strokeWidth="4"
+                        style={{ transform: 'rotate(-90deg)', transformOrigin: '50% 50%' }}
+                    />
+                </svg>
+                <span className={`absolute text-[10px] font-black ${score >= 80 ? 'text-primary' : 'text-amber-500'}`}>{score}%</span>
+            </div>
+        );
     };
 
     return (
-        <div className="max-w-7xl mx-auto space-y-8">
-            <div className="mb-6">
-                <h1 className="text-2xl font-bold text-neutral-900">Crop Recommendation Engine</h1>
-                <p className="text-neutral-600">Get AI-powered suggestions based on your soil, climate, and budget.</p>
-            </div>
+        <div className="flex flex-col lg:flex-row max-w-7xl mx-auto w-full gap-6">
+            {/* Left Panel: Form Section */}
+            <aside className="w-full lg:w-1/3 flex flex-col gap-6">
+                {/* Page Heading */}
+                <div className="flex flex-col gap-2">
+                    <h1 className="text-slate-900 dark:text-white text-3xl font-black leading-tight">AI Crop Recommendation</h1>
+                    <p className="text-[#50956a] text-sm font-normal">Based on Kerala's agro-climatic zones and your resource profile.</p>
+                </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                {/* Input Form */}
-                <div className="lg:col-span-1 bg-white p-6 rounded-xl shadow-sm border border-neutral-200 h-fit">
-                    <h2 className="text-lg font-semibold mb-4 flex items-center">
-                        <Target className="mr-2 h-5 w-5 text-primary" />
-                        Input Parameters
-                    </h2>
-
-                    <form onSubmit={handleSubmit} className="space-y-4">
-                        <div>
-                            <label className="block text-sm font-medium text-neutral-700 mb-1">Season</label>
-                            <select name="season" value={formData.season} onChange={handleChange} className="w-full rounded-md border-neutral-300 shadow-sm focus:border-primary focus:ring focus:ring-primary/20 p-2 border">
-                                <option value="Kharif">Kharif (June-Oct)</option>
-                                <option value="Rabi">Rabi (Nov-March)</option>
-                                <option value="Summer">Summer (April-May)</option>
-                            </select>
-                        </div>
-
-                        <div>
-                            <label className="block text-sm font-medium text-neutral-700 mb-1">Budget (₹)</label>
-                            <div className="relative">
-                                <span className="absolute left-3 top-2 text-neutral-500">₹</span>
-                                <input
-                                    type="number"
-                                    name="budget"
-                                    value={formData.budget}
-                                    onChange={handleChange}
-                                    min="5000"
-                                    max="1000000"
-                                    className="w-full rounded-md border-neutral-300 shadow-sm focus:border-primary focus:ring focus:ring-primary/20 p-2 pl-8 border"
-                                />
-                            </div>
-                        </div>
-
-                        <div>
-                            <label className="block text-sm font-medium text-neutral-700 mb-1">Water Availability</label>
-                            <select name="waterAvailability" value={formData.waterAvailability} onChange={handleChange} className="w-full rounded-md border-neutral-300 shadow-sm focus:border-primary focus:ring focus:ring-primary/20 p-2 border">
-                                <option value="Abundant">Abundant</option>
-                                <option value="Moderate">Moderate</option>
-                                <option value="Limited">Limited</option>
-                            </select>
-                        </div>
-
-                        <div>
-                            <label className="block text-sm font-medium text-neutral-700 mb-1">Primary Goal</label>
-                            <select name="goal" value={formData.goal} onChange={handleChange} className="w-full rounded-md border-neutral-300 shadow-sm focus:border-primary focus:ring focus:ring-primary/20 p-2 border">
-                                <option value="Maximum Profit">Maximum Profit</option>
-                                <option value="Low Risk">Low Risk</option>
-                                <option value="Quick Harvest">Quick Harvest</option>
-                                <option value="Subsistence">Subsistence</option>
-                            </select>
-                        </div>
-
-                        <div className="pt-4">
-                            <button
-                                type="submit"
-                                disabled={loading}
-                                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-50 transition-colors"
+                {/* Form Card */}
+                <div className="bg-white dark:bg-[#1a2e21] rounded-xl p-6 shadow-sm border border-primary/10">
+                    <div className="flex flex-col gap-1 mb-6">
+                        <h2 className="text-lg font-bold text-slate-900 dark:text-white">Advisor Panel</h2>
+                        <p className="text-xs text-[#50956a]">Define your land parameters</p>
+                    </div>
+                    <form className="space-y-4" onSubmit={handleSubmit}>
+                        <div className="flex flex-col gap-2">
+                            <label className="text-slate-900 dark:text-white text-sm font-semibold">Select Season</label>
+                            <select
+                                name="season"
+                                value={formData.season}
+                                onChange={handleChange}
+                                className="w-full rounded-lg border border-[#d1e6d8] bg-background-light dark:bg-[#112117] dark:border-white/10 p-3 text-sm focus:ring-primary focus:border-primary"
                             >
-                                {loading ? 'Analyzing...' : 'Get Recommendations'}
-                            </button>
+                                <option value="kharif">Monsoon (Kharif)</option>
+                                <option value="rabi">Winter (Rabi)</option>
+                                <option value="summer">Summer (Zaid)</option>
+                            </select>
                         </div>
-
-                        <div className="text-xs text-neutral-500 mt-4 bg-neutral-50 p-3 rounded-lg border border-neutral-100">
-                            <p><strong>Note:</strong> Auto-filled from profile:</p>
-                            <ul className="list-disc list-inside mt-1">
-                                <li>Soil: {formData.soilType}</li>
-                                <li>Farm Size: {formData.farmSize} acres</li>
-                            </ul>
+                        <div className="flex flex-col gap-2">
+                            <label className="text-slate-900 dark:text-white text-sm font-semibold">Budget Range (per acre)</label>
+                            <select
+                                name="budget"
+                                value={formData.budget}
+                                onChange={handleChange}
+                                className="w-full rounded-lg border border-[#d1e6d8] bg-background-light dark:bg-[#112117] dark:border-white/10 p-3 text-sm focus:ring-primary focus:border-primary"
+                            >
+                                <option value="low">Low (&lt; ₹50k)</option>
+                                <option value="mid">Medium (₹50k - ₹1.5L)</option>
+                                <option value="high">High (&gt; ₹1.5L)</option>
+                            </select>
                         </div>
+                        <div className="flex flex-col gap-2">
+                            <label className="text-slate-900 dark:text-white text-sm font-semibold">Water Availability</label>
+                            <select
+                                name="water"
+                                value={formData.water}
+                                onChange={handleChange}
+                                className="w-full rounded-lg border border-[#d1e6d8] bg-background-light dark:bg-[#112117] dark:border-white/10 p-3 text-sm focus:ring-primary focus:border-primary"
+                            >
+                                <option value="rainfed">Rain-fed</option>
+                                <option value="irrigated">Canal/Well Irrigated</option>
+                                <option value="low">Scarce / Drought-prone</option>
+                            </select>
+                        </div>
+                        <div className="flex flex-col gap-2">
+                            <label className="text-slate-900 dark:text-white text-sm font-semibold">Primary Goal</label>
+                            <select
+                                name="goal"
+                                value={formData.goal}
+                                onChange={handleChange}
+                                className="w-full rounded-lg border border-[#d1e6d8] bg-background-light dark:bg-[#112117] dark:border-white/10 p-3 text-sm focus:ring-primary focus:border-primary"
+                            >
+                                <option value="profit">Maximum Profit Margin</option>
+                                <option value="risk">Low Risk / Resilience</option>
+                                <option value="export">Export Potential</option>
+                            </select>
+                        </div>
+                        <button
+                            type="submit"
+                            disabled={loading}
+                            className="w-full bg-primary text-white py-4 rounded-lg font-bold flex items-center justify-center gap-2 hover:bg-green-700 transition-all mt-4 disabled:opacity-50"
+                        >
+                            <span className="material-symbols-outlined">auto_awesome</span>
+                            {loading ? 'Generating...' : 'Generate Recommendations'}
+                        </button>
                     </form>
                 </div>
 
-                {/* Results Section */}
-                <div className="lg:col-span-2">
-                    {!recommendations ? (
-                        <div className="h-full flex flex-col items-center justify-center text-neutral-400 min-h-[400px] bg-neutral-50 rounded-xl border-2 border-dashed border-neutral-200">
-                            <Sprout className="h-16 w-16 mb-4 opacity-20" />
-                            <p>Enter details and click "Get Recommendations" to see results</p>
-                        </div>
-                    ) : (
-                        <div className="space-y-6">
-                            <h2 className="text-xl font-bold text-neutral-900">Top Recommended Crops</h2>
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-                                {recommendations.map((crop) => (
-                                    <CropCard key={crop.id} crop={crop} />
-                                ))}
+                {/* Secondary Nav Items */}
+                <div className="flex flex-col gap-2">
+                    <div className="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary/10 text-primary">
+                        <span className="material-symbols-outlined">analytics</span>
+                        <p className="text-sm font-bold">Current Recommendation</p>
+                    </div>
+                    <div className="flex items-center gap-3 px-3 py-2 text-[#50956a] hover:bg-white dark:hover:bg-white/5 rounded-lg cursor-pointer transition-colors">
+                        <span className="material-symbols-outlined">bookmark</span>
+                        <p className="text-sm font-medium">Saved Results</p>
+                    </div>
+                    <div className="flex items-center gap-3 px-3 py-2 text-[#50956a] hover:bg-white dark:hover:bg-white/5 rounded-lg cursor-pointer transition-colors">
+                        <span className="material-symbols-outlined">history</span>
+                        <p className="text-sm font-medium">Historical Trends</p>
+                    </div>
+                </div>
+            </aside>
+
+            {/* Right Panel: Results Section */}
+            <section className="flex-1 flex flex-col gap-6">
+                <div className="flex items-center justify-between flex-wrap gap-4">
+                    <h3 className="text-xl font-bold text-slate-900 dark:text-white">Top 3 Recommended Crops</h3>
+                    <div className="flex gap-2">
+                        <span className="flex items-center gap-1 text-xs bg-primary/20 text-primary px-2 py-1 rounded font-bold">
+                            <span className="material-symbols-outlined text-sm">location_on</span> Wayanad, Kerala
+                        </span>
+                        <span className="flex items-center gap-1 text-xs bg-amber-100 text-amber-700 px-2 py-1 rounded font-bold">
+                            <span className="material-symbols-outlined text-sm">wb_sunny</span> High Humidity
+                        </span>
+                    </div>
+                </div>
+
+                {/* Results Grid */}
+                <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
+                    {displayCrops.map((crop, idx) => (
+                        <div
+                            key={idx}
+                            className={`bg-white dark:bg-[#1a2e21] rounded-xl overflow-hidden flex flex-col ${crop.best ? 'border-2 border-primary shadow-lg' : 'border border-primary/10 shadow-sm'
+                                }`}
+                        >
+                            <div className="relative h-40 w-full overflow-hidden">
+                                {crop.best && (
+                                    <div className="absolute top-3 left-3 z-10 bg-primary text-white text-[10px] font-black px-2 py-1 rounded uppercase tracking-widest">Best Match</div>
+                                )}
+                                <img className="w-full h-full object-cover" alt={crop.name} src={crop.image} />
+                            </div>
+                            <div className="p-5 flex flex-col flex-1">
+                                <div className="flex justify-between items-start mb-4">
+                                    <div>
+                                        <h4 className="text-lg font-black text-slate-900 dark:text-white">{crop.name}</h4>
+                                        <p className="text-xs text-[#50956a]">{crop.variety}</p>
+                                    </div>
+                                    <ProgressCircle score={crop.score} />
+                                </div>
+                                <div className="space-y-3 mb-6">
+                                    <div className="flex justify-between text-sm">
+                                        <span className="text-[#50956a]">Investment</span>
+                                        <span className="font-bold text-slate-900 dark:text-white">{crop.investment}</span>
+                                    </div>
+                                    <div className="flex justify-between text-sm">
+                                        <span className="text-[#50956a]">Profit Margin</span>
+                                        <span className={`font-bold ${crop.score >= 80 ? 'text-primary' : 'text-amber-600'}`}>{crop.profit}</span>
+                                    </div>
+                                    <div className="flex justify-between text-sm">
+                                        <span className="text-[#50956a]">Growth Cycle</span>
+                                        <span className="font-bold text-slate-900 dark:text-white">{crop.cycle}</span>
+                                    </div>
+                                </div>
+                                <button className="mt-auto w-full py-2 bg-primary/10 text-primary font-bold rounded-lg border border-primary/20 hover:bg-primary hover:text-white transition-all">
+                                    View Full Guide
+                                </button>
                             </div>
                         </div>
-                    )}
-                </div>
-            </div>
-        </div>
-    );
-};
-
-const CropCard = ({ crop }) => {
-    const getScoreColor = (score) => {
-        if (score >= 80) return 'text-green-600 bg-green-50 border-green-200';
-        if (score >= 60) return 'text-yellow-600 bg-yellow-50 border-yellow-200';
-        if (score >= 40) return 'text-orange-600 bg-orange-50 border-orange-200';
-        return 'text-red-600 bg-red-50 border-red-200';
-    };
-
-    const getRiskColor = (risk) => {
-        switch (risk) {
-            case 'Low': return 'text-green-600';
-            case 'Medium': return 'text-yellow-600';
-            case 'High': return 'text-red-600';
-            default: return 'text-gray-600';
-        }
-    };
-
-    const profit = (crop.expected_yield_kg * crop.market_price_per_kg) - crop.investment_per_acre;
-
-    return (
-        <div className="bg-white rounded-xl shadow-md overflow-hidden border border-neutral-100 hover:shadow-lg transition-shadow flex flex-col">
-            <div className="h-40 w-full overflow-hidden relative">
-                <img src={crop.image} alt={crop.name} className="w-full h-full object-cover" />
-                <div className={`absolute top-2 right-2 px-2 py-1 rounded-full text-xs font-bold border ${getScoreColor(crop.score)}`}>
-                    {Math.round(crop.score)}% Match
-                </div>
-            </div>
-
-            <div className="p-4 flex-1 flex flex-col">
-                <div className="flex justify-between items-start mb-2">
-                    <h3 className="text-lg font-bold text-neutral-900">{crop.name}</h3>
-                    <span className={`text-xs px-2 py-1 rounded bg-neutral-100 font-medium ${getRiskColor(crop.climate_sensitivity)}`}>
-                        {crop.climate_sensitivity} Risk
-                    </span>
+                    ))}
                 </div>
 
-                <div className="space-y-2 text-sm text-neutral-600 flex-1">
-                    <div className="flex justify-between">
-                        <span>Duration:</span>
-                        <span className="font-medium">{crop.duration_days} days</span>
-                    </div>
-                    <div className="flex justify-between">
-                        <span>Investment:</span>
-                        <span className="font-medium">₹{crop.investment_per_acre.toLocaleString()}</span>
-                    </div>
-                    <div className="flex justify-between">
-                        <span>Est. Profit:</span>
-                        <span className="font-medium text-green-600">₹{profit.toLocaleString()}</span>
+                {/* Footer Disclaimer */}
+                <div className="mt-4 p-4 rounded-lg bg-background-light dark:bg-white/5 border border-primary/5">
+                    <div className="flex items-start gap-3">
+                        <span className="material-symbols-outlined text-primary">info</span>
+                        <p className="text-xs text-[#50956a] leading-relaxed">
+                            Recommendations are generated using historical rainfall data (2010-2023), current soil pH levels for the Malabar region, and market price volatility indices. Financial estimates are approximate and based on local cooperative rates.
+                        </p>
                     </div>
                 </div>
-
-                <button className="mt-4 w-full py-2 bg-neutral-900 text-white rounded-lg text-sm font-medium hover:bg-neutral-800 transition-colors">
-                    View Details
-                </button>
-            </div>
+            </section>
         </div>
     );
 };

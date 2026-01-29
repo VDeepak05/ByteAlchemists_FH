@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Government Agricultural Schemes - KrishiSahaya</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#16a249",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#112117",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-[#0e1b13] dark:text-[#f8fbf9] min-h-screen">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-solid border-[#e8f3ec] dark:border-[#1e3a29] px-4 md:px-20 lg:px-40 py-3">
+<div class="max-w-[1200px] mx-auto flex items-center justify-between gap-8">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-2">
+<div class="text-primary flex items-center">
+<span class="material-symbols-outlined text-3xl">potted_plant</span>
+</div>
+<h2 class="text-[#0e1b13] dark:text-white text-xl font-bold leading-tight tracking-tight">KrishiSahaya</h2>
+</div>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-[#50956a] hover:text-primary transition-colors text-sm font-medium leading-normal" href="#">Dashboard</a>
+<a class="text-primary text-sm font-semibold leading-normal border-b-2 border-primary" href="#">Schemes</a>
+<a class="text-[#50956a] hover:text-primary transition-colors text-sm font-medium leading-normal" href="#">Advisory</a>
+<a class="text-[#50956a] hover:text-primary transition-colors text-sm font-medium leading-normal" href="#">Market</a>
+</nav>
+</div>
+<div class="flex flex-1 justify-end items-center gap-4">
+<button class="hidden lg:flex items-center gap-1 text-[#50956a] text-sm font-medium px-3 py-1 rounded-lg border border-[#e8f3ec] dark:border-[#1e3a29]">
+<span class="material-symbols-outlined text-[18px]">translate</span>
+<span>മലയാളം</span>
+</button>
+<div class="hidden sm:flex items-center bg-[#e8f3ec] dark:bg-[#1e3a29] rounded-lg px-3 py-1.5 gap-2">
+<span class="material-symbols-outlined text-[#50956a] text-[20px]">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-32 lg:w-48 placeholder:text-[#50956a]" placeholder="Quick search..."/>
+</div>
+<button class="bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-lg text-sm font-bold flex items-center gap-2 transition-all">
+<span class="material-symbols-outlined text-[20px]">person</span>
+<span class="truncate">Profile</span>
+</button>
+</div>
+</div>
+</header>
+<main class="max-w-[1200px] mx-auto px-4 md:px-10 lg:px-20 py-10">
+<!-- Page Heading -->
+<div class="flex flex-col md:flex-row justify-between items-end gap-6 mb-8">
+<div class="flex flex-col gap-2 max-w-2xl">
+<h1 class="text-[#0e1b13] dark:text-white text-4xl font-black leading-tight tracking-tight">Government Agricultural Schemes</h1>
+<p class="text-[#50956a] text-lg font-normal leading-normal">Explore financial assistance and technical support curated for Kerala's climate-resilient farming.</p>
+</div>
+<div class="flex items-center gap-3 bg-primary/10 px-4 py-2 rounded-xl border border-primary/20">
+<span class="material-symbols-outlined text-primary">verified_user</span>
+<div class="text-xs">
+<p class="text-primary font-bold">Profile Match Active</p>
+<p class="text-[#50956a]">Filtering for 2.5 Acres, Palakkad</p>
+</div>
+</div>
+</div>
+<!-- Search and Filter Bar -->
+<div class="flex flex-col gap-4 mb-10">
+<div class="bg-white dark:bg-[#1a2e22] p-2 rounded-xl shadow-sm border border-[#e8f3ec] dark:border-[#1e3a29] flex flex-col md:flex-row gap-2">
+<div class="flex-1 flex items-center px-4 gap-3 border-b md:border-b-0 md:border-r border-[#e8f3ec] dark:border-[#1e3a29] py-2 md:py-0">
+<span class="material-symbols-outlined text-[#50956a]">search</span>
+<input class="w-full bg-transparent border-none focus:ring-0 text-[#0e1b13] dark:text-white placeholder:text-[#50956a]" placeholder="Search schemes like PM-KISAN, KCC, or Subhiksha..." type="text"/>
+</div>
+<div class="flex items-center gap-2 px-4 py-2 md:py-0">
+<span class="material-symbols-outlined text-[#50956a] text-[20px]">filter_list</span>
+<select class="bg-transparent border-none focus:ring-0 text-sm font-medium text-[#0e1b13] dark:text-white">
+<option>All Categories</option>
+<option>Income Support</option>
+<option>Insurance</option>
+<option>Irrigation</option>
+</select>
+</div>
+<button class="bg-primary text-white px-8 py-3 rounded-lg font-bold hover:shadow-lg hover:shadow-primary/20 transition-all">
+                    Search
+                </button>
+</div>
+<!-- Chips for quick filters -->
+<div class="flex gap-2 overflow-x-auto pb-2 no-scrollbar">
+<button class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-primary text-white px-5 transition-colors">
+<span class="text-sm font-medium">All Schemes</span>
+</button>
+<button class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-[#e8f3ec] dark:bg-[#1e3a29] hover:bg-primary/20 px-5 text-[#0e1b13] dark:text-white transition-colors">
+<span class="text-sm font-medium">Income Support</span>
+</button>
+<button class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-[#e8f3ec] dark:bg-[#1e3a29] hover:bg-primary/20 px-5 text-[#0e1b13] dark:text-white transition-colors">
+<span class="text-sm font-medium">Insurance</span>
+</button>
+<button class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-[#e8f3ec] dark:bg-[#1e3a29] hover:bg-primary/20 px-5 text-[#0e1b13] dark:text-white transition-colors">
+<span class="text-sm font-medium">Organic Farming</span>
+</button>
+<button class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-[#e8f3ec] dark:bg-[#1e3a29] hover:bg-primary/20 px-5 text-[#0e1b13] dark:text-white transition-colors">
+<span class="text-sm font-medium">Livestock</span>
+</button>
+<button class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-[#e8f3ec] dark:bg-[#1e3a29] hover:bg-primary/20 px-5 text-[#0e1b13] dark:text-white transition-colors">
+<span class="text-sm font-medium">Irrigation</span>
+</button>
+</div>
+</div>
+<!-- Scheme Cards Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Card 1 -->
+<div class="bg-white dark:bg-[#1a2e22] rounded-xl border border-[#e8f3ec] dark:border-[#1e3a29] overflow-hidden flex flex-col group hover:shadow-xl transition-all duration-300">
+<div class="h-48 w-full bg-center bg-no-repeat bg-cover relative" data-alt="Lush green paddy fields in Kerala" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBkMFosQpeX3aZ6BjjGAZ2wErPN6S-di0Hm_VSxvkvQU0RFXWx6K0VxNUUfJqPKv7OtfR2V0udUBeruwSRY_XY9rzUVxnIuIfCHq7bI_UDiA87t9fYQSX-iZot10vT0F6A8y88EulzNwR_Xzar56akuLT8f4of2K_hafKKvDPl-PQsnX9sfdx6NEf-bj-PtGy5jsLz3J4CvxlY1aQYwF53SdY3gJHEkgBCN63Hks3KqLdv07Ig7pUJO43iyq6nmp16118ksrgiRNvM");'>
+<div class="absolute top-4 left-4">
+<span class="bg-primary/90 text-white text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded">Income Support</span>
+</div>
+</div>
+<div class="p-6 flex flex-col flex-1 gap-4">
+<div>
+<div class="flex justify-between items-start mb-2">
+<h3 class="text-xl font-bold text-[#0e1b13] dark:text-white">PM-KISAN</h3>
+<span class="bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400 text-xs font-bold px-2 py-1 rounded flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">check_circle</span> Likely Eligible
+                            </span>
+</div>
+<p class="text-[#50956a] text-sm leading-relaxed">Direct income support of ₹6,000 per year in three equal installments to small and marginal farmer families.</p>
+</div>
+<div class="mt-auto flex flex-col gap-4">
+<div class="flex items-center gap-2 text-xs font-semibold text-[#50956a]">
+<span class="material-symbols-outlined text-[16px]">calendar_today</span>
+<span>Next Installment: Dec 2024</span>
+</div>
+<button class="w-full bg-primary text-white py-2.5 rounded-lg font-bold flex items-center justify-center gap-2 hover:bg-primary/90 transition-colors">
+                            Apply Now <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-white dark:bg-[#1a2e22] rounded-xl border border-[#e8f3ec] dark:border-[#1e3a29] overflow-hidden flex flex-col group hover:shadow-xl transition-all duration-300">
+<div class="h-48 w-full bg-center bg-no-repeat bg-cover relative" data-alt="Close up of growing vegetable plants" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC6MTPOUQvD2TrmvHhjDOuhliFDfB6psmXn4fiNaWrsoBArY417B3-c7cRZjk9AeNIr45dIfqtZ9s4oRWoz_M-nkbL7t3fA1qkA5GAc6Vb_40dq9dtLlXYjbx47NBeAHorNkZPckoO4c96M0zt-8I23Cltdgvm7jR6x_CfP7OK5qwSv7QmStkP74J0x3aMh1tPCMPHdMEwhtEiGc47IAeTUCG6K1yRLvgu6X-0JRm-Y-y7Ia3BZPH5SQOtaUE9K9-lHfgFqfL4ho_4");'>
+<div class="absolute top-4 left-4">
+<span class="bg-[#2563eb]/90 text-white text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded">Credit</span>
+</div>
+</div>
+<div class="p-6 flex flex-col flex-1 gap-4">
+<div>
+<div class="flex justify-between items-start mb-2">
+<h3 class="text-xl font-bold text-[#0e1b13] dark:text-white">Kisan Credit Card</h3>
+<span class="bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400 text-xs font-bold px-2 py-1 rounded flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">check_circle</span> Likely Eligible
+                            </span>
+</div>
+<p class="text-[#50956a] text-sm leading-relaxed">Timely credit support to farmers for their cultivation and other needs including purchase of inputs.</p>
+</div>
+<div class="mt-auto flex flex-col gap-4">
+<div class="flex items-center gap-2 text-xs font-semibold text-[#50956a]">
+<span class="material-symbols-outlined text-[16px]">percent</span>
+<span>Interest Rate: 4% (with subsidy)</span>
+</div>
+<button class="w-full bg-primary text-white py-2.5 rounded-lg font-bold flex items-center justify-center gap-2 hover:bg-primary/90 transition-colors">
+                            Check Limit <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-white dark:bg-[#1a2e22] rounded-xl border border-[#e8f3ec] dark:border-[#1e3a29] overflow-hidden flex flex-col group hover:shadow-xl transition-all duration-300">
+<div class="h-48 w-full bg-center bg-no-repeat bg-cover relative" data-alt="Rainwater falling on young plants" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCTEKek7y-9x8sbRzx7X6K67hin1LojUZsJWqlAxQ19JbwP0OxqBWve-Wj_Tk36EG38ipNUJzMZ_9KJjGknsNF3FvqLck--STAIQROk9ItyJJ0UsZ3LLzO3g5MCv1RWsnZ3XeaTGOCGLDN6Jvqashgav7ttNNyl3Leq-_ikMgs_G-gxnD8EszOTp_VNbjFwelBT_3I1KU4WbabroCWFcoboSi2-kpz_rpQcBOUTz8cW-QMkIvmKHPPv8OHHwispUvnb96F-2_2mA6g");'>
+<div class="absolute top-4 left-4">
+<span class="bg-[#d97706]/90 text-white text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded">Insurance</span>
+</div>
+</div>
+<div class="p-6 flex flex-col flex-1 gap-4">
+<div>
+<div class="flex justify-between items-start mb-2">
+<h3 class="text-xl font-bold text-[#0e1b13] dark:text-white">PMFBY Insurance</h3>
+<span class="bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400 text-xs font-bold px-2 py-1 rounded flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">info</span> Review Needed
+                            </span>
+</div>
+<p class="text-[#50956a] text-sm leading-relaxed">Insurance coverage and financial support to farmers in the event of failure of any of the notified crops.</p>
+</div>
+<div class="mt-auto flex flex-col gap-4">
+<div class="flex items-center gap-2 text-xs font-semibold text-[#50956a]">
+<span class="material-symbols-outlined text-[16px]">warning</span>
+<span>Deadline: July 31st for Kharif</span>
+</div>
+<button class="w-full border-2 border-primary text-primary hover:bg-primary hover:text-white py-2 rounded-lg font-bold flex items-center justify-center gap-2 transition-all">
+                            View Eligibility <span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="bg-white dark:bg-[#1a2e22] rounded-xl border border-[#e8f3ec] dark:border-[#1e3a29] overflow-hidden flex flex-col group hover:shadow-xl transition-all duration-300">
+<div class="h-48 w-full bg-center bg-no-repeat bg-cover relative" data-alt="Organic vegetables in a wooden basket" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBDOevCHWuZgXUZ2pBcsl8XqmJlqnnAYm2T1UEAJAk_qyhJ0VEVUtdOoVnPZI6C7tC48nAVOZJSGUhOOwwGYeya5Gax24Th_yX5DdgBXVpsWff235a2KdGX0ddQ5Cx_C5_o3mW0eNYkMqFqGyFqW1Dq9MFtwLG__qy2BXjnbETK2m-9uyXPuNj4TB73--i2bGQURVj9qMnQUS7sc1RUSd0Pz2T6M8NseTWhRvcjzLrEbnPXQJ8SFI427dIlcGz4nhgMet-2IxbNzaM");'>
+<div class="absolute top-4 left-4">
+<span class="bg-[#16a34a]/90 text-white text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded">State Initiative</span>
+</div>
+</div>
+<div class="p-6 flex flex-col flex-1 gap-4">
+<div>
+<div class="flex justify-between items-start mb-2">
+<h3 class="text-xl font-bold text-[#0e1b13] dark:text-white">Subhiksha Keralam</h3>
+<span class="bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400 text-xs font-bold px-2 py-1 rounded flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">check_circle</span> Likely Eligible
+                            </span>
+</div>
+<p class="text-[#50956a] text-sm leading-relaxed">Kerala state program for food security through fallow land cultivation and integrated farming.</p>
+</div>
+<div class="mt-auto flex flex-col gap-4">
+<div class="flex items-center gap-2 text-xs font-semibold text-[#50956a]">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+<span>Valid across all 14 Districts</span>
+</div>
+<button class="w-full bg-primary text-white py-2.5 rounded-lg font-bold flex items-center justify-center gap-2 hover:bg-primary/90 transition-colors">
+                            Apply Now <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Card 5 -->
+<div class="bg-white dark:bg-[#1a2e22] rounded-xl border border-[#e8f3ec] dark:border-[#1e3a29] overflow-hidden flex flex-col group hover:shadow-xl transition-all duration-300">
+<div class="h-48 w-full bg-center bg-no-repeat bg-cover relative" data-alt="Drip irrigation system in a farm" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD0G-2MSL2aUMMaAaiLe2OEM4UxloDcJuAFe2NevuPzQs3Gy4iIpPtrNC3hyZNQWWLwcbQLf60KbMcCsK_ECUIi6E7_d_lQLHAuXfWfNP9Ikz-RtxkPzkQu4N_SltIJlv6d12icXM3VlRqpijwtMX1YqgfZ2FzVGyN4nJrmYsNEQobvp0Q0dZYKp3jNIZmaMOTnXKtywWQW8TgVWL6MBfN_Rfj3-yr2ewXVVf5LOvr_EjlS7WRUq7kgwzdhte91m8JbzFHXdcmCk0k");'>
+<div class="absolute top-4 left-4">
+<span class="bg-[#0891b2]/90 text-white text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded">Infrastructure</span>
+</div>
+</div>
+<div class="p-6 flex flex-col flex-1 gap-4">
+<div>
+<div class="flex justify-between items-start mb-2">
+<h3 class="text-xl font-bold text-[#0e1b13] dark:text-white">PM-KSY (Irrigation)</h3>
+<span class="bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400 text-xs font-bold px-2 py-1 rounded flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">cancel</span> Ineligible
+                            </span>
+</div>
+<p class="text-[#50956a] text-sm leading-relaxed">Subsidies for micro-irrigation systems like drip and sprinkler irrigation to improve water efficiency.</p>
+</div>
+<div class="mt-auto flex flex-col gap-4">
+<div class="flex items-center gap-2 text-xs font-semibold text-[#50956a]">
+<span class="material-symbols-outlined text-[16px]">priority_high</span>
+<span>Requires Minimum 5 Acres Land</span>
+</div>
+<button class="w-full border border-[#e8f3ec] dark:border-[#1e3a29] text-[#50956a] py-2 rounded-lg font-bold flex items-center justify-center gap-2 cursor-not-allowed">
+                            View Details <span class="material-symbols-outlined text-[18px]">lock</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Card 6 -->
+<div class="bg-white dark:bg-[#1a2e22] rounded-xl border border-[#e8f3ec] dark:border-[#1e3a29] overflow-hidden flex flex-col group hover:shadow-xl transition-all duration-300">
+<div class="h-48 w-full bg-center bg-no-repeat bg-cover relative" data-alt="Cows in a modern dairy farm" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDTb-gWrREo-8THpXUBFVsiWRI3Du01mtqY7DnDeC8GU_L5GZX_Lqnw4djHh7_xtNadefh6Sd0ty3gzDloBgM0nniLCFxuM0uGdRuWxyRfXSCvdD-uv8QlxyZEHNMYmhktOhYCaKA4dElj-4WZr-4Zpvwx-O3rKd-7f2IiZ5NiW5d8XRYYGiiFfJA6PBmCiNHXbhbrFuBjRcpuEx2HE0hOQ795-fdp_U68-mk8Cyi3cNIoAeQagF6cwEBVVrKBBfiQNU2A7ZuVWnjU");'>
+<div class="absolute top-4 left-4">
+<span class="bg-[#7c3aed]/90 text-white text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded">Livestock</span>
+</div>
+</div>
+<div class="p-6 flex flex-col flex-1 gap-4">
+<div>
+<div class="flex justify-between items-start mb-2">
+<h3 class="text-xl font-bold text-[#0e1b13] dark:text-white">Dairy Entrepreneurship</h3>
+<span class="bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400 text-xs font-bold px-2 py-1 rounded flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">info</span> Review Needed
+                            </span>
+</div>
+<p class="text-[#50956a] text-sm leading-relaxed">Financial assistance for setting up dairy units and improving milk production infrastructure.</p>
+</div>
+<div class="mt-auto flex flex-col gap-4">
+<div class="flex items-center gap-2 text-xs font-semibold text-[#50956a]">
+<span class="material-symbols-outlined text-[16px]">account_balance</span>
+<span>Subsidy: 25% to 33.3%</span>
+</div>
+<button class="w-full border-2 border-primary text-primary hover:bg-primary hover:text-white py-2 rounded-lg font-bold flex items-center justify-center gap-2 transition-all">
+                            Check Criteria <span class="material-symbols-outlined text-[18px]">description</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination -->
+<div class="mt-12 flex justify-center items-center gap-4">
+<button class="p-2 rounded-lg border border-[#e8f3ec] dark:border-[#1e3a29] text-[#50956a] hover:bg-white dark:hover:bg-[#1a2e22] transition-colors disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<div class="flex gap-2">
+<button class="w-10 h-10 rounded-lg bg-primary text-white font-bold">1</button>
+<button class="w-10 h-10 rounded-lg border border-[#e8f3ec] dark:border-[#1e3a29] text-[#50956a] hover:bg-white dark:hover:bg-[#1a2e22] font-bold transition-colors">2</button>
+<button class="w-10 h-10 rounded-lg border border-[#e8f3ec] dark:border-[#1e3a29] text-[#50956a] hover:bg-white dark:hover:bg-[#1a2e22] font-bold transition-colors">3</button>
+</div>
+<button class="p-2 rounded-lg border border-[#e8f3ec] dark:border-[#1e3a29] text-[#50956a] hover:bg-white dark:hover:bg-[#1a2e22] transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</main>
+<!-- Footer for quick access -->
+<footer class="bg-white dark:bg-[#1a2e22] border-t border-[#e8f3ec] dark:border-[#1e3a29] mt-20 py-10 px-4">
+<div class="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
+<div class="col-span-1 md:col-span-2">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary text-3xl">potted_plant</span>
+<h2 class="text-[#0e1b13] dark:text-white text-xl font-bold">KrishiSahaya</h2>
+</div>
+<p class="text-[#50956a] max-w-sm">Empowering Kerala's farmers with data-driven climate advice and seamless access to government support.</p>
+</div>
+<div>
+<h4 class="font-bold mb-4 dark:text-white">Quick Links</h4>
+<ul class="space-y-2 text-[#50956a] text-sm">
+<li><a class="hover:text-primary transition-colors" href="#">Help Center</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">State Dept. of Agriculture</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Kisan Call Center</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold mb-4 dark:text-white">Contact Support</h4>
+<div class="flex items-center gap-2 text-[#50956a] text-sm mb-2">
+<span class="material-symbols-outlined text-[18px]">call</span>
+<span>1800-425-1660</span>
+</div>
+<div class="flex items-center gap-2 text-[#50956a] text-sm">
+<span class="material-symbols-outlined text-[18px]">mail</span>
+<span>support@krishisahaya.org</span>
+</div>
+</div>
+</div>
+<div class="max-w-[1200px] mx-auto mt-10 pt-6 border-t border-[#e8f3ec] dark:border-[#1e3a29] flex justify-between items-center text-xs text-[#50956a]">
+<p>© 2024 KrishiSahaya. Government of Kerala Initiative Partner.</p>
+<div class="flex gap-4">
+<a href="#">Privacy Policy</a>
+<a href="#">Terms of Service</a>
+</div>
+</div>
+</footer>
+</body></html>
