@@ -1,138 +1,143 @@
-// Crop Recommendation Rules
-import cropRules from '../../data/cropRules.json';
+import { GoogleGenerativeAI } from "@google/generative-ai";
+
+const API_KEY = import.meta.env.VITE_GEMINI_API_KEY;
+
+let genAI = null;
+let model = null;
+
+if (API_KEY) {
+    genAI = new GoogleGenerativeAI(API_KEY);
+    model = genAI.getGenerativeModel({ model: "gemini-flash-latest" });
+}
+
+const APPROVED_CROPS = [
+    "Rice (Paddy)", "Coconut", "Black Pepper",
+    "Turmeric", "Tapioca (Cassava)", "Bitter Gourd",
+    "Snake Gourd", "Ash Gourd", "Pumpkin", "Chilli", "Amaranthus",
+    "Nutmeg", "Arecanut", "Vanilla", "Cocoa", "Mango", "Jackfruit"
+];
 
 /**
- * Crop Recommendation Service - Rule-based AI engine
+ * AI-Powered Crop Recommendation Service using Gemini
  */
 class CropRecommendationService {
     /**
-     * Get crop recommendations based on user input
-     * @param {Object} input - User input parameters
-     * @returns {Promise<Object>} Recommendations
+     * Get crop recommendations based on user input using Gemini AI
      */
     async getRecommendations(input) {
+        if (!model) {
+            console.warn("Gemini API not available, returning fallback");
+            return this.getFallbackRecommendations(input);
+        }
+
         try {
-            await new Promise((resolve) => setTimeout(resolve, 1500)); // Simulate AI processing
+            const { season, budget, water, goal } = input;
 
-            const { season, budget, water, goal, soilType, landSize } = input;
+            const prompt = `You are an expert agricultural advisor for farmers in Kerala, India.
 
-            // Filter crops by season
-            let suitableCrops = cropRules.filter((crop) =>
-                crop.seasons.includes(season.toLowerCase())
-            );
+Based on the following farmer profile, recommend the TOP 3 BEST CROPS to grow.
 
-            // Filter by water availability
-            suitableCrops = suitableCrops.filter((crop) => {
-                if (water === 'high') return true;
-                if (water === 'moderate') return crop.waterRequirement !== 'high';
-                if (water === 'low') return crop.waterRequirement === 'low';
-                return true;
-            });
+**IMPORTANT:** You must ONLY recommend crops from this approved list:
+${APPROVED_CROPS.join(", ")}
 
-            // Filter by budget
-            suitableCrops = suitableCrops.filter((crop) => {
-                const budgetLevel = this.getBudgetLevel(budget);
-                if (budgetLevel === 'high') return true;
-                if (budgetLevel === 'moderate') return crop.investment !== 'high';
-                if (budgetLevel === 'low') return crop.investment === 'low';
-                return true;
-            });
+**Farmer's Profile:**
+- Season: ${season}
+- Budget: ${budget}
+- Water Availability: ${water}
+- Primary Goal: ${goal === 'profit' ? 'Maximum Profit' : goal === 'yield' ? 'Maximum Yield' : 'Sustainability'}
 
-            // Score crops based on goal
-            suitableCrops = suitableCrops.map((crop) => {
-                let score = 60; // Base score
+**Requirements:**
+1. Focus on crops suitable for Kerala's climate and soil
+2. Consider local market demand
+3. Return ONLY a valid JSON object in this format:
+{
+    "recommendations": [
+        {
+            "name": "Exact Name from Approved List",
+            "confidence": 92,
+            "investment": "₹XX,000 - ₹XX,000/hectare",
+            "profitMargin": "+XX%",
+            "growthCycle": "X-X months",
+            "marketDemand": "high/medium/low",
+            "reasons": ["Reason 1", "Reason 2"]
+        }
+    ],
+    "region": "Recommended Kerala region",
+    "tips": ["Tip 1", "Tip 2"]
+}`;
 
-                // Goal-based scoring
-                if (goal === 'profit' && crop.profitability === 'high') score += 20;
-                if (goal === 'yield' && crop.yieldPotential === 'high') score += 20;
-                if (goal === 'sustainability' && crop.sustainability === 'high') score += 20;
+            const result = await model.generateContent(prompt);
+            const text = result.response.text();
 
-                // Kerala suitability bonus
-                if (crop.keralaSuitability === 'high') score += 15;
-
-                // Market demand bonus
-                if (crop.marketDemand === 'high') score += 10;
-
-                // Soil type match
-                if (soilType && crop.suitableSoils.includes(soilType.toLowerCase())) {
-                    score += 10;
-                }
-
-                return {
-                    ...crop,
-                    confidence: Math.min(95, score),
-                };
-            });
-
-            // Sort by confidence and take top 3
-            const topRecommendations = suitableCrops
-                .sort((a, b) => b.confidence - a.confidence)
-                .slice(0, 3);
+            // Clean and parse JSON
+            const cleanText = text.replace(/```json/g, '').replace(/```/g, '').trim();
+            const aiResponse = JSON.parse(cleanText);
 
             return {
-                recommendations: topRecommendations.map((crop) => ({
+                recommendations: aiResponse.recommendations.map((crop, index) => ({
                     name: crop.name,
                     confidence: crop.confidence,
-                    expectedYield: crop.expectedYield,
-                    investment: crop.investmentRange,
+                    investment: crop.investment,
+                    profitMargin: crop.profitMargin,
+                    growthCycle: crop.growthCycle,
                     marketDemand: crop.marketDemand,
-                    profitability: crop.profitability,
-                    reasons: this.generateReasons(crop, input),
-                    tips: crop.tips || [],
+                    reasons: crop.reasons || [],
+                    isBest: index === 0
                 })),
-                inputSummary: {
-                    season,
-                    budget,
-                    water,
-                    goal,
-                },
+                region: aiResponse.region,
+                tips: aiResponse.tips,
+                inputSummary: { season, budget, water, goal },
+                aiGenerated: true
             };
+
         } catch (error) {
-            console.error('Error generating recommendations:', error);
-            throw error;
+            console.error("Gemini recommendation error:", error);
+            return this.getFallbackRecommendations(input);
         }
     }
 
     /**
-     * Get budget level from budget string
+     * Fallback recommendations when AI is unavailable
      */
-    getBudgetLevel(budget) {
-        if (budget.includes('50')) return 'high';
-        if (budget.includes('20')) return 'moderate';
-        return 'low';
-    }
+    getFallbackRecommendations(input) {
+        const fallbackCrops = [
+            {
+                name: "Black Pepper",
+                confidence: 96,
+                investment: "₹30,000 - 45,000/hectare",
+                profitMargin: "+40%",
+                growthCycle: "2-3 years (perennial)",
+                marketDemand: "high",
+                reasons: ["Kerala's signature spice", "High export demand", "Suitable for all seasons"],
+                isBest: true
+            },
+            {
+                name: "Turmeric",
+                confidence: 91,
+                investment: "₹50,000 - 70,000/hectare",
+                profitMargin: "+35%",
+                growthCycle: "8-9 months",
+                marketDemand: "high",
+                reasons: ["Strong domestic market", "Multiple uses (food, medicine)", "Good for monsoon season"]
+            },
+            {
+                name: "Tapioca (Cassava)",
+                confidence: 88,
+                investment: "₹15,000 - 25,000/hectare",
+                profitMargin: "+25%",
+                growthCycle: "10-12 months",
+                marketDemand: "moderate",
+                reasons: ["Low investment crop", "Drought tolerant", "Multiple harvest windows"]
+            }
+        ];
 
-    /**
-     * Generate explanation reasons for recommendation
-     */
-    generateReasons(crop, input) {
-        const reasons = [];
-
-        if (crop.keralaSuitability === 'high') {
-            reasons.push('Highly suitable for Kerala\'s climate');
-        }
-
-        if (crop.seasons.includes(input.season.toLowerCase())) {
-            reasons.push(`Perfect for ${input.season} season`);
-        }
-
-        if (input.goal === 'profit' && crop.profitability === 'high') {
-            reasons.push('High profitability potential');
-        }
-
-        if (input.goal === 'yield' && crop.yieldPotential === 'high') {
-            reasons.push('Excellent yield potential');
-        }
-
-        if (crop.marketDemand === 'high') {
-            reasons.push('Strong market demand');
-        }
-
-        if (crop.waterRequirement === input.water) {
-            reasons.push('Matches your water availability');
-        }
-
-        return reasons.slice(0, 3);
+        return {
+            recommendations: fallbackCrops,
+            region: "Malabar Region",
+            tips: ["Consider intercropping for better returns", "Check local APMC prices before selling"],
+            inputSummary: input,
+            aiGenerated: false
+        };
     }
 }
 

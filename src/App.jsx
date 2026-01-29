@@ -11,6 +11,7 @@ import CropCalendar from './pages/CropCalendar';
 import Settings from './pages/Settings';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import AIAdvisor from './pages/AIAdvisor';
 
 function AppRoutes() {
   const { isAuthenticated } = useAuth();
@@ -22,6 +23,7 @@ function AppRoutes() {
 
       <Route path="/" element={isAuthenticated ? <Layout /> : <Navigate to="/login" />}>
         <Route index element={<Dashboard />} />
+        <Route path="advisor" element={<AIAdvisor />} />
         <Route path="recommendations" element={<CropRecommendation />} />
         <Route path="market" element={<MarketPrices />} />
         <Route path="schemes" element={<GovSchemes />} />

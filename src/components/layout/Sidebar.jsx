@@ -15,7 +15,8 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
 
     const navigation = [
         { name: 'Dashboard', href: '/', icon: 'dashboard' },
-        { name: 'AI Advisor', href: '/recommendations', icon: 'psychology' },
+        { name: 'AI Advisor', href: '/advisor', icon: 'smart_toy' },
+        { name: 'Crop Planner', href: '/recommendations', icon: 'psychology' },
         { name: 'Market Prices', href: '/market', icon: 'trending_up' },
         { name: 'Govt Schemes', href: '/schemes', icon: 'gavel' },
         { name: 'Crop Calendar', href: '/calendar', icon: 'calendar_month' },
@@ -81,7 +82,13 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
 
                 {/* CTA Button */}
                 <div className="p-6 space-y-3">
-                    <button className="w-full bg-primary hover:bg-green-700 text-white font-bold py-3 rounded-xl flex items-center justify-center gap-2 transition-all shadow-lg shadow-primary/20">
+                    <button
+                        onClick={() => {
+                            navigate('/advisor');
+                            setIsOpen(false);
+                        }}
+                        className="w-full bg-primary hover:bg-green-700 text-white font-bold py-3 rounded-xl flex items-center justify-center gap-2 transition-all shadow-lg shadow-primary/20"
+                    >
                         <span className="material-symbols-outlined text-xl">smart_toy</span>
                         <span>Consult AI Advisor</span>
                     </button>

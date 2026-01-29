@@ -34,18 +34,18 @@ const CropRecommendation = () => {
 
             const result = await cropRecommendationService.getRecommendations(input);
 
-            // Transform results for display
+            // Transform results for display (compatible with both AI and fallback)
             const formattedRecommendations = result.recommendations.map((rec, idx) => ({
                 name: rec.name,
-                variety: rec.marketDemand + ' demand',
+                variety: (rec.marketDemand || 'high') + ' demand',
                 score: rec.confidence,
                 investment: rec.investment,
-                profit: rec.profitability === 'high' ? '+40%' : rec.profitability === 'moderate' ? '+25%' : '+15%',
-                cycle: rec.expectedYield,
+                profit: rec.profitMargin || (rec.profitability === 'high' ? '+40%' : '+25%'),
+                cycle: rec.growthCycle || rec.expectedYield || 'Variable',
                 reasons: rec.reasons || [],
                 tips: rec.tips || [],
                 image: getCropImage(rec.name),
-                best: idx === 0
+                best: rec.isBest || idx === 0
             }));
 
             setRecommendations(formattedRecommendations);
@@ -58,23 +58,42 @@ const CropRecommendation = () => {
     };
 
     const getCropImage = (cropName) => {
+        // Map exact crop names to local images
         const images = {
-            'Rice (Paddy)': 'https://images.unsplash.com/photo-1536304993881-ff6e9eefa2a6?w=400',
-            'Coconut': 'https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=400',
-            'Rubber': 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400',
-            'Black Pepper': 'https://images.unsplash.com/photo-1599909533711-5b2b8ea0d0e5?w=400',
-            'Cardamom': 'https://images.unsplash.com/photo-1615485500704-8e990f9900f7?w=400',
-            'Banana': 'https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=400',
-            'Ginger': 'https://images.unsplash.com/photo-1597445812315-77b3bec2e98d?w=400',
-            'Turmeric': 'https://images.unsplash.com/photo-1615485020624-1d21ed0eb3b8?w=400',
-            'Tapioca (Cassava)': 'https://images.unsplash.com/photo-1589927986089-35812388d1f4?w=400',
-            'Cashew': 'https://images.unsplash.com/photo-1604450651583-d67e8b4a6c6f?w=400',
-            'Coffee': 'https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=400',
-            'Tea': 'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=400',
-            'Vegetables (Mixed)': 'https://images.unsplash.com/photo-1540420773420-3366772f4999?w=400',
-            'Pineapple': 'https://images.unsplash.com/photo-1550258987-190a2d41a8ba?w=400'
+            'Rice (Paddy)': '/images/crops/rice.png',
+            'Coconut': '/images/crops/coconut.png',
+            'Black Pepper': '/images/crops/black_pepper.png',
+            'Turmeric': '/images/crops/turmeric.png',
+            'Tapioca (Cassava)': '/images/crops/tapioca.png',
+            'Bitter Gourd': '/images/crops/bitter_gourd.png',
+            'Snake Gourd': '/images/crops/snake_gourd.png',
+            'Ash Gourd': '/images/crops/ash_gourd.png',
+            'Pumpkin': '/images/crops/pumpkin.png',
+            'Chilli': '/images/crops/chilli.png',
+            'Amaranthus': '/images/crops/amaranthus.png',
+            'Nutmeg': '/images/crops/nutmeg.png',
+            'Arecanut': '/images/crops/arecanut.png',
+            'Vanilla': '/images/crops/vanilla.png',
+            'Cocoa': '/images/crops/cocoa.png',
+            'Mango': '/images/crops/mango.png',
+            'Jackfruit': '/images/crops/jackfruit.png',
+            'Rubber': '/images/crops/rubber.png',
+            'Cardamom': '/images/crops/cardamom.png',
+            'Banana': '/images/crops/banana.png',
+            'Ginger': '/images/crops/ginger.png',
+            'Cashew': '/images/crops/cashew.png',
+            'Coffee': '/images/crops/coffee.png',
+            'Tea': '/images/crops/tea.png',
+            'Vegetables (Mixed)': '/images/crops/vegetables.png',
+            'Pineapple': '/images/crops/pineapple.png'
         };
-        return images[cropName] || 'https://images.unsplash.com/photo-1560493676-04071c5f467b?w=400';
+
+        // Try exact match
+        if (images[cropName]) return images[cropName];
+
+        // Try fuzzy partial match
+        const key = Object.keys(images).find(k => cropName.includes(k) || k.includes(cropName));
+        return key ? images[key] : null; // Return null if no image found (UI can handle placeholder if needed, but we expect coverage)
     };
 
     // Default recommendations to show
