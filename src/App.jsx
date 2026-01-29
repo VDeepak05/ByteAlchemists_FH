@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { AuthProvider, useAuth } from './context/AuthContext';
 import Layout from './components/layout/Layout';
 import Dashboard from './pages/Dashboard';
-import CropRecommendation from './pages/CropRecommendation';
+import AIAdvisor from './pages/AIAdvisor';
 import MarketPrices from './pages/MarketPrices';
 import GovSchemes from './pages/GovSchemes';
 import Login from './pages/Login';
@@ -19,7 +19,7 @@ function AppRoutes() {
 
       <Route path="/" element={isAuthenticated ? <Layout /> : <Navigate to="/login" />}>
         <Route index element={<Dashboard />} />
-        <Route path="recommendations" element={<CropRecommendation />} />
+        <Route path="recommendations" element={<AIAdvisor />} />
         <Route path="market" element={<MarketPrices />} />
         <Route path="schemes" element={<GovSchemes />} />
       </Route>
