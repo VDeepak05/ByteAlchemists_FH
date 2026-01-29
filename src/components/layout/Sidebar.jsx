@@ -35,7 +35,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
 
             {/* Sidebar */}
             <aside className={clsx(
-                "fixed inset-y-0 left-0 z-30 w-72 flex-shrink-0 bg-white dark:bg-zinc-900 border-r border-slate-200 dark:border-zinc-800 flex flex-col transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-auto",
+                "fixed inset-y-0 left-0 z-30 w-72 flex-shrink-0 bg-white dark:bg-surface-dark border-r border-slate-200 dark:border-border-dark flex flex-col transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-auto",
                 isOpen ? "translate-x-0" : "-translate-x-full"
             )}>
                 {/* Logo Section */}
@@ -44,7 +44,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
                         <span className="material-symbols-outlined text-2xl">eco</span>
                     </div>
                     <div>
-                        <h1 className="text-xl font-bold tracking-tight text-slate-900 dark:text-white">KrishiSahaya</h1>
+                        <h1 className="text-xl font-bold tracking-tight text-slate-900 dark:text-text-dark-primary">KrishiSahaya</h1>
                         <p className="text-xs text-primary font-semibold uppercase tracking-wider leading-none">Kerala Farmer Portal</p>
                     </div>
                     {/* Mobile close button */}
@@ -69,7 +69,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
                                     "flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors",
                                     isActive
                                         ? "bg-primary/10 text-primary font-semibold"
-                                        : "text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-zinc-800"
+                                        : "text-slate-600 dark:text-text-dark-secondary hover:bg-slate-100 dark:hover:bg-surface-dark-elevated"
                                 )}
                             >
                                 <span className="material-symbols-outlined">{item.icon}</span>

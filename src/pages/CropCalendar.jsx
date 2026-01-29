@@ -139,8 +139,8 @@ const CropCalendar = () => {
             {/* Header */}
             <div className="flex items-end justify-between">
                 <div>
-                    <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Crop Calendar</h1>
-                    <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                    <h1 className="text-3xl font-bold text-gray-900 dark:text-text-dark-primary">Crop Calendar</h1>
+                    <p className="text-sm text-gray-500 dark:text-text-dark-secondary mt-1">
                         Plan your farming activities month by month
                     </p>
                 </div>
@@ -156,7 +156,7 @@ const CropCalendar = () => {
                     <select
                         value={selectedMonth}
                         onChange={(e) => setSelectedMonth(Number(e.target.value))}
-                        className="w-full px-4 py-3 rounded-lg border border-gray-200 dark:border-zinc-700 dark:bg-zinc-800 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none"
+                        className="w-full px-4 py-3 rounded-lg border border-gray-200 dark:border-border-dark dark:bg-surface-dark-elevated dark:text-text-dark-primary focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none"
                     >
                         {months.map((month, index) => (
                             <option key={index} value={index}>
@@ -178,7 +178,7 @@ const CropCalendar = () => {
                                 onClick={() => setSelectedSeason(season.id)}
                                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${selectedSeason === season.id
                                         ? 'bg-primary text-white'
-                                        : 'bg-white dark:bg-zinc-800 text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-zinc-700 hover:bg-gray-50 dark:hover:bg-zinc-700'
+                                        : 'bg-white dark:bg-surface-dark-elevated text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-border-dark hover:bg-gray-50 dark:hover:bg-zinc-700'
                                     }`}
                             >
                                 {season.name}
@@ -194,7 +194,7 @@ const CropCalendar = () => {
                     {filteredActivities.map(activity => (
                         <div
                             key={activity.id}
-                            className="bg-white dark:bg-zinc-900 rounded-2xl border border-gray-200 dark:border-zinc-800 p-6 shadow-sm hover:shadow-md transition-shadow"
+                            className="bg-white dark:bg-surface-dark rounded-2xl border border-gray-200 dark:border-border-dark p-6 shadow-sm hover:shadow-md transition-shadow"
                         >
                             {/* Header */}
                             <div className="flex items-start justify-between mb-4">
@@ -205,10 +205,10 @@ const CropCalendar = () => {
                                         </span>
                                     </div>
                                     <div>
-                                        <h3 className="font-bold text-gray-900 dark:text-white">
+                                        <h3 className="font-bold text-gray-900 dark:text-text-dark-primary">
                                             {activity.crop}
                                         </h3>
-                                        <p className="text-sm text-gray-500 dark:text-gray-400">
+                                        <p className="text-sm text-gray-500 dark:text-text-dark-secondary">
                                             {activity.activity}
                                         </p>
                                     </div>
@@ -219,17 +219,17 @@ const CropCalendar = () => {
                             </div>
 
                             {/* Description */}
-                            <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+                            <p className="text-sm text-gray-600 dark:text-text-dark-secondary mb-4">
                                 {activity.description}
                             </p>
 
                             {/* Meta Info */}
                             <div className="flex items-center gap-4 text-sm">
-                                <div className="flex items-center gap-1 text-gray-500 dark:text-gray-400">
+                                <div className="flex items-center gap-1 text-gray-500 dark:text-text-dark-secondary">
                                     <span className="material-symbols-outlined text-sm">schedule</span>
                                     <span>{activity.duration}</span>
                                 </div>
-                                <div className="flex items-center gap-1 text-gray-500 dark:text-gray-400">
+                                <div className="flex items-center gap-1 text-gray-500 dark:text-text-dark-secondary">
                                     <span className="material-symbols-outlined text-sm">wb_sunny</span>
                                     <span className="capitalize">{activity.season}</span>
                                 </div>
@@ -238,11 +238,11 @@ const CropCalendar = () => {
                     ))}
                 </div>
             ) : (
-                <div className="bg-white dark:bg-zinc-900 rounded-2xl border border-gray-200 dark:border-zinc-800 p-12 text-center">
+                <div className="bg-white dark:bg-surface-dark rounded-2xl border border-gray-200 dark:border-border-dark p-12 text-center">
                     <span className="material-symbols-outlined text-6xl text-gray-300 dark:text-gray-700 mb-4">
                         event_busy
                     </span>
-                    <p className="text-gray-500 dark:text-gray-400">
+                    <p className="text-gray-500 dark:text-text-dark-secondary">
                         No activities scheduled for {months[selectedMonth]} in this season.
                     </p>
                 </div>

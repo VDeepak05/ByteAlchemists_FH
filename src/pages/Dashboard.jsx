@@ -1,15 +1,85 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import weatherService from '../services/api/weatherService';
+import LoadingSpinner from '../components/common/LoadingSpinner';
+import ErrorDisplay from '../components/common/ErrorDisplay';
+import LocationSearch from '../components/common/LocationSearch';
 
 const Dashboard = () => {
-    const weatherForecast = [
-        { day: 'MON', icon: 'cloud', temp: '28°' },
-        { day: 'TUE', icon: 'cloud', temp: '29°' },
-        { day: 'WED', icon: 'sunny', temp: '32°' },
-        { day: 'THU', icon: 'sunny', temp: '33°' },
-        { day: 'FRI', icon: 'water_drop', temp: '27°' },
-        { day: 'SAT', icon: 'rainy', temp: '26°' },
-        { day: 'SUN', icon: 'cloud', temp: '30°' },
-    ];
+    // Weather state
+    const [currentWeather, setCurrentWeather] = useState(null);
+    const [forecast, setForecast] = useState([]);
+    const [weatherLoading, setWeatherLoading] = useState(true);
+    const [weatherError, setWeatherError] = useState(null);
+
+    // Default coordinates (Thiruvananthapuram)
+    const [coords, setCoords] = useState({
+        lat: parseFloat(import.meta.env.VITE_DEFAULT_LAT) || 8.5241,
+        lon: parseFloat(import.meta.env.VITE_DEFAULT_LON) || 76.9366
+    });
+
+    // Fetch weather data
+    const fetchWeatherData = async () => {
+        setWeatherLoading(true);
+        setWeatherError(null);
+
+        try {
+            const [current, forecastData] = await Promise.all([
+                weatherService.getCurrentWeather(coords.lat, coords.lon),
+                weatherService.getWeatherForecast(coords.lat, coords.lon)
+            ]);
+
+            setCurrentWeather(current);
+            setForecast(forecastData);
+        } catch (error) {
+            console.error('Failed to fetch weather:', error);
+            setWeatherError('Failed to load weather data. Please try again.');
+        } finally {
+            setWeatherLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        fetchWeatherData();
+    }, [coords]);
+
+    const handleLocationSelect = (location) => {
+        setCoords({ lat: location.lat, lon: location.lon });
+    };
+
+    // Generate dynamic chart path based on forecast
+    const generateChartPaths = () => {
+        if (!forecast.length) return { path: '', area: '' };
+
+        const temps = forecast.map(day => day.temp);
+        const minTemp = Math.min(...temps) - 2;
+        const maxTemp = Math.max(...temps) + 2;
+        const tempRange = maxTemp - minTemp || 1;
+
+        const points = forecast.map((day, index) => {
+            const x = (index / (forecast.length - 1)) * 800;
+            const normalizedTemp = (day.temp - minTemp) / tempRange;
+            const y = 80 - (normalizedTemp * 60); // Keep within 20-80 Y range (padding)
+            return { x, y };
+        });
+
+        let path = `M ${points[0].x} ${points[0].y}`;
+        for (let i = 0; i < points.length - 1; i++) {
+            const curr = points[i];
+            const next = points[i + 1];
+            const cp1x = curr.x + (next.x - curr.x) / 2;
+            const cp1y = curr.y;
+            const cp2x = curr.x + (next.x - curr.x) / 2;
+            const cp2y = next.y;
+            path += ` C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${next.x} ${next.y}`;
+        }
+
+        return {
+            path,
+            area: `${path} V 100 H 0 Z`
+        };
+    };
+
+    const { path: chartPath, area: areaPath } = generateChartPaths();
 
     const alerts = [
         { id: 1, type: 'red', icon: 'warning', title: 'Heavy Rainfall Warning', desc: 'Expected 150mm+ precipitation in next 24h. Secure drainage systems.', label: 'Red Alert' },
@@ -26,62 +96,84 @@ const Dashboard = () => {
     return (
         <div className="space-y-8 max-w-7xl mx-auto">
             {/* Page Title */}
-            <div className="flex items-end justify-between">
+            {/* Page Title */}
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
                 <div>
-                    <h2 className="text-3xl font-black text-slate-900 dark:text-white tracking-tight">Farmer Dashboard</h2>
-                    <p className="text-slate-500 flex items-center gap-1 mt-1">
-                        <span className="material-symbols-outlined text-sm">location_on</span>
-                        Kochi, Kerala | <span className="font-medium text-slate-700 dark:text-slate-300">June 2024 (Monsoon Season)</span>
-                    </p>
+                    <h2 className="text-3xl font-black text-slate-900 dark:text-text-dark-primary tracking-tight">Farmer Dashboard</h2>
+                    <div className="flex items-center gap-2 mt-2">
+                        <LocationSearch onLocationSelect={handleLocationSelect} />
+                        <span className="text-slate-500 text-sm hidden md:inline ml-2">| {currentWeather?.location || 'Kerala'}</span>
+                    </div>
                 </div>
-                <button className="flex items-center gap-2 bg-white dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 px-4 py-2 rounded-lg text-sm font-bold shadow-sm hover:bg-slate-50 transition-colors">
-                    <span className="material-symbols-outlined text-sm">refresh</span>
-                    Refresh Data
+                <button
+                    onClick={fetchWeatherData}
+                    disabled={weatherLoading}
+                    className="flex items-center gap-2 bg-white dark:bg-surface-dark-elevated border border-slate-200 dark:border-border-dark px-4 py-2 rounded-lg text-sm font-bold shadow-sm hover:bg-slate-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                    <span className="material-symbols-outlined text-sm">{weatherLoading ? 'hourglass_empty' : 'refresh'}</span>
+                    {weatherLoading ? 'Loading...' : 'Refresh Data'}
                 </button>
             </div>
 
             {/* Dashboard Grid */}
             <div className="grid grid-cols-12 gap-6">
                 {/* Weather Widget (Span 8) */}
-                <div className="col-span-12 lg:col-span-8 bg-white dark:bg-zinc-900 rounded-2xl border border-slate-200 dark:border-zinc-800 p-6 shadow-sm overflow-hidden">
-                    <div className="flex items-center justify-between mb-8">
-                        <div>
-                            <h3 className="text-lg font-bold">Weather Forecast</h3>
-                            <p className="text-sm text-slate-500">7-Day outlook for Kochi agricultural zone</p>
-                        </div>
-                        <div className="flex items-center gap-4">
-                            <div className="text-right">
-                                <p className="text-3xl font-black text-primary leading-none">32°C</p>
-                                <p className="text-sm font-medium text-slate-500">Partly Cloudy</p>
-                            </div>
-                            <span className="material-symbols-outlined text-5xl text-yellow-500">wb_sunny</span>
-                        </div>
-                    </div>
-
-                    {/* Chart Placeholder */}
-                    <div className="mb-8">
-                        <div className="h-24 w-full">
-                            <svg className="w-full h-full" preserveAspectRatio="none" viewBox="0 0 800 100">
-                                <path d="M0 60 Q 50 20 100 40 T 200 60 T 300 30 T 400 70 T 500 40 T 600 20 T 700 50 T 800 30" fill="none" stroke="#16a249" strokeLinecap="round" strokeWidth="3"></path>
-                                <defs>
-                                    <linearGradient id="grad" x1="0%" x2="0%" y1="0%" y2="100%">
-                                        <stop offset="0%" style={{ stopColor: '#16a249', stopOpacity: 1 }}></stop>
-                                        <stop offset="100%" style={{ stopColor: '#16a249', stopOpacity: 0 }}></stop>
-                                    </linearGradient>
-                                </defs>
-                                <path d="M0 60 Q 50 20 100 40 T 200 60 T 300 30 T 400 70 T 500 40 T 600 20 T 700 50 T 800 30 V 100 H 0 Z" fill="url(#grad)" opacity="0.1"></path>
-                            </svg>
-                        </div>
-                        <div className="flex justify-between px-2">
-                            {weatherForecast.map((day, idx) => (
-                                <div key={idx} className="text-center">
-                                    <p className="text-xs font-bold text-slate-400">{day.day}</p>
-                                    <span className={`material-symbols-outlined my-1 ${day.icon === 'sunny' ? 'text-yellow-500' : day.icon === 'rainy' ? 'text-sky-500' : 'text-sky-400'}`}>{day.icon}</span>
-                                    <p className="text-sm font-bold">{day.temp}</p>
+                <div className="col-span-12 lg:col-span-8 bg-white dark:bg-surface-dark rounded-2xl border border-slate-200 dark:border-border-dark p-6 shadow-sm overflow-hidden">
+                    {weatherLoading ? (
+                        <LoadingSpinner message="Fetching weather data..." />
+                    ) : weatherError ? (
+                        <ErrorDisplay message={weatherError} onRetry={fetchWeatherData} />
+                    ) : currentWeather && (
+                        <>
+                            <div className="flex items-center justify-between mb-8">
+                                <div>
+                                    <h3 className="text-lg font-bold dark:text-text-dark-primary">Weather Forecast</h3>
+                                    <p className="text-sm text-slate-500 dark:text-text-dark-secondary">5-Day outlook for {currentWeather.location || 'Kerala'}</p>
                                 </div>
-                            ))}
-                        </div>
-                    </div>
+                                <div className="flex items-center gap-4">
+                                    <div className="text-right">
+                                        <p className="text-3xl font-black text-primary leading-none">{currentWeather.temperature}°C</p>
+                                        <p className="text-sm font-medium text-slate-500 dark:text-text-dark-secondary capitalize">{currentWeather.description}</p>
+                                    </div>
+                                    <span className="material-symbols-outlined text-5xl text-yellow-500">
+                                        {currentWeather.condition === 'clear' ? 'wb_sunny' :
+                                            currentWeather.condition === 'rain' ? 'rainy' :
+                                                currentWeather.condition === 'clouds' ? 'cloud' : 'wb_cloudy'}
+                                    </span>
+                                </div>
+                            </div>
+
+                            {/* Chart Placeholder */}
+                            <div className="mb-8">
+                                <div className="h-24 w-full">
+                                    <svg className="w-full h-full" preserveAspectRatio="none" viewBox="0 0 800 100">
+                                        <defs>
+                                            <linearGradient id="grad" x1="0%" x2="0%" y1="0%" y2="100%">
+                                                <stop offset="0%" style={{ stopColor: '#16a249', stopOpacity: 0.2 }}></stop>
+                                                <stop offset="100%" style={{ stopColor: '#16a249', stopOpacity: 0 }}></stop>
+                                            </linearGradient>
+                                        </defs>
+                                        <path d={areaPath} fill="url(#grad)"></path>
+                                        <path d={chartPath} fill="none" stroke="#16a249" strokeLinecap="round" strokeWidth="3"></path>
+                                    </svg>
+                                </div>
+                                <div className="flex justify-between px-2">
+                                    {forecast.map((day, idx) => (
+                                        <div key={idx} className="text-center">
+                                            <p className="text-xs font-bold text-slate-400 dark:text-text-dark-secondary">{day.day}</p>
+                                            <span className={`material-symbols-outlined my-1 ${day.condition === 'clear' ? 'text-yellow-500' :
+                                                day.condition === 'rain' ? 'text-sky-500' : 'text-sky-400'
+                                                }`}>
+                                                {day.condition === 'clear' ? 'wb_sunny' :
+                                                    day.condition === 'rain' ? 'rainy' : 'cloud'}
+                                            </span>
+                                            <p className="text-sm font-bold dark:text-text-dark-primary">{day.temp}°</p>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </>
+                    )}
                 </div>
 
                 {/* Alerts Sidebar (Span 4) */}
@@ -93,22 +185,22 @@ const Dashboard = () => {
                     {alerts.map(alert => (
                         <div
                             key={alert.id}
-                            className={`bg-white dark:bg-zinc-900 p-4 rounded-xl shadow-sm border-y border-r border-slate-200 dark:border-zinc-800 ${alert.type === 'red' ? 'border-l-4 border-l-red-500' :
-                                    alert.type === 'amber' ? 'border-l-4 border-l-amber-500' :
-                                        'border-l-4 border-l-primary'
+                            className={`bg-white dark:bg-surface-dark p-4 rounded-xl shadow-sm border-y border-r border-slate-200 dark:border-border-dark ${alert.type === 'red' ? 'border-l-4 border-l-red-500' :
+                                alert.type === 'amber' ? 'border-l-4 border-l-amber-500' :
+                                    'border-l-4 border-l-primary'
                                 }`}
                         >
                             <div className="flex gap-3">
                                 <span className={`material-symbols-outlined ${alert.type === 'red' ? 'text-red-500' :
-                                        alert.type === 'amber' ? 'text-amber-500' :
-                                            'text-primary'
+                                    alert.type === 'amber' ? 'text-amber-500' :
+                                        'text-primary'
                                     }`}>{alert.icon}</span>
                                 <div>
                                     <h4 className="font-bold text-sm">{alert.title}</h4>
                                     <p className="text-xs text-slate-500 mt-1">{alert.desc}</p>
                                     <p className={`text-[10px] font-bold mt-2 uppercase tracking-wider ${alert.type === 'red' ? 'text-red-600' :
-                                            alert.type === 'amber' ? 'text-amber-600' :
-                                                'text-primary'
+                                        alert.type === 'amber' ? 'text-amber-600' :
+                                            'text-primary'
                                         }`}>{alert.label}</p>
                                 </div>
                             </div>
@@ -117,18 +209,18 @@ const Dashboard = () => {
                 </div>
 
                 {/* Market Insights (Span 4) */}
-                <div className="col-span-12 md:col-span-4 bg-white dark:bg-zinc-900 rounded-2xl border border-slate-200 dark:border-zinc-800 p-6 shadow-sm">
+                <div className="col-span-12 md:col-span-4 bg-white dark:bg-surface-dark rounded-2xl border border-slate-200 dark:border-border-dark p-6 shadow-sm">
                     <div className="flex items-center justify-between mb-4">
                         <h3 className="text-lg font-bold">Local Market Prices</h3>
                         <button className="text-primary text-xs font-bold hover:underline">View All</button>
                     </div>
                     <div className="space-y-4">
                         {marketPrices.map((item, idx) => (
-                            <div key={item.id} className={`flex items-center justify-between py-2 ${idx < marketPrices.length - 1 ? 'border-b border-slate-100 dark:border-zinc-800' : ''}`}>
+                            <div key={item.id} className={`flex items-center justify-between py-2 ${idx < marketPrices.length - 1 ? 'border-b border-slate-100 dark:border-border-dark' : ''}`}>
                                 <div className="flex items-center gap-3">
                                     <div className={`size-8 rounded-lg flex items-center justify-center font-bold text-xs ${idx === 0 ? 'bg-yellow-100 text-yellow-700' :
-                                            idx === 1 ? 'bg-primary/10 text-primary' :
-                                                'bg-orange-100 text-orange-700'
+                                        idx === 1 ? 'bg-primary/10 text-primary' :
+                                            'bg-orange-100 text-orange-700'
                                         }`}>{item.code}</div>
                                     <div>
                                         <p className="text-sm font-bold">{item.name}</p>
@@ -145,7 +237,7 @@ const Dashboard = () => {
                 </div>
 
                 {/* Crop Calendar (Span 8) */}
-                <div className="col-span-12 md:col-span-8 bg-white dark:bg-zinc-900 rounded-2xl border border-slate-200 dark:border-zinc-800 p-6 shadow-sm">
+                <div className="col-span-12 md:col-span-8 bg-white dark:bg-surface-dark rounded-2xl border border-slate-200 dark:border-border-dark p-6 shadow-sm">
                     <div className="flex items-center justify-between mb-6">
                         <div>
                             <h3 className="text-lg font-bold">Monthly Crop Calendar</h3>
@@ -160,16 +252,16 @@ const Dashboard = () => {
                             </button>
                         </div>
                     </div>
-                    <div className="grid grid-cols-7 gap-px bg-slate-200 dark:bg-zinc-800 rounded-lg overflow-hidden border border-slate-200 dark:border-zinc-800">
+                    <div className="grid grid-cols-7 gap-px bg-slate-200 dark:bg-surface-dark-elevated rounded-lg overflow-hidden border border-slate-200 dark:border-border-dark">
                         {/* Calendar Header */}
                         {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map(day => (
-                            <div key={day} className="bg-slate-50 dark:bg-zinc-900 py-2 text-center text-[10px] font-bold text-slate-400 uppercase">{day}</div>
+                            <div key={day} className="bg-slate-50 dark:bg-surface-dark py-2 text-center text-[10px] font-bold text-slate-400 uppercase">{day}</div>
                         ))}
                         {/* Calendar Days */}
                         {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14].map(day => (
                             <div
                                 key={day}
-                                className={`bg-white dark:bg-zinc-900 h-24 p-2 relative ${day === 8 ? 'ring-2 ring-primary ring-inset z-10' : ''}`}
+                                className={`bg-white dark:bg-surface-dark h-24 p-2 relative ${day === 8 ? 'ring-2 ring-primary ring-inset z-10' : ''}`}
                             >
                                 <p className={`text-xs font-bold ${day === 8 ? 'text-primary' : 'text-slate-400'}`}>{day}</p>
                                 {day === 2 && (

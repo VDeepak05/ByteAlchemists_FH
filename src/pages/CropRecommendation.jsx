@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { getRecommendations } from '../services/cropEngine';
+import cropRecommendationService from '../services/api/cropRecommendationService';
+import LoadingSpinner from '../components/common/LoadingSpinner';
 
 const CropRecommendation = () => {
     const [formData, setFormData] = useState({
@@ -10,6 +11,7 @@ const CropRecommendation = () => {
     });
     const [recommendations, setRecommendations] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -18,13 +20,61 @@ const CropRecommendation = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
+        setError(null);
         try {
-            const results = await getRecommendations(formData);
-            setRecommendations(results.slice(0, 3));
-        } catch (error) {
-            console.error('Error getting recommendations:', error);
+            // Map form values to service expected format
+            const input = {
+                season: formData.season,
+                budget: formData.budget === 'low' ? '< 50000' : formData.budget === 'mid' ? '20000-100000' : '> 100000',
+                water: formData.water === 'rainfed' ? 'moderate' : formData.water === 'irrigated' ? 'high' : 'low',
+                goal: formData.goal === 'profit' ? 'profit' : formData.goal === 'risk' ? 'sustainability' : 'profit',
+                soilType: 'laterite', // Default for Kerala
+                landSize: 2
+            };
+
+            const result = await cropRecommendationService.getRecommendations(input);
+
+            // Transform results for display
+            const formattedRecommendations = result.recommendations.map((rec, idx) => ({
+                name: rec.name,
+                variety: rec.marketDemand + ' demand',
+                score: rec.confidence,
+                investment: rec.investment,
+                profit: rec.profitability === 'high' ? '+40%' : rec.profitability === 'moderate' ? '+25%' : '+15%',
+                cycle: rec.expectedYield,
+                reasons: rec.reasons || [],
+                tips: rec.tips || [],
+                image: getCropImage(rec.name),
+                best: idx === 0
+            }));
+
+            setRecommendations(formattedRecommendations);
+        } catch (err) {
+            console.error('Error getting recommendations:', err);
+            setError('Failed to generate recommendations. Please try again.');
+        } finally {
+            setLoading(false);
         }
-        setLoading(false);
+    };
+
+    const getCropImage = (cropName) => {
+        const images = {
+            'Rice (Paddy)': 'https://images.unsplash.com/photo-1536304993881-ff6e9eefa2a6?w=400',
+            'Coconut': 'https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=400',
+            'Rubber': 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400',
+            'Black Pepper': 'https://images.unsplash.com/photo-1599909533711-5b2b8ea0d0e5?w=400',
+            'Cardamom': 'https://images.unsplash.com/photo-1615485500704-8e990f9900f7?w=400',
+            'Banana': 'https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=400',
+            'Ginger': 'https://images.unsplash.com/photo-1597445812315-77b3bec2e98d?w=400',
+            'Turmeric': 'https://images.unsplash.com/photo-1615485020624-1d21ed0eb3b8?w=400',
+            'Tapioca (Cassava)': 'https://images.unsplash.com/photo-1589927986089-35812388d1f4?w=400',
+            'Cashew': 'https://images.unsplash.com/photo-1604450651583-d67e8b4a6c6f?w=400',
+            'Coffee': 'https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=400',
+            'Tea': 'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=400',
+            'Vegetables (Mixed)': 'https://images.unsplash.com/photo-1540420773420-3366772f4999?w=400',
+            'Pineapple': 'https://images.unsplash.com/photo-1550258987-190a2d41a8ba?w=400'
+        };
+        return images[cropName] || 'https://images.unsplash.com/photo-1560493676-04071c5f467b?w=400';
     };
 
     // Default recommendations to show
@@ -69,7 +119,7 @@ const CropRecommendation = () => {
         return (
             <div className="relative flex items-center justify-center">
                 <svg className="w-12 h-12">
-                    <circle className="text-gray-200 dark:text-white/10" cx="24" cy="24" fill="transparent" r="20" stroke="currentColor" strokeWidth="4" />
+                    <circle className="text-gray-200 dark:text-text-dark-primary/10" cx="24" cy="24" fill="transparent" r="20" stroke="currentColor" strokeWidth="4" />
                     <circle
                         className={`${score >= 80 ? 'text-primary' : 'text-amber-500'}`}
                         cx="24" cy="24" fill="transparent" r="20"
@@ -92,19 +142,19 @@ const CropRecommendation = () => {
             <aside className="w-full lg:w-1/3 flex flex-col gap-6">
                 {/* Page Heading */}
                 <div className="flex flex-col gap-2">
-                    <h1 className="text-slate-900 dark:text-white text-3xl font-black leading-tight">AI Crop Recommendation</h1>
+                    <h1 className="text-slate-900 dark:text-text-dark-primary text-3xl font-black leading-tight">AI Crop Recommendation</h1>
                     <p className="text-[#50956a] text-sm font-normal">Based on Kerala's agro-climatic zones and your resource profile.</p>
                 </div>
 
                 {/* Form Card */}
                 <div className="bg-white dark:bg-[#1a2e21] rounded-xl p-6 shadow-sm border border-primary/10">
                     <div className="flex flex-col gap-1 mb-6">
-                        <h2 className="text-lg font-bold text-slate-900 dark:text-white">Advisor Panel</h2>
+                        <h2 className="text-lg font-bold text-slate-900 dark:text-text-dark-primary">Advisor Panel</h2>
                         <p className="text-xs text-[#50956a]">Define your land parameters</p>
                     </div>
                     <form className="space-y-4" onSubmit={handleSubmit}>
                         <div className="flex flex-col gap-2">
-                            <label className="text-slate-900 dark:text-white text-sm font-semibold">Select Season</label>
+                            <label className="text-slate-900 dark:text-text-dark-primary text-sm font-semibold">Select Season</label>
                             <select
                                 name="season"
                                 value={formData.season}
@@ -117,7 +167,7 @@ const CropRecommendation = () => {
                             </select>
                         </div>
                         <div className="flex flex-col gap-2">
-                            <label className="text-slate-900 dark:text-white text-sm font-semibold">Budget Range (per acre)</label>
+                            <label className="text-slate-900 dark:text-text-dark-primary text-sm font-semibold">Budget Range (per acre)</label>
                             <select
                                 name="budget"
                                 value={formData.budget}
@@ -130,7 +180,7 @@ const CropRecommendation = () => {
                             </select>
                         </div>
                         <div className="flex flex-col gap-2">
-                            <label className="text-slate-900 dark:text-white text-sm font-semibold">Water Availability</label>
+                            <label className="text-slate-900 dark:text-text-dark-primary text-sm font-semibold">Water Availability</label>
                             <select
                                 name="water"
                                 value={formData.water}
@@ -143,7 +193,7 @@ const CropRecommendation = () => {
                             </select>
                         </div>
                         <div className="flex flex-col gap-2">
-                            <label className="text-slate-900 dark:text-white text-sm font-semibold">Primary Goal</label>
+                            <label className="text-slate-900 dark:text-text-dark-primary text-sm font-semibold">Primary Goal</label>
                             <select
                                 name="goal"
                                 value={formData.goal}
@@ -186,7 +236,7 @@ const CropRecommendation = () => {
             {/* Right Panel: Results Section */}
             <section className="flex-1 flex flex-col gap-6">
                 <div className="flex items-center justify-between flex-wrap gap-4">
-                    <h3 className="text-xl font-bold text-slate-900 dark:text-white">Top 3 Recommended Crops</h3>
+                    <h3 className="text-xl font-bold text-slate-900 dark:text-text-dark-primary">Top 3 Recommended Crops</h3>
                     <div className="flex gap-2">
                         <span className="flex items-center gap-1 text-xs bg-primary/20 text-primary px-2 py-1 rounded font-bold">
                             <span className="material-symbols-outlined text-sm">location_on</span> Wayanad, Kerala
@@ -214,7 +264,7 @@ const CropRecommendation = () => {
                             <div className="p-5 flex flex-col flex-1">
                                 <div className="flex justify-between items-start mb-4">
                                     <div>
-                                        <h4 className="text-lg font-black text-slate-900 dark:text-white">{crop.name}</h4>
+                                        <h4 className="text-lg font-black text-slate-900 dark:text-text-dark-primary">{crop.name}</h4>
                                         <p className="text-xs text-[#50956a]">{crop.variety}</p>
                                     </div>
                                     <ProgressCircle score={crop.score} />
@@ -222,7 +272,7 @@ const CropRecommendation = () => {
                                 <div className="space-y-3 mb-6">
                                     <div className="flex justify-between text-sm">
                                         <span className="text-[#50956a]">Investment</span>
-                                        <span className="font-bold text-slate-900 dark:text-white">{crop.investment}</span>
+                                        <span className="font-bold text-slate-900 dark:text-text-dark-primary">{crop.investment}</span>
                                     </div>
                                     <div className="flex justify-between text-sm">
                                         <span className="text-[#50956a]">Profit Margin</span>
@@ -230,7 +280,7 @@ const CropRecommendation = () => {
                                     </div>
                                     <div className="flex justify-between text-sm">
                                         <span className="text-[#50956a]">Growth Cycle</span>
-                                        <span className="font-bold text-slate-900 dark:text-white">{crop.cycle}</span>
+                                        <span className="font-bold text-slate-900 dark:text-text-dark-primary">{crop.cycle}</span>
                                     </div>
                                 </div>
                                 <button className="mt-auto w-full py-2 bg-primary/10 text-primary font-bold rounded-lg border border-primary/20 hover:bg-primary hover:text-white transition-all">

@@ -99,13 +99,13 @@ const Login = () => {
                         <div className="w-8 h-8 bg-primary rounded flex items-center justify-center">
                             <span className="material-icons text-background-dark text-lg">eco</span>
                         </div>
-                        <span className="text-background-dark dark:text-white text-xl font-bold">KrishiSahaya</span>
+                        <span className="text-background-dark dark:text-text-dark-primary text-xl font-bold">KrishiSahaya</span>
                     </div>
 
-                    <div className="bg-white dark:bg-zinc-900 rounded-xl shadow-xl p-8 border border-gray-100 dark:border-zinc-800">
+                    <div className="bg-white dark:bg-surface-dark rounded-xl shadow-xl p-8 border border-gray-100 dark:border-border-dark">
                         <div className="mb-8">
-                            <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Welcome Back</h2>
-                            <p className="text-gray-500 dark:text-gray-400 mt-1">Access your farming dashboard</p>
+                            <h2 className="text-2xl font-bold text-gray-900 dark:text-text-dark-primary">Welcome Back</h2>
+                            <p className="text-gray-500 dark:text-text-dark-secondary mt-1">Access your farming dashboard</p>
                         </div>
 
                         {error && (
@@ -124,7 +124,7 @@ const Login = () => {
                                         person
                                     </span>
                                     <input
-                                        className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-200 dark:border-zinc-700 dark:bg-zinc-800 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none"
+                                        className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-200 dark:border-border-dark dark:bg-surface-dark-elevated dark:text-text-dark-primary focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none"
                                         placeholder="e.g. +91 98765 43210"
                                         type="text"
                                         name="username"
@@ -149,7 +149,7 @@ const Login = () => {
                                         lock
                                     </span>
                                     <input
-                                        className="w-full pl-10 pr-10 py-3 rounded-lg border border-gray-200 dark:border-zinc-700 dark:bg-zinc-800 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none"
+                                        className="w-full pl-10 pr-10 py-3 rounded-lg border border-gray-200 dark:border-border-dark dark:bg-surface-dark-elevated dark:text-text-dark-primary focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none"
                                         placeholder="••••••••"
                                         type={showPassword ? "text" : "password"}
                                         name="password"
@@ -168,13 +168,13 @@ const Login = () => {
 
                             <div className="flex items-center">
                                 <input
-                                    className="w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary dark:bg-zinc-800 dark:border-zinc-700"
+                                    className="w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary dark:bg-surface-dark-elevated dark:border-border-dark"
                                     id="remember"
                                     type="checkbox"
                                     checked={rememberMe}
                                     onChange={(e) => setRememberMe(e.target.checked)}
                                 />
-                                <label className="ml-2 text-sm text-gray-600 dark:text-gray-400" htmlFor="remember">
+                                <label className="ml-2 text-sm text-gray-600 dark:text-text-dark-secondary" htmlFor="remember">
                                     Remember me for 30 days
                                 </label>
                             </div>
@@ -189,15 +189,15 @@ const Login = () => {
 
                         <div className="relative my-8">
                             <div className="absolute inset-0 flex items-center">
-                                <span className="w-full border-t border-gray-200 dark:border-zinc-800"></span>
+                                <span className="w-full border-t border-gray-200 dark:border-border-dark"></span>
                             </div>
                             <div className="relative flex justify-center text-xs uppercase">
-                                <span className="bg-white dark:bg-zinc-900 px-2 text-gray-500">Or continue with</span>
+                                <span className="bg-white dark:bg-surface-dark px-2 text-gray-500">Or continue with</span>
                             </div>
                         </div>
 
                         <div className="grid grid-cols-2 gap-4">
-                            <button className="flex items-center justify-center gap-2 px-4 py-3 border border-gray-200 dark:border-zinc-700 rounded-lg hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors">
+                            <button className="flex items-center justify-center gap-2 px-4 py-3 border border-gray-200 dark:border-border-dark rounded-lg hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors">
                                 <img
                                     alt="Google"
                                     className="w-5 h-5"
@@ -205,14 +205,14 @@ const Login = () => {
                                 />
                                 <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Google</span>
                             </button>
-                            <button className="flex items-center justify-center gap-2 px-4 py-3 border border-gray-200 dark:border-zinc-700 rounded-lg hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors">
-                                <span className="material-symbols-outlined text-gray-600 dark:text-gray-400 text-lg">sms</span>
+                            <button className="flex items-center justify-center gap-2 px-4 py-3 border border-gray-200 dark:border-border-dark rounded-lg hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors">
+                                <span className="material-symbols-outlined text-gray-600 dark:text-text-dark-secondary text-lg">sms</span>
                                 <span className="text-sm font-medium text-gray-700 dark:text-gray-300">OTP</span>
                             </button>
                         </div>
 
                         <div className="mt-8 text-center">
-                            <p className="text-sm text-gray-600 dark:text-gray-400">
+                            <p className="text-sm text-gray-600 dark:text-text-dark-secondary">
                                 New to KrishiSahaya? {' '}
                                 <Link to="/register" className="text-primary font-bold hover:underline">
                                     Create an account

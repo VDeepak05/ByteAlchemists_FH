@@ -1,52 +1,69 @@
 import React, { useState, useEffect } from 'react';
-
-const basePrices = {
-    "Black Pepper": 640,
-    "Cardamom": 1250,
-    "Rubber (RSS 4)": 185.5,
-    "Coconut (Dry)": 35.2,
-    "Tapioca": 28,
-};
-
-const marketLocations = {
-    "Black Pepper": "Kochi APMC",
-    "Cardamom": "Idukki Market",
-    "Rubber (RSS 4)": "Kottayam",
-    "Coconut (Dry)": "Kozhikode",
-    "Tapioca": "Trivandrum APMC"
-};
+import marketService from '../services/api/marketService';
+import LoadingSpinner from '../components/common/LoadingSpinner';
+import ErrorDisplay from '../components/common/ErrorDisplay';
 
 const cropIcons = {
-    "Black Pepper": "eco",
-    "Cardamom": "grain",
-    "Rubber (RSS 4)": "layers",
-    "Coconut (Dry)": "circle_notifications",
-    "Tapioca": "restaurant"
+    "Cereals": "eco",
+    "Spices": "grain",
+    "Plantation Crops": "layers",
+    "Fruits": "nutrition",
+    "Vegetables": "restaurant",
+    "Tubers": "restaurant",
+    "Nuts": "egg"
 };
 
 const MarketPrices = () => {
     const [prices, setPrices] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [searchQuery, setSearchQuery] = useState('');
+    const [selectedCategory, setSelectedCategory] = useState('all');
+    const [sortBy, setSortBy] = useState('crop');
+    const [sortOrder, setSortOrder] = useState('asc');
+
+    const categories = ['all', 'Cereals', 'Spices', 'Plantation Crops', 'Fruits', 'Vegetables', 'Tubers', 'Nuts'];
+
+    const fetchPrices = async () => {
+        setLoading(true);
+        setError(null);
+        try {
+            let data;
+            if (searchQuery) {
+                data = await marketService.searchCrops(searchQuery);
+            } else if (selectedCategory !== 'all') {
+                data = await marketService.getPricesByCategory(selectedCategory);
+            } else {
+                data = await marketService.getMarketPrices();
+            }
+
+            // Transform data for display
+            const formattedPrices = data.map((item) => ({
+                id: item.id,
+                name: item.crop,
+                current: item.price,
+                unit: item.unit,
+                change: item.change,
+                trend: item.change > 0 ? 'up' : item.change < 0 ? 'down' : 'stable',
+                location: item.market,
+                category: item.category,
+                icon: cropIcons[item.category] || 'eco'
+            }));
+
+            // Sort data
+            const sortedPrices = marketService.sortPrices(formattedPrices, sortBy, sortOrder);
+            setPrices(sortedPrices);
+        } catch (err) {
+            console.error('Failed to fetch market prices:', err);
+            setError('Failed to load market prices. Please try again.');
+        } finally {
+            setLoading(false);
+        }
+    };
 
     useEffect(() => {
-        const newPrices = Object.entries(basePrices).map(([name, base], index) => {
-            const variation = (Math.random() - 0.5) * 0.1;
-            const current = Math.round((base * (1 + variation)) * 100) / 100;
-            const change = ((current - base) / base) * 100;
-
-            return {
-                id: index,
-                name,
-                current,
-                base,
-                change,
-                trend: change > 1 ? 'up' : change < -1 ? 'down' : 'stable',
-                location: marketLocations[name],
-                icon: cropIcons[name]
-            };
-        });
-
-        setPrices(newPrices);
-    }, []);
+        fetchPrices();
+    }, [selectedCategory, sortBy, sortOrder]);
 
     const getAdvice = (price) => {
         if (price.trend === 'up' && price.change > 3) return { text: 'Sell Now', primary: true };
@@ -108,17 +125,17 @@ const MarketPrices = () => {
                 <nav className="flex items-center gap-2 text-sm">
                     <a className="text-[#50956a] hover:text-primary" href="#">Home</a>
                     <span className="material-symbols-outlined text-sm text-[#50956a]">chevron_right</span>
-                    <span className="text-slate-900 dark:text-white font-medium">Market Price Intelligence</span>
+                    <span className="text-slate-900 dark:text-text-dark-primary font-medium">Market Price Intelligence</span>
                 </nav>
 
                 {/* Page Heading */}
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
                     <div className="flex flex-col gap-1">
-                        <h1 className="text-3xl lg:text-4xl font-black tracking-tight text-slate-900 dark:text-white">Market Price Intelligence</h1>
-                        <p className="text-[#50956a] dark:text-gray-400">Real-time wholesale prices across major Kerala agricultural markets. <span className="text-xs ml-2 italic opacity-75">Last updated: {new Date().toLocaleTimeString()}</span></p>
+                        <h1 className="text-3xl lg:text-4xl font-black tracking-tight text-slate-900 dark:text-text-dark-primary">Market Price Intelligence</h1>
+                        <p className="text-[#50956a] dark:text-text-dark-secondary">Real-time wholesale prices across major Kerala agricultural markets. <span className="text-xs ml-2 italic opacity-75">Last updated: {new Date().toLocaleTimeString()}</span></p>
                     </div>
                     <div className="flex gap-2">
-                        <button className="flex items-center gap-2 px-4 py-2 bg-[#e8f3ec] dark:bg-[#1a2e22] text-slate-900 dark:text-white rounded-lg font-bold text-sm hover:bg-[#d1e6d8] transition-colors">
+                        <button className="flex items-center gap-2 px-4 py-2 bg-[#e8f3ec] dark:bg-[#1a2e22] text-slate-900 dark:text-text-dark-primary rounded-lg font-bold text-sm hover:bg-[#d1e6d8] transition-colors">
                             <span className="material-symbols-outlined text-sm">download</span> Export CSV
                         </button>
                         <button className="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg font-bold text-sm hover:bg-primary/90 transition-colors">
@@ -178,7 +195,7 @@ const MarketPrices = () => {
                                                     <div className="size-8 rounded-lg bg-gray-100 dark:bg-[#253d2e] flex items-center justify-center text-primary">
                                                         <span className="material-symbols-outlined">{price.icon}</span>
                                                     </div>
-                                                    <span className="font-bold text-slate-900 dark:text-white">{price.name}</span>
+                                                    <span className="font-bold text-slate-900 dark:text-text-dark-primary">{price.name}</span>
                                                 </div>
                                             </td>
                                             <td className="px-6 py-4 whitespace-nowrap">
@@ -186,8 +203,8 @@ const MarketPrices = () => {
                                             </td>
                                             <td className="px-6 py-4 whitespace-nowrap">
                                                 <div className={`flex items-center gap-1 font-bold px-2 py-1 rounded w-fit ${price.trend === 'up' ? 'text-primary bg-primary/10' :
-                                                        price.trend === 'down' ? 'text-red-500 bg-red-50 dark:bg-red-900/20' :
-                                                            'text-gray-500 bg-gray-100 dark:bg-gray-800'
+                                                    price.trend === 'down' ? 'text-red-500 bg-red-50 dark:bg-red-900/20' :
+                                                        'text-gray-500 bg-gray-100 dark:bg-gray-800'
                                                     }`}>
                                                     <span className="material-symbols-outlined text-sm">
                                                         {price.trend === 'up' ? 'trending_up' : price.trend === 'down' ? 'trending_down' : 'remove'}
@@ -235,14 +252,14 @@ const MarketPrices = () => {
                             <span className="material-symbols-outlined text-primary">lightbulb</span>
                             <h4 className="font-bold">Pro-Tip for Sell Timing</h4>
                         </div>
-                        <p className="text-sm text-[#50956a] leading-relaxed">Prices in the <span className="font-bold text-slate-900 dark:text-white">Kochi market</span> typically peak between Tuesday and Thursday. Consider harvesting on weekends for early-week market distribution.</p>
+                        <p className="text-sm text-[#50956a] leading-relaxed">Prices in the <span className="font-bold text-slate-900 dark:text-text-dark-primary">Kochi market</span> typically peak between Tuesday and Thursday. Consider harvesting on weekends for early-week market distribution.</p>
                     </div>
                     <div className="bg-white dark:bg-[#1a2e22] p-6 rounded-xl border border-[#e8f3ec] dark:border-[#1e3226] shadow-sm">
                         <div className="flex items-center gap-3 mb-4">
                             <span className="material-symbols-outlined text-primary">cloud_sync</span>
                             <h4 className="font-bold">Sync with Weather</h4>
                         </div>
-                        <p className="text-sm text-[#50956a] leading-relaxed">Upcoming monsoon in North Kerala may affect spice supply next week. Current trends suggest a <span className="font-bold text-slate-900 dark:text-white">10-15% price spike</span> for Cardamom. Plan accordingly.</p>
+                        <p className="text-sm text-[#50956a] leading-relaxed">Upcoming monsoon in North Kerala may affect spice supply next week. Current trends suggest a <span className="font-bold text-slate-900 dark:text-text-dark-primary">10-15% price spike</span> for Cardamom. Plan accordingly.</p>
                     </div>
                 </div>
             </main>
