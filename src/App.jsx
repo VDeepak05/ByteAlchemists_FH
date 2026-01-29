@@ -14,14 +14,14 @@ import Register from './pages/Register';
 
 
 function AppRoutes() {
-  const { isAuthenticated } = useAuth();
+  const { currentUser } = useAuth();
 
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
 
-      <Route path="/" element={isAuthenticated ? <Layout /> : <Navigate to="/login" />}>
+      <Route path="/" element={currentUser ? <Layout /> : <Navigate to="/login" />}>
         <Route index element={<Dashboard />} />
         <Route path="recommendations" element={<AIAdvisor />} />
         <Route path="market" element={<MarketPrices />} />
