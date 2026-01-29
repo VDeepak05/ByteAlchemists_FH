@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>KrishiSahaya - Modern Farmer Login</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ec6d",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#102218",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+
+<body class="font-display bg-background-light dark:bg-background-dark min-h-screen transition-colors duration-300">
+    <div class="flex min-h-screen overflow-hidden">
+        <!-- Left Section: Visual Narrative -->
+        <div class="hidden lg:flex lg:w-1/2 relative overflow-hidden">
+            <img alt="Lush Kerala Rice Field" class="absolute inset-0 w-full h-full object-cover"
+                data-alt="Lush Kerala rice field at dawn with mist"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4-tm7o-B-iKbn2w_pKxaypAieOW4r92id4L58WcZp_0NpIkUoOViu0gPiBzqWmiBfdUF9c8VzDwiHg3WTWTqlcyto5VkTM03hjdpIiFGhksBD3Vnu2N9Xw0MJ8faFGOWczB6Xx4vj9bm6M2PJgkTowF6sHtU90aHG0ApEkT1McyI5euW_btRfoNBA_AncGzOPMCGvuHgbGyR8PWL0w7m3SukOjvm0hKSG8prD6HyzcYhbFf4PoeCOg96HFsjZO5-_YEwBsNj4dlc" />
+            <!-- Overlay for legibility -->
+            <div
+                class="absolute inset-0 bg-gradient-to-tr from-background-dark/80 via-background-dark/40 to-transparent">
+            </div>
+            <div class="relative z-10 flex flex-col justify-between p-12 w-full">
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center shadow-lg">
+                        <span class="material-icons text-background-dark">eco</span>
+                    </div>
+                    <span class="text-white text-2xl font-bold tracking-tight">KrishiSahaya</span>
+                </div>
+                <div class="max-w-lg mb-12">
+                    <h1 class="text-5xl font-bold text-white leading-tight mb-6">
+                        Empowering Kerala's Farmers with AI Intelligence.
+                    </h1>
+                    <p class="text-white/80 text-lg">
+                        Navigate climate challenges with data-driven insights tailored for the God's Own Country.
+                    </p>
+                    <div class="mt-10 flex items-center gap-6">
+                        <div class="flex -space-x-3">
+                            <div class="w-10 h-10 rounded-full border-2 border-white bg-gray-200 overflow-hidden">
+                                <img alt="Farmer User" data-alt="Portrait of a smiling local farmer"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCH5NPY_r8CU4O8AyW4ggRkROWI3c_zgY2kbvPFQT5kM4DPLSNZnBev9gaUHu93bJAqf9WIuJ6f-6EunbDf48vh9aZchvFCzzZ8vQhfGbgiSw-VKaDco4CE84dDn6lj91FWOO68bbZ65I0Ey85n4o_f_Pl37YTdg0dtI5Nlkc_6SyFjU-9jy0lmA-Bs5JB8tadE0roEjwHVFv_bg1R-Q8yFjGKODazdsevQp4eNUtOgw6DoDYZeJqxSsu7Ov4W2tdOovrTxUqvfcY" />
+                            </div>
+                            <div class="w-10 h-10 rounded-full border-2 border-white bg-gray-200 overflow-hidden">
+                                <img alt="Farmer User" data-alt="Portrait of a female entrepreneur farmer"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJWkrexUdUOUzni4M7e0tyCMQiS2Bwon51LmaOoCipwv0FDYzfUOzNH1dWlKMsj03GqfcTKlpAHuwxgXi1XxdpFdHWimtjhnGQ7bjy63MZKywCDjP7eYtHXA-XZmMcQ1nC8t_ZuDSchp6MHbMoRMdks4km6VeBYdfZyTO6p4qewLO2hLFCOB-1lMgONJNv7r3DwSsnKZx386kxVWtqrWb6weg1iP1_p0UyZ9xCsnaotXfUkM7l-y5Azi_49EJJjn7iGOKc9FjGOQo" />
+                            </div>
+                            <div class="w-10 h-10 rounded-full border-2 border-white bg-gray-200 overflow-hidden">
+                                <img alt="Farmer User" data-alt="Portrait of a young farmer using mobile"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfRssIo78z9-Zub4VP8SPDqM90vav2ar_s9NYEA5OpHmdeyv2fENN4yE5iH6_hsZWxob1qOpE4XjR01nO1JIMdygh4tRIKQn22T7Qzmn8R3SCnGxtxRNI4XUkcMxcACd2NlhAUfefG5E0_BpuMl52vOrCaPsIj5NH_hlT2u60HZImPP7-imd8xpm_68pebHa98xoS4nJi0qOucaLq21eOyUWMR8VzQXloXNUUgS5axgaBFFpYR6v3o26oCH0KOB842dtqzTceSoO0" />
+                            </div>
+                        </div>
+                        <span class="text-white/90 text-sm font-medium">Joined by 10k+ farmers this month</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Right Section: Login Form -->
+        <div
+            class="w-full lg:w-1/2 flex items-center justify-center p-6 sm:p-12 bg-background-light dark:bg-background-dark relative">
+            <!-- Subtle Decorative Leaf Motif (SVG) -->
+            <div class="absolute bottom-0 right-0 p-8 opacity-5 dark:opacity-10 pointer-events-none">
+                <span class="material-icons text-[200px] text-primary rotate-45">eco</span>
+            </div>
+            <div class="w-full max-w-md">
+                <!-- Mobile Header Only -->
+                <div class="lg:hidden flex items-center space-x-2 mb-8 justify-center">
+                    <div class="w-8 h-8 bg-primary rounded flex items-center justify-center">
+                        <span class="material-icons text-background-dark text-lg">eco</span>
+                    </div>
+                    <span class="text-background-dark dark:text-white text-xl font-bold">KrishiSahaya</span>
+                </div>
+                <div
+                    class="bg-white dark:bg-zinc-900 rounded-xl shadow-xl p-8 border border-gray-100 dark:border-zinc-800">
+                    <div class="mb-8">
+                        <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Welcome Back</h2>
+                        <p class="text-gray-500 dark:text-gray-400 mt-1">Access your farming dashboard</p>
+                    </div>
+                    <form class="space-y-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Phone Number
+                                or Email</label>
+                            <div class="relative">
+                                <span
+                                    class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">person</span>
+                                <input
+                                    class="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-200 dark:border-zinc-700 dark:bg-zinc-800 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none"
+                                    placeholder="e.g. +91 98765 43210" type="text" />
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <label class="text-sm font-medium text-gray-700 dark:text-gray-300">Password</label>
+                                <a class="text-xs font-semibold text-primary hover:underline" href="#">Forgot
+                                    Password?</a>
+                            </div>
+                            <div class="relative">
+                                <span
+                                    class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">lock</span>
+                                <input
+                                    class="w-full pl-10 pr-10 py-3 rounded-lg border border-gray-200 dark:border-zinc-700 dark:bg-zinc-800 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent transition-all outline-none"
+                                    placeholder="••••••••" type="password" />
+                                <span
+                                    class="material-icons absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 cursor-pointer text-sm">visibility_off</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <input
+                                class="w-4 h-4 text-primary bg-gray-100 border-gray-300 rounded focus:ring-primary dark:bg-zinc-800 dark:border-zinc-700"
+                                id="remember" type="checkbox" />
+                            <label class="ml-2 text-sm text-gray-600 dark:text-gray-400" for="remember">Remember me for
+                                30 days</label>
+                        </div>
+                        <button
+                            class="w-full bg-primary hover:bg-opacity-90 text-background-dark font-bold py-3.5 rounded-lg shadow-lg shadow-primary/20 transition-all active:scale-[0.98]"
+                            type="submit">
+                            Sign In
+                        </button>
+                    </form>
+                    <div class="relative my-8">
+                        <div class="absolute inset-0 flex items-center">
+                            <span class="w-full border-t border-gray-200 dark:border-zinc-800"></span>
+                        </div>
+                        <div class="relative flex justify-center text-xs uppercase">
+                            <span class="bg-white dark:bg-zinc-900 px-2 text-gray-500">Or continue with</span>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <button
+                            class="flex items-center justify-center gap-2 px-4 py-3 border border-gray-200 dark:border-zinc-700 rounded-lg hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors">
+                            <img alt="Google" class="w-5 h-5" data-alt="Google G Logo"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbDqPo6c5KybCmm2UiRERejTtM5KClSSONQSccEuHPLoIPpe__iywQVHBHf64Y6DYPAs2NyY0eH4FW0-ZPr8kQqi-xukBXDU6hZxysvgcta_CMTNJliTdyikCnkUWSwUK3-Zne22rUZt8ZDphI9ARIM0B1M0OKaffODzDOzU8VmwCjjS-avnrOPfRVs9y2-8WPfscsmXL5LrAP0gZ7kxa7euP5tvy7HGOnw_6JKU5zZZFKjBJXjDVj8wX2ZHI70tg_P55x-AD0JTM" />
+                            <span class="text-sm font-medium text-gray-700 dark:text-gray-300">Google</span>
+                        </button>
+                        <button
+                            class="flex items-center justify-center gap-2 px-4 py-3 border border-gray-200 dark:border-zinc-700 rounded-lg hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors">
+                            <span class="material-icons text-gray-600 dark:text-gray-400 text-lg">sms</span>
+                            <span class="text-sm font-medium text-gray-700 dark:text-gray-300">OTP</span>
+                        </button>
+                    </div>
+                    <div class="mt-8 text-center">
+                        <p class="text-sm text-gray-600 dark:text-gray-400">
+                            New to KrishiSahaya?
+                            <a class="text-primary font-bold hover:underline" href="#">Create an account</a>
+                        </p>
+                    </div>
+                </div>
+                <!-- Legal Links -->
+                <div class="mt-8 flex justify-center space-x-6">
+                    <a class="text-xs text-gray-500 hover:text-primary transition-colors" href="#">Privacy Policy</a>
+                    <a class="text-xs text-gray-500 hover:text-primary transition-colors" href="#">Terms of Service</a>
+                    <a class="text-xs text-gray-500 hover:text-primary transition-colors" href="#">Help Center</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

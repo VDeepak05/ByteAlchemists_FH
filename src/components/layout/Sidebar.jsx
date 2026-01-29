@@ -1,9 +1,17 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import clsx from 'clsx';
+import { useAuth } from '../../context/AuthContext';
 
 const Sidebar = ({ isOpen, setIsOpen }) => {
     const location = useLocation();
+    const navigate = useNavigate();
+    const { logout } = useAuth();
+
+    const handleSignOut = () => {
+        logout();
+        navigate('/login');
+    };
 
     const navigation = [
         { name: 'Dashboard', href: '/', icon: 'dashboard' },
@@ -72,10 +80,19 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
                 </nav>
 
                 {/* CTA Button */}
-                <div className="p-6">
+                <div className="p-6 space-y-3">
                     <button className="w-full bg-primary hover:bg-green-700 text-white font-bold py-3 rounded-xl flex items-center justify-center gap-2 transition-all shadow-lg shadow-primary/20">
                         <span className="material-symbols-outlined text-xl">smart_toy</span>
                         <span>Consult AI Advisor</span>
+                    </button>
+
+                    {/* Sign Out Button */}
+                    <button
+                        onClick={handleSignOut}
+                        className="w-full flex items-center justify-center gap-2 px-3 py-2.5 rounded-lg text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors border border-red-200 dark:border-red-800"
+                    >
+                        <span className="material-symbols-outlined">logout</span>
+                        <span className="text-sm font-medium">Sign Out</span>
                     </button>
                 </div>
             </aside>

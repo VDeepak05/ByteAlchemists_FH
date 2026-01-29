@@ -1,20 +1,28 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 const Login = () => {
     const navigate = useNavigate();
+    const { login } = useAuth();
     const [showPassword, setShowPassword] = useState(false);
     const [rememberMe, setRememberMe] = useState(false);
     const [loginData, setLoginData] = useState({
         username: '',
         password: ''
     });
+    const [error, setError] = useState('');
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // TODO: Implement actual authentication
-        console.log('Login attempt:', loginData);
-        navigate('/');
+        setError('');
+
+        const success = login(loginData.username, loginData.password);
+        if (success) {
+            navigate('/');
+        } else {
+            setError('Please enter valid credentials');
+        }
     };
 
     const handleInputChange = (e) => {
@@ -100,13 +108,19 @@ const Login = () => {
                             <p className="text-gray-500 dark:text-gray-400 mt-1">Access your farming dashboard</p>
                         </div>
 
+                        {error && (
+                            <div className="mb-4 p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
+                                <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
+                            </div>
+                        )}
+
                         <form className="space-y-6" onSubmit={handleSubmit}>
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                                     Phone Number or Email
                                 </label>
                                 <div className="relative">
-                                    <span className="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">
+                                    <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">
                                         person
                                     </span>
                                     <input
@@ -131,7 +145,7 @@ const Login = () => {
                                     </a>
                                 </div>
                                 <div className="relative">
-                                    <span className="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">
+                                    <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">
                                         lock
                                     </span>
                                     <input
@@ -144,7 +158,7 @@ const Login = () => {
                                         required
                                     />
                                     <span
-                                        className="material-icons absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 cursor-pointer text-sm"
+                                        className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 cursor-pointer text-sm"
                                         onClick={() => setShowPassword(!showPassword)}
                                     >
                                         {showPassword ? 'visibility' : 'visibility_off'}
@@ -192,7 +206,7 @@ const Login = () => {
                                 <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Google</span>
                             </button>
                             <button className="flex items-center justify-center gap-2 px-4 py-3 border border-gray-200 dark:border-zinc-700 rounded-lg hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors">
-                                <span className="material-icons text-gray-600 dark:text-gray-400 text-lg">sms</span>
+                                <span className="material-symbols-outlined text-gray-600 dark:text-gray-400 text-lg">sms</span>
                                 <span className="text-sm font-medium text-gray-700 dark:text-gray-300">OTP</span>
                             </button>
                         </div>
