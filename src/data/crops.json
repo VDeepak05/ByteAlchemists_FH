@@ -1,0 +1,232 @@
+[
+    {
+        "id": 1,
+        "name": "Rice (Paddy)",
+        "season": [
+            "Kharif",
+            "Rabi"
+        ],
+        "soil": [
+            "Alluvial",
+            "Black Cotton"
+        ],
+        "water": "Abundant",
+        "investment_per_acre": 25000,
+        "duration_days": 120,
+        "expected_yield_kg": 2500,
+        "market_price_per_kg": 30,
+        "climate_sensitivity": "High",
+        "rainfall_required_mm": 1200,
+        "image": "https://images.unsplash.com/photo-1536630596251-245f3e1b71e1?auto=format&fit=crop&q=80&w=400"
+    },
+    {
+        "id": 2,
+        "name": "Coconut",
+        "season": [
+            "All"
+        ],
+        "soil": [
+            "Laterite",
+            "Coastal Sandy",
+            "Red Soil"
+        ],
+        "water": "Moderate",
+        "investment_per_acre": 50000,
+        "duration_days": 1825,
+        "expected_yield_kg": 8000,
+        "market_price_per_kg": 25,
+        "climate_sensitivity": "Medium",
+        "rainfall_required_mm": 1500,
+        "image": "https://images.unsplash.com/photo-1621935212586-b4d664c1f82f?auto=format&fit=crop&q=80&w=400"
+    },
+    {
+        "id": 3,
+        "name": "Banana",
+        "season": [
+            "All"
+        ],
+        "soil": [
+            "Red Soil",
+            "Alluvial",
+            "Laterite"
+        ],
+        "water": "Moderate",
+        "investment_per_acre": 40000,
+        "duration_days": 365,
+        "expected_yield_kg": 15000,
+        "market_price_per_kg": 15,
+        "climate_sensitivity": "Medium",
+        "rainfall_required_mm": 1000,
+        "image": "https://images.unsplash.com/photo-1528825871115-3581a5387919?auto=format&fit=crop&q=80&w=400"
+    },
+    {
+        "id": 4,
+        "name": "Rubber",
+        "season": [
+            "All"
+        ],
+        "soil": [
+            "Laterite",
+            "Red Soil"
+        ],
+        "water": "Abundant",
+        "investment_per_acre": 80000,
+        "duration_days": 2555,
+        "expected_yield_kg": 1500,
+        "market_price_per_kg": 150,
+        "climate_sensitivity": "High",
+        "rainfall_required_mm": 2000,
+        "image": "https://images.unsplash.com/photo-1598457726915-v4b664c1f82f?auto=format&fit=crop&q=80&w=400"
+    },
+    {
+        "id": 5,
+        "name": "Black Pepper",
+        "season": [
+            "Kharif"
+        ],
+        "soil": [
+            "Laterite",
+            "Red Soil"
+        ],
+        "water": "Moderate",
+        "investment_per_acre": 35000,
+        "duration_days": 730,
+        "expected_yield_kg": 400,
+        "market_price_per_kg": 500,
+        "climate_sensitivity": "Medium",
+        "rainfall_required_mm": 1500,
+        "image": "https://images.unsplash.com/photo-1620916297397-a4a5402a3c6c?auto=format&fit=crop&q=80&w=400"
+    },
+    {
+        "id": 6,
+        "name": "Turmeric",
+        "season": [
+            "Kharif"
+        ],
+        "soil": [
+            "Red Soil",
+            "Alluvial"
+        ],
+        "water": "Moderate",
+        "investment_per_acre": 30000,
+        "duration_days": 240,
+        "expected_yield_kg": 3000,
+        "market_price_per_kg": 80,
+        "climate_sensitivity": "Low",
+        "rainfall_required_mm": 1000,
+        "image": "https://images.unsplash.com/photo-1615485925763-867862f80c76?auto=format&fit=crop&q=80&w=400"
+    },
+    {
+        "id": 7,
+        "name": "Ginger",
+        "season": [
+            "Kharif"
+        ],
+        "soil": [
+            "Red Soil",
+            "Laterite"
+        ],
+        "water": "Moderate",
+        "investment_per_acre": 35000,
+        "duration_days": 210,
+        "expected_yield_kg": 4000,
+        "market_price_per_kg": 70,
+        "climate_sensitivity": "Medium",
+        "rainfall_required_mm": 1200,
+        "image": "https://images.unsplash.com/photo-1635345710609-b4b0e5d17964?auto=format&fit=crop&q=80&w=400"
+    },
+    {
+        "id": 8,
+        "name": "Tapioca (Cassava)",
+        "season": [
+            "All"
+        ],
+        "soil": [
+            "Red Soil",
+            "Laterite"
+        ],
+        "water": "Limited",
+        "investment_per_acre": 15000,
+        "duration_days": 270,
+        "expected_yield_kg": 8000,
+        "market_price_per_kg": 18,
+        "climate_sensitivity": "Low",
+        "rainfall_required_mm": 600,
+        "image": "https://images.unsplash.com/photo-1596726884632-4d51bda86c9f?auto=format&fit=crop&q=80&w=400"
+    },
+    {
+        "id": 9,
+        "name": "Vegetables (Mixed)",
+        "season": [
+            "Rabi",
+            "Summer"
+        ],
+        "soil": [
+            "All"
+        ],
+        "water": "Moderate",
+        "investment_per_acre": 20000,
+        "duration_days": 90,
+        "expected_yield_kg": 5000,
+        "market_price_per_kg": 25,
+        "climate_sensitivity": "Medium",
+        "rainfall_required_mm": 500,
+        "image": "https://images.unsplash.com/photo-1597362925123-77861d3fbac7?auto=format&fit=crop&q=80&w=400"
+    },
+    {
+        "id": 10,
+        "name": "Cardamom",
+        "season": [
+            "All"
+        ],
+        "soil": [
+            "Laterite"
+        ],
+        "water": "Abundant",
+        "investment_per_acre": 100000,
+        "duration_days": 1095,
+        "expected_yield_kg": 250,
+        "market_price_per_kg": 1500,
+        "climate_sensitivity": "High",
+        "rainfall_required_mm": 1800,
+        "image": "https://images.unsplash.com/photo-1615486511484-92e1dd63a8a3?auto=format&fit=crop&q=80&w=400"
+    },
+    {
+        "id": 11,
+        "name": "Arecanut",
+        "season": [
+            "All"
+        ],
+        "soil": [
+            "Laterite",
+            "Coastal Sandy"
+        ],
+        "water": "Abundant",
+        "investment_per_acre": 60000,
+        "duration_days": 2190,
+        "expected_yield_kg": 1200,
+        "market_price_per_kg": 300,
+        "climate_sensitivity": "High",
+        "rainfall_required_mm": 1600,
+        "image": "https://images.unsplash.com/photo-1601633512213-90d3dcb1a134?auto=format&fit=crop&q=80&w=400"
+    },
+    {
+        "id": 12,
+        "name": "Pineapple",
+        "season": [
+            "All"
+        ],
+        "soil": [
+            "Red Soil",
+            "Laterite"
+        ],
+        "water": "Limited",
+        "investment_per_acre": 25000,
+        "duration_days": 450,
+        "expected_yield_kg": 12000,
+        "market_price_per_kg": 20,
+        "climate_sensitivity": "Low",
+        "rainfall_required_mm": 800,
+        "image": "https://images.unsplash.com/photo-1589820296156-2454bb8a6d54?auto=format&fit=crop&q=80&w=400"
+    }
+]
