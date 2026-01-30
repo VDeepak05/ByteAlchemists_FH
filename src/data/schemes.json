@@ -6,69 +6,85 @@
         "eligibility": "All landholding farmers",
         "benefit": "₹6,000 per year (3 installments)",
         "how_to_apply": "https://pmkisan.gov.in",
-        "category": "Income Support"
+        "category": "Income Support",
+        "logo": "/images/schemes/pm_kisan.png",
+        "officialLink": "https://pmkisan.gov.in"
     },
     {
         "id": 2,
         "name": "Pradhan Mantri Fasal Bima Yojana (PMFBY)",
-        "description": "Crop insurance against natural calamities",
-        "eligibility": "All farmers growing notified crops",
-        "benefit": "Insurance coverage up to sum insured amount",
-        "how_to_apply": "Through banks/CSCs during crop season",
-        "category": "Insurance"
+        "description": "Crop insurance scheme",
+        "eligibility": "Farmers with insurable crops",
+        "benefit": "Insurance coverage against crop loss",
+        "how_to_apply": "https://pmfby.gov.in",
+        "category": "Insurance",
+        "logo": "/images/schemes/pmfby_logo.svg",
+        "officialLink": "https://pmfby.gov.in"
     },
     {
         "id": 3,
         "name": "Kisan Credit Card (KCC)",
-        "description": "Credit facility for agriculture needs",
-        "eligibility": "Farmers with land ownership",
-        "benefit": "Loan up to ₹3 lakh at 4% interest",
-        "how_to_apply": "Apply at nearest bank",
-        "category": "Credit"
+        "description": "Short-term credit for farmers",
+        "eligibility": "All farmers, tenant farmers",
+        "benefit": "Low interest working capital",
+        "how_to_apply": "https://myscheme.gov.in/schemes/kcc",
+        "category": "Credit",
+        "logo": "/images/schemes/kcc_logo.svg",
+        "officialLink": "https://myscheme.gov.in/schemes/kcc"
     },
     {
         "id": 4,
         "name": "Soil Health Card Scheme",
-        "description": "Free soil testing and nutrient recommendations",
+        "description": "Assess soil health and provide recommendations",
         "eligibility": "All farmers",
-        "benefit": "Free soil health card with recommendations",
-        "how_to_apply": "Contact agriculture department",
-        "category": "Advisory"
+        "benefit": "Soil nutrient status & fertilizer recommendations",
+        "how_to_apply": "https://soilhealth.dac.gov.in/",
+        "category": "Sustainability",
+        "logo": "/images/schemes/soil_health_logo.png",
+        "officialLink": "https://soilhealth.dac.gov.in/"
     },
     {
         "id": 5,
         "name": "Paramparagat Krishi Vikas Yojana (PKVY)",
         "description": "Promotion of organic farming",
-        "eligibility": "Farmers willing to adopt organic farming",
-        "benefit": "₹50,000/hectare financial assistance",
-        "how_to_apply": "Through agriculture department",
-        "category": "Subsidy"
+        "eligibility": "Organic farming clusters",
+        "benefit": "Financial assistance for organic inputs",
+        "how_to_apply": "https://dms.jaivikkheti.in/pkvy",
+        "category": "Sustainability",
+        "logo": "/images/schemes/pkvy_logo.png",
+        "officialLink": "https://dms.jaivikkheti.in/pkvy"
     },
     {
         "id": 6,
-        "name": "National Mission for Sustainable Agriculture",
-        "description": "Support for climate-resilient practices",
-        "eligibility": "Farmers adopting sustainable practices",
-        "benefit": "Subsidies on equipment and training",
-        "how_to_apply": "State agriculture department",
-        "category": "Training & Subsidy"
+        "name": "National Mission for Sustainable Agriculture (NMSA)",
+        "description": "Promoting sustainable agriculture practices",
+        "eligibility": "All farmers",
+        "benefit": "Subsidies for water conservation, soil health",
+        "how_to_apply": "https://nmsa.dac.gov.in/",
+        "category": "Sustainability",
+        "logo": "/images/schemes/nmsa_logo.png",
+        "officialLink": "https://nmsa.dac.gov.in/"
     },
     {
         "id": 7,
-        "name": "Rashtriya Krishi Vikas Yojana",
-        "description": "Comprehensive agricultural development",
-        "eligibility": "Varies by component",
-        "benefit": "Infrastructure and input subsidies",
-        "how_to_apply": "District agriculture office",
-        "category": "Development"
+        "name": "Rashtriya Krishi Vikas Yojana (RKVY)",
+        "description": "Holistic development of agriculture",
+        "eligibility": "State governments & farmers",
+        "benefit": "Infrastructure development support",
+        "how_to_apply": "https://rkvy.nic.in/",
+        "category": "Development",
+        "logo": "/images/schemes/rkvy_logo.png",
+        "officialLink": "https://rkvy.nic.in/"
     },
     {
         "id": 8,
-        "name": "Kerala Farmers Debt Relief Commission",
-        "description": "Debt waiver for eligible farmers",
-        "eligibility": "Small/marginal farmers with outstanding loans",
-        "benefit": "Partial/full debt waiver",
-        "how_to_apply": "https://keralafarmerdebt.in",
-        "category": "Debt Relief"
+        "name": "Kerala Farmers' Debt Relief Commission",
+        "description": "Debt relief for distressed farmers in Kerala",
+        "eligibility": "Distressed farmers in Kerala",
+        "benefit": "Debt waiver/relief options",
+        "how_to_apply": "https://ksfdrc.kerala.gov.in/",
+        "category": "Debt Relief",
+        "logo": "/images/schemes/kerala_debt_relief_logo.png",
+        "officialLink": "https://ksfdrc.kerala.gov.in/"
     }
 ]
