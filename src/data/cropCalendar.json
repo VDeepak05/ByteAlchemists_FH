@@ -34,10 +34,11 @@
         "season": "virippu",
         "activity": "Harvesting",
         "months": [
+            7,
             8,
             9
         ],
-        "description": "Harvesting begins in September and continues to October.",
+        "description": "Harvesting begins in August-September (Chingam) and continues to October.",
         "icon": "shopping_basket",
         "priority": "high",
         "duration": "10-15 days"
@@ -225,5 +226,33 @@
         "icon": "invert_colors",
         "priority": "high",
         "duration": "Daily/Alternate days"
+    },
+    {
+        "id": 16,
+        "crop": "Banana (Nendran)",
+        "season": "mundakan",
+        "activity": "Planting",
+        "months": [
+            7,
+            8
+        ],
+        "description": "Planting season for Nendran banana, often timed for harvest before next Onam (Aug-Sept).",
+        "icon": "forest",
+        "priority": "high",
+        "duration": "20 days"
+    },
+    {
+        "id": 17,
+        "crop": "Vegetables (Onam)",
+        "season": "virippu",
+        "activity": "Harvesting",
+        "months": [
+            7,
+            8
+        ],
+        "description": "Harvesting of vegetables (Cowpea, Bitter Gourd, etc.) for Onam festival markets.",
+        "icon": "shopping_basket",
+        "priority": "high",
+        "duration": "10 days"
     }
 ]
