@@ -12,12 +12,7 @@ const GovSchemes = () => {
 
     const categories = ['All Schemes', 'Income Support', 'Insurance', 'Credit', 'Advisory', 'Subsidy', 'Development', 'Debt Relief'];
 
-    const schemeImages = {
-        'PM-KISAN': 'https://lh3.googleusercontent.com/aida-public/AB6AXuBkMFosQpeX3aZ6BjjGAZ2wErPN6S-di0Hm_VSxvkvQU0RFXWx6K0VxNUUfJqPKv7OtfR2V0udUBeruwSRY_XY9rzUVxnIuIfCHq7bI_UDiA87t9fYQSX-iZot10vT0F6A8y88EulzNwR_Xzar56akuLT8f4of2K_hafKKvDPl-PQsnX9sfdx6NEf-bj-PtGy5jsLz3J4CvxlY1aQYwF53SdY3gJHEkgBCN63Hks3KqLdv07Ig7pUJO43iyq6nmp16118ksrgiRNvM',
-        'Kisan Credit Card': 'https://lh3.googleusercontent.com/aida-public/AB6AXuC6MTPOUQvD2TrmvHhjDOuhliFDfB6psmXn4fiNaWrsoBArY417B3-c7cRZjk9AeNIr45dIfqtZ9s4oRWoz_M-nkbL7t3fA1qkA5GAc6Vb_40dq9dtLlXYjbx47NBeAHorNkZPckoO4c96M0zt-8I23Cltdgvm7jR6x_CfP7OK5qwSv7QmStkP74J0x3aMh1tPCMPHdMEwhtEiGc47IAeTUCG6K1yRLvgu6X-0JRm-Y-y7Ia3BZPH5SQOtaUE9K9-lHfgFqfL4ho_4',
-        'PMFBY': 'https://lh3.googleusercontent.com/aida-public/AB6AXuCTEKek7y-9x8sbRzx7X6K67hin1LojUZsJWqlAxQ19JbwP0OxqBWve-Wj_Tk36EG38ipNUJzMZ_9KJjGknsNF3FvqLck--STAIQROk9ItyJJ0UsZ3LLzO3g5MCv1RWsnZ3XeaTGOCGLDN6Jvqashgav7ttNNyl3Leq-_ikMgs_G-gxnD8EszOTp_VNbjFwelBT_3I1KU4WbabroCWFcoboSi2-kpz_rpQcBOUTz8cW-QMkIvmKHPPv8OHHwispUvnb96F-2_2mA6g',
-        'Subhiksha Keralam': 'https://lh3.googleusercontent.com/aida-public/AB6AXuBDOevCHWuZgXUZ2pBcsl8XqmJlqnnAYm2T1UEAJAk_qyhJ0VEVUtdOoVnPZI6C7tC48nAVOZJSGUhOOwwGYeya5Gax24Th_yX5DdgBXVpsWff235a2KdGX0ddQ5Cx_C5_o3mW0eNYkMqFqGyFqW1Dq9MFtwLG__qy2BXjnbETK2m-9uyXPuNj4TB73--i2bGQURVj9qMnQUS7sc1RUSd0Pz2T6M8NseTWhRvcjzLrEbnPXQJ8SFI427dIlcGz4nhgMet-2IxbNzaM',
-    };
+
 
     const categoryColors = {
         'Income Support': 'bg-primary/90',
@@ -167,13 +162,13 @@ const GovSchemes = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {filteredSchemes.map((scheme) => {
                     const eligibility = getEligibilityBadge(scheme);
-                    const image = schemeImages[scheme.name] || schemeImages['PM-KISAN'];
+                    const image = scheme.logo || '/images/schemes/india_emblem.png';
                     const catColor = categoryColors[scheme.category] || 'bg-primary/90';
 
                     return (
                         <div key={scheme.id} className="bg-white dark:bg-[#1a2e22] rounded-xl border border-[#e8f3ec] dark:border-[#1e3a29] overflow-hidden flex flex-col group hover:shadow-xl transition-all duration-300">
                             <div
-                                className="h-48 w-full bg-center bg-no-repeat bg-cover relative"
+                                className="h-48 w-full bg-center bg-no-repeat bg-contain relative bg-slate-50 dark:bg-slate-800 border-b border-[#e8f3ec] dark:border-[#1e3a29]"
                                 style={{ backgroundImage: `url("${image}")` }}
                             >
                                 <div className="absolute top-4 left-4">
@@ -198,7 +193,7 @@ const GovSchemes = () => {
                                         <span>{scheme.benefit}</span>
                                     </div>
                                     <a
-                                        href={scheme.how_to_apply}
+                                        href={scheme.officialLink || scheme.how_to_apply}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className={`w-full py-2.5 rounded-lg font-bold flex items-center justify-center gap-2 transition-all ${eligibility.icon === 'cancel'
