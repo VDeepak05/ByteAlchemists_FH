@@ -1,0 +1,258 @@
+[
+    {
+        "id": 1,
+        "crop": "Rice (Virippu)",
+        "season": "virippu",
+        "activity": "Sowing & Nursery Preparation",
+        "months": [
+            3,
+            4,
+            5
+        ],
+        "description": "First crop season. Sowing starts with pre-monsoon showers (April-May) and extends till early June.",
+        "icon": "agriculture",
+        "priority": "high",
+        "duration": "20-25 days"
+    },
+    {
+        "id": 2,
+        "crop": "Rice (Virippu)",
+        "season": "virippu",
+        "activity": "Transplanting",
+        "months": [
+            5,
+            6
+        ],
+        "description": "Transplanting of seedlings to the main field after onset of monsoon.",
+        "icon": "water_drop",
+        "priority": "high",
+        "duration": "15-20 days"
+    },
+    {
+        "id": 3,
+        "crop": "Rice (Virippu)",
+        "season": "virippu",
+        "activity": "Harvesting",
+        "months": [
+            7,
+            8,
+            9
+        ],
+        "description": "Harvesting begins in August-September (Chingam) and continues to October.",
+        "icon": "shopping_basket",
+        "priority": "high",
+        "duration": "10-15 days"
+    },
+    {
+        "id": 4,
+        "crop": "Rice (Mundakan)",
+        "season": "mundakan",
+        "activity": "Sowing / Transplanting",
+        "months": [
+            8,
+            9,
+            10
+        ],
+        "description": "Second crop season (Winter). Sowing/Transplanting starts in September-October.",
+        "icon": "agriculture",
+        "priority": "high",
+        "duration": "20-30 days"
+    },
+    {
+        "id": 5,
+        "crop": "Rice (Mundakan)",
+        "season": "mundakan",
+        "activity": "Harvesting",
+        "months": [
+            11,
+            0,
+            1
+        ],
+        "description": "Harvesting takes place in December-January.",
+        "icon": "shopping_basket",
+        "priority": "high",
+        "duration": "15-20 days"
+    },
+    {
+        "id": 6,
+        "crop": "Rice (Puncha)",
+        "season": "puncha",
+        "activity": "Sowing / Transplanting",
+        "months": [
+            11,
+            0
+        ],
+        "description": "Summer crop. Sowing in December-January.",
+        "icon": "wb_sunny",
+        "priority": "medium",
+        "duration": "20-25 days"
+    },
+    {
+        "id": 7,
+        "crop": "Rice (Puncha)",
+        "season": "puncha",
+        "activity": "Harvesting",
+        "months": [
+            2,
+            3
+        ],
+        "description": "Harvesting in March-April.",
+        "icon": "shopping_basket",
+        "priority": "high",
+        "duration": "15 days"
+    },
+    {
+        "id": 8,
+        "crop": "Coconut",
+        "season": "perennial",
+        "activity": "Fertilizer Application (Post-Monsoon)",
+        "months": [
+            8,
+            9
+        ],
+        "description": "Apply second dose of fertilizers (Sept-Oct).",
+        "icon": "science",
+        "priority": "medium",
+        "duration": "Single application"
+    },
+    {
+        "id": 9,
+        "crop": "Coconut",
+        "season": "perennial",
+        "activity": "Summer Irrigation",
+        "months": [
+            11,
+            0,
+            1,
+            2,
+            3,
+            4
+        ],
+        "description": "Regular irrigation is crucial during dry summer months.",
+        "icon": "water",
+        "priority": "high",
+        "duration": "Weekly/Daily"
+    },
+    {
+        "id": 10,
+        "crop": "Black Pepper",
+        "season": "perennial",
+        "activity": "Harvesting",
+        "months": [
+            11,
+            0,
+            1
+        ],
+        "description": "Berries turn red/orange. Harvesting usually in Dec-Jan-Feb.",
+        "icon": "vertical_align_bottom",
+        "priority": "high",
+        "duration": "30-45 days"
+    },
+    {
+        "id": 11,
+        "crop": "Ginger & Turmeric",
+        "season": "virippu",
+        "activity": "Planting",
+        "months": [
+            3,
+            4
+        ],
+        "description": "Planting of rhizomes with pre-monsoon showers (April-May).",
+        "icon": "grass",
+        "priority": "high",
+        "duration": "15-20 days"
+    },
+    {
+        "id": 12,
+        "crop": "Vegetables (Cool Season)",
+        "season": "mundakan",
+        "activity": "Sowing (Cabbage, Carrot)",
+        "months": [
+            9,
+            10,
+            11
+        ],
+        "description": "Sowing of cool season vegetables like Cabbage, Cauliflower, Carrot.",
+        "icon": "eco",
+        "priority": "medium",
+        "duration": "Throughout season"
+    },
+    {
+        "id": 13,
+        "crop": "Vegetables (Summer)",
+        "season": "puncha",
+        "activity": "Sowing (Cucumber, Pumpkin)",
+        "months": [
+            0,
+            1,
+            2
+        ],
+        "description": "Sowing of gourds, cucumber, and pumpkin for summer harvest.",
+        "icon": "eco",
+        "priority": "medium",
+        "duration": "Throughout season"
+    },
+    {
+        "id": 14,
+        "crop": "Arecanut",
+        "season": "perennial",
+        "activity": "Harvesting",
+        "months": [
+            8,
+            9,
+            10,
+            11,
+            0
+        ],
+        "description": "Harvesting of ripe nuts (Sept-Jan).",
+        "icon": "cut",
+        "priority": "medium",
+        "duration": "Multiple pickings"
+    },
+    {
+        "id": 15,
+        "crop": "Rubber",
+        "season": "perennial",
+        "activity": "Tapping",
+        "months": [
+            8,
+            9,
+            10,
+            11,
+            0,
+            1
+        ],
+        "description": "Peak tapping season (Sep-Jan). Tapping is suspended during refoliation (Feb-Mar) and heavy rain (Jun-Jul).",
+        "icon": "invert_colors",
+        "priority": "high",
+        "duration": "Daily/Alternate days"
+    },
+    {
+        "id": 16,
+        "crop": "Banana (Nendran)",
+        "season": "mundakan",
+        "activity": "Planting",
+        "months": [
+            7,
+            8
+        ],
+        "description": "Planting season for Nendran banana, often timed for harvest before next Onam (Aug-Sept).",
+        "icon": "forest",
+        "priority": "high",
+        "duration": "20 days"
+    },
+    {
+        "id": 17,
+        "crop": "Vegetables (Onam)",
+        "season": "virippu",
+        "activity": "Harvesting",
+        "months": [
+            7,
+            8
+        ],
+        "description": "Harvesting of vegetables (Cowpea, Bitter Gourd, etc.) for Onam festival markets.",
+        "icon": "shopping_basket",
+        "priority": "high",
+        "duration": "10 days"
+    }
+]
