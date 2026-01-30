@@ -4,14 +4,15 @@ import { AuthProvider, useAuth } from './context/AuthContext';
 import { ThemeProvider } from './context/ThemeContext';
 import Layout from './components/layout/Layout';
 import Dashboard from './pages/Dashboard';
-import CropRecommendation from './pages/CropRecommendation';
+import AIAdvisor from './pages/AIAdvisor';
 import MarketPrices from './pages/MarketPrices';
 import GovSchemes from './pages/GovSchemes';
 import CropCalendar from './pages/CropCalendar';
 import Settings from './pages/Settings';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import AIAdvisor from './pages/AIAdvisor';
+// Added this import assuming the file exists, as it is used in the Reneto routes
+import CropRecommendation from './pages/CropRecommendation'; 
 
 function AppRoutes() {
   const { isAuthenticated } = useAuth();
@@ -23,8 +24,11 @@ function AppRoutes() {
 
       <Route path="/" element={isAuthenticated ? <Layout /> : <Navigate to="/login" />}>
         <Route index element={<Dashboard />} />
+        
+        {/* Resolved Conflict: Using Reneto's granular routing */}
         <Route path="advisor" element={<AIAdvisor />} />
         <Route path="recommendations" element={<CropRecommendation />} />
+        
         <Route path="market" element={<MarketPrices />} />
         <Route path="schemes" element={<GovSchemes />} />
         <Route path="calendar" element={<CropCalendar />} />

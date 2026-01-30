@@ -1,0 +1,575 @@
+[
+    {
+        "id": 1,
+        "name": "Rice Blast",
+        "affectedCrops": [
+            "Rice (Paddy)"
+        ],
+        "severity": "High",
+        "symptoms": [
+            "leaf_spots",
+            "discoloration",
+            "stunted_growth"
+        ],
+        "description": "Fungal disease causing diamond-shaped lesions on leaves, stems, and grains",
+        "environmentalFactors": {
+            "favorableSeasons": [
+                "Kharif",
+                "Rabi"
+            ],
+            "weather": [
+                "rainy",
+                "humid"
+            ],
+            "temperatureRange": "25-28°C"
+        },
+        "treatments": {
+            "organic": [
+                "Apply neem oil spray (5ml/liter) twice a week",
+                "Use Trichoderma viride bio-fungicide",
+                "Maintain proper field drainage"
+            ],
+            "chemical": [
+                "Spray Tricyclazole 75% WP @ 0.6g/liter",
+                "Use Carbendazim 50% WP @ 1g/liter",
+                "Apply at early infection stage"
+            ],
+            "prevention": [
+                "Use blast-resistant varieties",
+                "Avoid excessive nitrogen fertilization",
+                "Maintain 15cm water depth in field",
+                "Remove infected plant debris"
+            ]
+        },
+        "resistantVarieties": [
+            "Jyothi",
+            "Kanchana",
+            "Aiswarya"
+        ],
+        "image": "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&q=80&w=400"
+    },
+    {
+        "id": 2,
+        "name": "Bacterial Leaf Blight",
+        "affectedCrops": [
+            "Rice (Paddy)"
+        ],
+        "severity": "Medium",
+        "symptoms": [
+            "leaf_spots",
+            "wilting",
+            "discoloration"
+        ],
+        "description": "Bacterial disease causing yellowish to white lesions on leaf margins",
+        "environmentalFactors": {
+            "favorableSeasons": [
+                "Kharif"
+            ],
+            "weather": [
+                "rainy",
+                "humid"
+            ],
+            "temperatureRange": "25-34°C"
+        },
+        "treatments": {
+            "organic": [
+                "Remove and destroy infected plants immediately",
+                "Apply Pseudomonas fluorescens as seed treatment",
+                "Maintain balanced nutrition"
+            ],
+            "chemical": [
+                "Spray Copper oxychloride @ 2.5g/liter",
+                "Use Streptocycline @ 100ppm",
+                "Apply at tillering stage"
+            ],
+            "prevention": [
+                "Use disease-free seeds",
+                "Avoid water stagnation",
+                "Maintain plant spacing",
+                "Use resistant varieties"
+            ]
+        },
+        "resistantVarieties": [
+            "Kanchana",
+            "Jaya",
+            "Bharathy"
+        ],
+        "image": "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&q=80&w=400"
+    },
+    {
+        "id": 3,
+        "name": "Coconut Root Wilt",
+        "affectedCrops": [
+            "Coconut"
+        ],
+        "severity": "High",
+        "symptoms": [
+            "wilting",
+            "discoloration",
+            "stunted_growth"
+        ],
+        "description": "Progressive wilting and yellowing of fronds, leading to tree death",
+        "environmentalFactors": {
+            "favorableSeasons": [
+                "All"
+            ],
+            "weather": [
+                "dry",
+                "humid"
+            ],
+            "temperatureRange": "28-35°C"
+        },
+        "treatments": {
+            "organic": [
+                "Root feeding with 2% Urea + micronutrients",
+                "Application of vermicompost @ 25kg/tree",
+                "Green manuring with cowpea"
+            ],
+            "chemical": [
+                "Root feeding with Tetracycline @ 300ppm",
+                "Apply aliette fungicide @ 5g/liter",
+                "Soil drenching with metalaxyl"
+            ],
+            "prevention": [
+                "Plant disease-free seedlings",
+                "Maintain proper drainage",
+                "Remove and destroy affected palms",
+                "Quarantine infected areas"
+            ]
+        },
+        "resistantVarieties": [
+            "WCT",
+            "Chowghat Orange Dwarf",
+            "Ananda Kalpa"
+        ],
+        "image": "https://images.unsplash.com/photo-1621935212586-b4d664c1f82f?auto=format&fit=crop&q=80&w=400"
+    },
+    {
+        "id": 4,
+        "name": "Bud Rot (Coconut)",
+        "affectedCrops": [
+            "Coconut"
+        ],
+        "severity": "High",
+        "symptoms": [
+            "rot",
+            "discoloration",
+            "wilting"
+        ],
+        "description": "Fungal disease affecting the growing bud, causing rotting and death",
+        "environmentalFactors": {
+            "favorableSeasons": [
+                "Kharif"
+            ],
+            "weather": [
+                "rainy",
+                "humid"
+            ],
+            "temperatureRange": "25-30°C"
+        },
+        "treatments": {
+            "organic": [
+                "Remove infected tissues carefully",
+                "Apply Bordeaux paste to wounds",
+                "Drain out accumulated water from crown"
+            ],
+            "chemical": [
+                "Apply Copper oxychloride paste to affected area",
+                "Spray Carbendazim @ 1g/liter",
+                "Use systemic fungicides as preventive"
+            ],
+            "prevention": [
+                "Avoid injury to growing point",
+                "Maintain crown hygiene",
+                "Protect from heavy rainfall",
+                "Apply prophylactic Bordeaux mixture"
+            ]
+        },
+        "resistantVarieties": [
+            "Chowghat Green Dwarf",
+            "Malayan Orange Dwarf"
+        ],
+        "image": "https://images.unsplash.com/photo-1621935212586-b4d664c1f82f?auto=format&fit=crop&q=80&w=400"
+    },
+    {
+        "id": 5,
+        "name": "Panama Wilt (Banana)",
+        "affectedCrops": [
+            "Banana"
+        ],
+        "severity": "High",
+        "symptoms": [
+            "wilting",
+            "discoloration",
+            "stunted_growth"
+        ],
+        "description": "Soil-borne fungal disease causing yellowing and wilting of leaves",
+        "environmentalFactors": {
+            "favorableSeasons": [
+                "All"
+            ],
+            "weather": [
+                "humid",
+                "rainy"
+            ],
+            "temperatureRange": "24-32°C"
+        },
+        "treatments": {
+            "organic": [
+                "Apply Trichoderma-enriched FYM",
+                "Use biocontrol agent Pseudomonas",
+                "Soil solarization in fallow period"
+            ],
+            "chemical": [
+                "Soil drench with Carbendazim @ 2g/liter",
+                "Apply Propiconazole @ 1ml/liter",
+                "Treat suckers before planting"
+            ],
+            "prevention": [
+                "Use tissue-cultured disease-free plants",
+                "Avoid waterlogging",
+                "Implement crop rotation",
+                "Remove and destroy infected plants"
+            ]
+        },
+        "resistantVarieties": [
+            "Nendran (Kerala selection)",
+            "Grand Naine",
+            "Robusta"
+        ],
+        "image": "https://images.unsplash.com/photo-1528825871115-3581a5387919?auto=format&fit=crop&q=80&w=400"
+    },
+    {
+        "id": 6,
+        "name": "Sigatoka Leaf Spot",
+        "affectedCrops": [
+            "Banana"
+        ],
+        "severity": "Medium",
+        "symptoms": [
+            "leaf_spots",
+            "discoloration"
+        ],
+        "description": "Fungal disease causing brown/black streaks and spots on leaves",
+        "environmentalFactors": {
+            "favorableSeasons": [
+                "Kharif"
+            ],
+            "weather": [
+                "rainy",
+                "humid"
+            ],
+            "temperatureRange": "25-30°C"
+        },
+        "treatments": {
+            "organic": [
+                "Remove infected lower leaves",
+                "Apply neem oil @ 5ml/liter",
+                "Use copper-based organic fungicides"
+            ],
+            "chemical": [
+                "Spray Propiconazole @ 1ml/liter",
+                "Use Mancozeb @ 2.5g/liter",
+                "Alternate fungicides to prevent resistance"
+            ],
+            "prevention": [
+                "Maintain wide plant spacing",
+                "Ensure good air circulation",
+                "Remove old leaves regularly",
+                "Avoid overhead irrigation"
+            ]
+        },
+        "resistantVarieties": [
+            "Grand Naine",
+            "Robusta",
+            "Rasthali"
+        ],
+        "image": "https://images.unsplash.com/photo-1528825871115-3581a5387919?auto=format&fit=crop&q=80&w=400"
+    },
+    {
+        "id": 7,
+        "name": "Quick Wilt (Pepper)",
+        "affectedCrops": [
+            "Black Pepper"
+        ],
+        "severity": "High",
+        "symptoms": [
+            "wilting",
+            "discoloration",
+            "root_damage"
+        ],
+        "description": "Soil-borne fungal disease causing sudden wilting and death of vines",
+        "environmentalFactors": {
+            "favorableSeasons": [
+                "Kharif"
+            ],
+            "weather": [
+                "rainy",
+                "humid"
+            ],
+            "temperatureRange": "25-30°C"
+        },
+        "treatments": {
+            "organic": [
+                "Apply Trichoderma harzianum as soil drench",
+                "Use vermicompost enriched with biocontrol agents",
+                "Improve soil drainage immediately"
+            ],
+            "chemical": [
+                "Drench soil with Metalaxyl @ 2g/liter",
+                "Apply Copper oxychloride @ 3g/liter",
+                "Use Fosetyl-Al as preventive"
+            ],
+            "prevention": [
+                "Plant in well-drained soil",
+                "Use disease-free planting material",
+                "Avoid waterlogging during monsoon",
+                "Maintain proper stem hygiene"
+            ]
+        },
+        "resistantVarieties": [
+            "Panniyur-1",
+            "Panniyur-5",
+            "Subhakara"
+        ],
+        "image": "https://images.unsplash.com/photo-1620916297397-a4a5402a3c6c?auto=format&fit=crop&q=80&w=400"
+    },
+    {
+        "id": 8,
+        "name": "Leaf Rot (Turmeric)",
+        "affectedCrops": [
+            "Turmeric"
+        ],
+        "severity": "Medium",
+        "symptoms": [
+            "leaf_spots",
+            "rot",
+            "discoloration"
+        ],
+        "description": "Fungal disease causing brown spots and rotting of leaves",
+        "environmentalFactors": {
+            "favorableSeasons": [
+                "Kharif"
+            ],
+            "weather": [
+                "rainy",
+                "humid"
+            ],
+            "temperatureRange": "25-35°C"
+        },
+        "treatments": {
+            "organic": [
+                "Spray garlic extract @ 10ml/liter",
+                "Apply neem cake to soil @ 250g/plant",
+                "Use bio-fungicides like Trichoderma"
+            ],
+            "chemical": [
+                "Spray Mancozeb @ 2.5g/liter",
+                "Use Copper oxychloride @ 3g/liter",
+                "Apply at 15-day intervals"
+            ],
+            "prevention": [
+                "Use healthy rhizomes for planting",
+                "Maintain proper spacing",
+                "Improve field drainage",
+                "Practice crop rotation"
+            ]
+        },
+        "resistantVarieties": [
+            "Alleppey Supreme",
+            "Kedaram",
+            "Kanthi"
+        ],
+        "image": "https://images.unsplash.com/photo-1615485925763-867862f80c76?auto=format&fit=crop&q=80&w=400"
+    },
+    {
+        "id": 9,
+        "name": "Soft Rot (Ginger)",
+        "affectedCrops": [
+            "Ginger"
+        ],
+        "severity": "High",
+        "symptoms": [
+            "rot",
+            "wilting",
+            "discoloration"
+        ],
+        "description": "Bacterial disease causing water-soaked lesions and rotting of rhizomes",
+        "environmentalFactors": {
+            "favorableSeasons": [
+                "Kharif"
+            ],
+            "weather": [
+                "rainy",
+                "humid"
+            ],
+            "temperatureRange": "25-35°C"
+        },
+        "treatments": {
+            "organic": [
+                "Remove and destroy infected plants",
+                "Apply Pseudomonas fluorescens as soil treatment",
+                "Improve drainage and reduce irrigation"
+            ],
+            "chemical": [
+                "Drench soil with Streptocycline @ 200ppm",
+                "Apply Copper oxychloride @ 3g/liter",
+                "Treat seed rhizomes with Bordeaux mixture"
+            ],
+            "prevention": [
+                "Use disease-free seed rhizomes",
+                "Treat rhizomes with bio-agents before planting",
+                "Avoid waterlogging",
+                "Practice crop rotation with non-host crops"
+            ]
+        },
+        "resistantVarieties": [
+            "Mahima",
+            "Suruchi",
+            "Suprabha"
+        ],
+        "image": "https://images.unsplash.com/photo-1635345710609-b4b0e5d17964?auto=format&fit=crop&q=80&w=400"
+    },
+    {
+        "id": 10,
+        "name": "Rhizome Rot (Ginger)",
+        "affectedCrops": [
+            "Ginger"
+        ],
+        "severity": "High",
+        "symptoms": [
+            "root_damage",
+            "wilting",
+            "discoloration"
+        ],
+        "description": "Fungal disease affecting rhizomes causing rotting and plant death",
+        "environmentalFactors": {
+            "favorableSeasons": [
+                "Kharif"
+            ],
+            "weather": [
+                "rainy",
+                "humid"
+            ],
+            "temperatureRange": "20-30°C"
+        },
+        "treatments": {
+            "organic": [
+                "Apply Trichoderma viride to soil",
+                "Use neem cake @ 250g/plant",
+                "Ensure proper drainage"
+            ],
+            "chemical": [
+                "Soil drench with Metalaxyl @ 2g/liter",
+                "Apply Mancozeb @ 2.5g/liter as foliar spray",
+                "Treat seed with Carbendazim"
+            ],
+            "prevention": [
+                "Select well-drained planting sites",
+                "Treat seed rhizomes before planting",
+                "Avoid deep planting",
+                "Mulch with dried leaves"
+            ]
+        },
+        "resistantVarieties": [
+            "Rio-de-Janeiro",
+            "Maran",
+            "IISR Mahima"
+        ],
+        "image": "https://images.unsplash.com/photo-1635345710609-b4b0e5d17964?auto=format&fit=crop&q=80&w=400"
+    },
+    {
+        "id": 11,
+        "name": "Anthracnose (Vegetables)",
+        "affectedCrops": [
+            "Vegetables (Mixed)"
+        ],
+        "severity": "Medium",
+        "symptoms": [
+            "fruit_damage",
+            "leaf_spots",
+            "rot"
+        ],
+        "description": "Fungal disease causing dark sunken lesions on fruits and leaves",
+        "environmentalFactors": {
+            "favorableSeasons": [
+                "Kharif",
+                "Summer"
+            ],
+            "weather": [
+                "rainy",
+                "humid"
+            ],
+            "temperatureRange": "24-30°C"
+        },
+        "treatments": {
+            "organic": [
+                "Remove infected plant parts",
+                "Apply neem oil + Trichoderma",
+                "Use potassium bicarbonate spray"
+            ],
+            "chemical": [
+                "Spray Carbendazim @ 1g/liter",
+                "Use Copper fungicides @ 2.5g/liter",
+                "Apply at fruit formation stage"
+            ],
+            "prevention": [
+                "Use disease-free seeds",
+                "Maintain proper spacing",
+                "Avoid overhead irrigation",
+                "Practice crop rotation"
+            ]
+        },
+        "resistantVarieties": [
+            "Hybrid varieties available for specific vegetables"
+        ],
+        "image": "https://images.unsplash.com/photo-1597362925123-77861d3fbac7?auto=format&fit=crop&q=80&w=400"
+    },
+    {
+        "id": 12,
+        "name": "Capsid Bug Damage (Cardamom)",
+        "affectedCrops": [
+            "Cardamom"
+        ],
+        "severity": "Medium",
+        "symptoms": [
+            "leaf_spots",
+            "fruit_damage",
+            "discoloration"
+        ],
+        "description": "Pest damage causing brown lesions on leaves and capsules",
+        "environmentalFactors": {
+            "favorableSeasons": [
+                "All"
+            ],
+            "weather": [
+                "humid"
+            ],
+            "temperatureRange": "10-35°C"
+        },
+        "treatments": {
+            "organic": [
+                "Hand-pick and destroy bugs",
+                "Spray neem oil @ 5ml/liter",
+                "Use yellow sticky traps"
+            ],
+            "chemical": [
+                "Spray Quinalphos @ 2ml/liter",
+                "Use Acephate @ 1.5g/liter",
+                "Apply during early infestation"
+            ],
+            "prevention": [
+                "Remove weeds and alternate hosts",
+                "Maintain proper shade (50-60%)",
+                "Regular monitoring of plantations",
+                "Use pheromone traps"
+            ]
+        },
+        "resistantVarieties": [
+            "Njallani Green Gold",
+            "IISR Avinash",
+            "IISR Suvasini"
+        ],
+        "image": "https://images.unsplash.com/photo-1615486511484-92e1dd63a8a3?auto=format&fit=crop&q=80&w=400"
+    }
+]
