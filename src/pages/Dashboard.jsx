@@ -118,7 +118,7 @@ const Dashboard = () => {
             {/* Dashboard Grid */}
             <div className="grid grid-cols-12 gap-6">
                 {/* Weather Widget (Span 8) */}
-                <div className="col-span-12 lg:col-span-8 bg-white dark:bg-surface-dark rounded-2xl border border-slate-200 dark:border-border-dark p-6 shadow-sm overflow-hidden">
+                <div id="weather" className="col-span-12 lg:col-span-8 bg-white dark:bg-surface-dark rounded-2xl border border-slate-200 dark:border-border-dark p-6 shadow-sm overflow-hidden">
                     {weatherLoading ? (
                         <LoadingSpinner message="Fetching weather data..." />
                     ) : weatherError ? (
